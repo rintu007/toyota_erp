@@ -69,9 +69,10 @@ $active_record = TRUE;
 
 // My DataBase Connection
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+
+$db['default']['hostname'] = '175.107.202.44';
+$db['default']['username'] = 'hoss';
+$db['default']['password'] = 'Diamonds1';
 $db['default']['database'] = 'dealer';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -84,6 +85,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
 
 //$db['default']['hostname'] = '192.168.1.117';
 //$db['default']['username'] = 'devRadium';

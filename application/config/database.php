@@ -101,9 +101,9 @@ $active_record = TRUE;
 //$db['default']['autoinit'] = TRUE;
 //$db['default']['stricton'] = FALSE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['hostname'] = '175.107.202.44';
+$db['default']['username'] = 'hoss';
+$db['default']['password'] = 'Diamonds1';
 $db['default']['database'] = 'dealer';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
