@@ -4,16 +4,26 @@
         include 'include/admin_leftmenu.php';
         ?>
         <div class="right-pnel">
-            <form method="post" class="form animated fadeIn">
+            <form method="post" action="<?=site_url('index.php/pbo_list/index')?>" class="form animated fadeIn">
                 <h3><?= $PboMessage ?></h3>
                 <fieldset>
                     <legend>PBO List</legend>
                     <div class="feildwrap">
-                        <div>
-                            <label style="margin-left: -135px">Search</label>
-                            <input type="text" data-validation="required" name="search" id="search"
-                                   placeholder="Search By Name/Pbo Num">
+                        <div class="">
+                            <label >PboNumber</label>
+                            <input type="text" data-validation="" name="PboNumber" value="<?= isset($_POST['PboNumber'])?$_POST['PboNumber']:''?>" placeholder="Search By Name/Pbo Num">
+                        </div><div class="">
+                            <label >Chasis Number</label>
+                            <input type="text" data-validation="" name="ChasisNumber" value="<?= isset($_POST['ChasisNumber'])?$_POST['ChasisNumber']:''?>" placeholder="Search By Chasis Number">
+                        </div><div class="">
+                            <label >Engine Number</label>
+                            <input type="text" data-validation="" name="EngineNumber" value="<?= isset($_POST['EngineNumber'])?($_POST['EngineNumber']):''?>" placeholder="Search By Engine Number">
+                        </div><div class="">
+                            <label >Customer Name</label>
+                            <input type="text" data-validation="" name="CustomerName" value="<?= isset($_POST['CustomerName'])?$_POST['CustomerName']:''?>" placeholder="Search By Customer Name">
                         </div>
+
+                        <input type="submit" value="search" class="btn">
                     </div>
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
@@ -35,6 +45,16 @@
                                 </tr>
                             </thead>
                             <tfoot>
+                            <tr>
+
+                                <td colspan="15">
+                                    <div id="paging">
+                                        <p style="color: #fff;font-weight: bold;text-align: right;padding: 5px 5px 5px 0;">
+                                            Total : <?php echo $counts ?>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
                                 <tr>
                                     <td colspan="13">
                                         <div id="paging">
@@ -46,12 +66,12 @@
                             </tfoot>
                             <tbody id="finalResult">
                                 <?php
-                                $count = 1;
+
                                 foreach ($ResourceBook as $CarPboResourceBook) {
                                     $ResourceBookId = $CarPboResourceBook['IdResourceBook'];
                                     ?>
                                     <tr id="rbRes">
-                                        <td class="resId" name="resId"><?= $count++ ?></td>
+                                        <td class="resId" name="resId"><?= $page++ ?></td>
                                         <td class="tbl-name"><?= $CarPboResourceBook['CustomerName'] ?></td>
                                         <td class="tbl-date"><?= $CarPboResourceBook['PboNumber'] ?></td>
                                         <td class="tbl-date"><?= $CarPboResourceBook['Date'] ?></td>                           
@@ -74,6 +94,7 @@
                                     <?php
                                 }
                                 ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -82,67 +103,4 @@
         </div>
     </div>
 </div>
-<script>
-//    $("#search").keyup(function () {
-//        var search = $("#search").val();
-//        $.ajax({
-//            url: "<?= base_url() ?>index.php/pbo_list/search",
-//            type: "POST",
-//            data: {search: search},
-//            success: function (data) {
-//                console.log(data);
-//                var a = JSON.parse(data);
-//                if (a.length > 0) {
-//                    try {
-//                        var items = [];
-//                        var count = 1;
-//                        $.each(a, function (i, val) {
-//                            items += "<tr><td class='resId' name='resId'>" + count++ + "</td>\n\
-//                            <td class='tbl-name'>" + val.CustomerName + "</td><td>" + val.Date + "</td>\n\
-//<td>" + val.PboNumber + "</td><td>" + val.Variants + "</td><td>" + val.ColorName + "</td><td>" + val.Cellphone + "</td>\n\
-//</tr>";
-//                        });
-//                        $('#finalResult').html(items);
-//                    } catch (e) {
-//                        console.log(e);
-//                    }
-//                } else {
-//                    $("#finalResult").html("<td style='border: 0px'></td><td style='border: 0px'></td><td style='border: 0px'></td>" +
-//                            "<td style='border: 0px'>No Data Found</td><td style='border: 0px'></td><td style='border: 0px'></td>");
-//                }
-//            }
-//        });
-//    });
 
-
-    $(document).ready(function () {
-        jQuery.expr[':'].contains = function (a, i, m) {
-            return jQuery(a).text().toUpperCase()
-                    .indexOf(m[3].toUpperCase()) >= 0;
-        };
-        $('#search').keyup(function () {
-            var search = $(this).val();
-            if (search == "") {
-                $("tbody tr").show();
-            } else {
-                $("tbody tr").hide();
-                $("tr .tbl-name:contains(" + search + "),tr .tbl-date:contains(" + search + ")").parent().show();
-            }
-
-
-        });
-
-
-    });
-
-    function rbPopup(div_id, idRb) {
-        $('.popup-' + div_id).bPopup({
-            fadeSpeed: 'slow', //can be a string ('slow'/'fast') or int
-            followSpeed: 1500, //can be a string ('slow'/'fast') or int
-            modalColor: '#333',
-            closeClass: 'close-pop'
-        }, function () {
-            $(this).find("#idResourceBook").val(idRb);
-        });
-    }
-</script>

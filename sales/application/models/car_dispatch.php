@@ -76,6 +76,27 @@ class Car_dispatch extends CI_Model {
         return $this->db->get($name)->result_array();
     }
     function dispatchList($UserRole, $idUser, $perpage = '', $limit = '') {
+        $where = '';
+        if(isset($_POST['idDispatch']))
+        {
+            if(isset($_POST['PboNumber']) && $_POST['PboNumber']!='')
+            {
+                $where = ' and car_pbo.PboNumber ='. $_POST['PboNumber'];
+            }
+            if(isset($_POST['ChasisNumber ']) && $_POST['ChasisNumber ']!='')
+            {
+                $where = ' and ChasisNumber ='. $_POST['ChasisNumber'];
+            }
+            if(isset($_POST['EngineNumber']) && $_POST['EngineNumber']!='')
+            {
+                $where = ' and EngineNumber ='. $_POST['EngineNumber'];
+            }
+            if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+            {
+                $where = ' and car_dispatch.idDispatch ='. $_POST['idDispatch'];
+            }
+
+        }
         if ($UserRole == "Admin" || $UserRole == "Sales Admin" || $UserRole == "Director") {
             $query = $this->db->query('SELECT car_dispatch.idDispatch, car_dispatch.ChasisNo, car_dispatch.EngineNo,car_dispatch.DispatchedDate,car_dispatch.DispatchType,
                 car_pbo.PboNumber, car_dispatch.WarrantyBook,
@@ -94,7 +115,9 @@ class Car_dispatch extends CI_Model {
                 left join car_receive cr
                 on cr.idDispatch = car_dispatch.idDispatch
                 
-                where car_dispatch.isDelivered = 0 and car_dispatch.pdi=0 order by car_dispatch.idDispatch desc
+                where car_dispatch.isDelivered = 0 and car_dispatch.pdi=0'. $where .' 
+                 
+                 order by car_dispatch.idDispatch desc
                 '.
                 " limit $limit,$perpage"
 
@@ -142,9 +165,36 @@ class Car_dispatch extends CI_Model {
         return $this->db->query($query)->row();
     }
 
-    function get_dispatchReceive_list()
+    function get_dispatchReceive_list( $perpage = '', $limit = '')
     {
-        return $this->db->order_by("id")->get("car_receive")->result_array();
+        if(isset($_POST['entrydate']) && $_POST['entrydate']!='')
+        {
+            $this->db->where('entrydate', $_POST['entrydate']);
+        }
+        if(isset($_POST['arrivaldate']) && $_POST['arrivaldate']!='')
+        {
+            $this->db->where('arrivaldate', $_POST['arrivaldate']);
+        }
+        if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+        {
+            $this->db->where('idDispatch', $_POST['idDispatch']);
+        }
+        if(isset($_POST['remarks']) && $_POST['remarks']!='')
+        {
+            $this->db->like('remarks', $_POST['remarks']);
+        }
+        $query =  $this->db->get("car_receive");
+
+
+        $this->db->limit($perpage, $limit);
+        $this->db->order_by("id");
+
+        return $query->result_array();
+
+
+    }function get_dispatchReceive_count()
+    {
+        return $this->db->count_all_results('car_receive');
     }
 
     function dispatchReceive_insert($data)
@@ -179,8 +229,31 @@ class Car_dispatch extends CI_Model {
 
     function dispatchList_count()
     {
+        $where = '';
+        if(isset($_POST['idDispatch']))
+        {
+            if(isset($_POST['PboNumber']) && $_POST['PboNumber']!='')
+            {
+                $where = ' and car_pbo.PboNumber ='. $_POST['PboNumber'];
+            }
+            if(isset($_POST['ChasisNumber ']) && $_POST['ChasisNumber ']!='')
+            {
+                $where = ' and ChasisNumber ='. $_POST['ChasisNumber'];
+            }
+            if(isset($_POST['EngineNumber']) && $_POST['EngineNumber']!='')
+            {
+                $where = ' and EngineNumber ='. $_POST['EngineNumber'];
+            }
+            if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+            {
+                $where = ' and car_dispatch.idDispatch ='. $_POST['idDispatch'];
+            }
+
+        }
+
         $query = $this->db->query("
-        SELECT count(*)  count       FROM car_dispatch where isDelivered=0");
+        SELECT count(*)  count       FROM car_dispatch 
+        where car_dispatch.isDelivered = 0 and car_dispatch.pdi=0 $where");
 //        var_dump($query->row('count'));die;
         return $query->row('count');
     }

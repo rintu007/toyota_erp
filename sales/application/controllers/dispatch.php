@@ -222,7 +222,6 @@ class Dispatch extends CI_Controller {
         $Dispatch = new Car_dispatch();
         $idUser = $cookieData['userid'];
         $UserRole = $cookieData['Role'];
-//        var_dump($idUser);die;
         $config = array();
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -278,9 +277,42 @@ class Dispatch extends CI_Controller {
 
     function dispatchReceive_list()
     {
-        $Dispatch = new Car_dispatch();
 
-        $this->data['receivelist'] = $Dispatch->get_dispatchReceive_list();
+        $Dispatch = new Car_dispatch();
+        $config = array();
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['num_links'] = 1;
+        $config["base_url"] = base_url() . "index.php/dispatch/dispatchReceive_list/";
+        $count = $Dispatch->get_dispatchReceive_count();
+        $config["total_rows"] = $count;
+        $config["per_page"] = 20;
+        $config["uri_segment"] = 3;
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->pagination->initialize($config);
+        $this->data["links"] = $this->pagination->create_links();
+
+        $this->data['page'] =$page+1;
+        $this->data["counts"] = $count;
+
+        $this->data['receivelist'] = $Dispatch->get_dispatchReceive_list( $config["per_page"], $page) ;
         $this->load->view('header');
         $this->load->view('dispatchcarreceivelist', $this->data);
         $this->load->view('footer');

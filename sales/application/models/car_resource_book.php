@@ -47,8 +47,28 @@ class Car_resource_book extends CI_Model {
             $this->db->where('isPboCreated', 1);
             $this->db->where('IsLost', 0);
             $this->db->where('VehicleInterested !=', 'NULL');
-             $this->db->limit($perpage, $limit);
+
+            if(isset($_POST['PboNumber']) && $_POST['PboNumber']!='')
+            {
+
+                $this->db->where('car_pbo.PboNumber', $_POST['PboNumber']);
+            }
+            if(isset($_POST['ChasisNumber ']) && $_POST['ChasisNumber ']!='')
+            {
+                $this->db->where('ChasisNumber', $_POST['ChasisNumber']);
+            }
+            if(isset($_POST['EngineNumber']) && $_POST['EngineNumber']!='')
+            {
+                $this->db->where('EngineNumber', $_POST['EngineNumber']);
+            }
+            if(isset($_POST['CustomerName']) && $_POST['CustomerName']!='')
+            {
+                $this->db->like('CustomerName', $_POST['CustomerName']);
+            }
+            if(  $perpage != '' or  $limit!='')
+                $this->db->limit($perpage, $limit);
             $this->db->order_by("Date", "desc");
+
         } else {
             $this->db->select('*');
             $this->db->from('car_resource_book');
@@ -62,6 +82,24 @@ class Car_resource_book extends CI_Model {
             $this->db->where('car_resource_book.SalesmanId', $UserId);
              $this->db->limit($perpage, $limit);
             $this->db->order_by("Date", "desc");
+
+            if(isset($_POST['PboNumber']) && $_POST['PboNumber']!='')
+            {
+
+                $this->db->where('car_pbo.PboNumber', $_POST['PboNumber']);
+            }
+            if(isset($_POST['ChasisNumber ']) && $_POST['ChasisNumber ']!='')
+            {
+                $this->db->where('ChasisNumber', $_POST['ChasisNumber']);
+            }
+            if(isset($_POST['EngineNumber']) && $_POST['EngineNumber']!='')
+            {
+                $this->db->where('EngineNumber', $_POST['EngineNumber']);
+            }
+            if(isset($_POST['CustomerName']) && $_POST['CustomerName']!='')
+            {
+                $this->db->like('CustomerName', $_POST['CustomerName']);
+            }
         }
         $resourceBook = $this->db->get();
         return $resourceBook->result_array();

@@ -14,10 +14,38 @@
 
 
         <div class="right-pnel">
-            <a href="<?=base_url("index.php/dispatch/dispatchReceive_list")?>">Receive List</a>
-            <form class="form animated fadeIn">
+            <form class="form animated fadeIn"  action="<?=site_url('index.php/dispatch/lists')?>" method="post">
                 <fieldset>
                     <legend>Dispatch List</legend>
+                    <div class="feildwrap">
+                        <div class="">
+                            <label>Dispatch Number</label>
+                            <input type="text" data-validation="" name="idDispatch"
+                                   value="<?= isset($_POST['idDispatch']) ? $_POST['idDispatch'] : '' ?>"
+                                   placeholder="Search By id Dispatch">
+                        </div>
+                        <div class="">
+                            <label>PboNumber</label>
+                            <input type="text" data-validation="" name="PboNumber"
+                                   value="<?= isset($_POST['PboNumber']) ? $_POST['PboNumber'] : '' ?>"
+                                   placeholder="Search By Name/Pbo Num">
+                        </div>
+                        <div class="">
+                            <label>Chasis Number</label>
+                            <input type="text" data-validation="" name="ChasisNumber"
+                                   value="<?= isset($_POST['ChasisNumber']) ? $_POST['ChasisNumber'] : '' ?>"
+                                   placeholder="Search By Chasis Number">
+                        </div>
+                        <div class="">
+                            <label>Engine Number</label>
+                            <input type="text" data-validation="" name="EngineNumber"
+                                   value="<?= isset($_POST['EngineNumber']) ? ($_POST['EngineNumber']) : '' ?>"
+                                   placeholder="Search By Engine Number">
+                        </div>
+
+
+                        <input type="submit" value="search" class="btn">
+                    </div>
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead>

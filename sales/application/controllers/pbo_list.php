@@ -22,13 +22,13 @@ class Pbo_List extends CI_Controller {
     }
 
     function index() {
-
+//var_dump($_POST);die;
 
         $cookieData = unserialize($_COOKIE['logindata']);
         $UserId = $cookieData['userid'];
         $UserRole = $cookieData['Role'];
-        $this->data['ResourceBook'] = $this->Car_resource_book->allRbWithPbo($UserId, $UserRole, $limit = '', $offset = '');
-        
+//        $this->data['ResourceBook'] = $this->Car_resource_book->allRbWithPbo($UserId, $UserRole, $limit = '', $offset = '');
+
          $config = array();
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -50,15 +50,19 @@ class Pbo_List extends CI_Controller {
         $config['num_tag_close'] = '</li>';
         $config['num_links'] = 1;
         $config["base_url"] = base_url() . "index.php/pbo_list/index";
-        $config["total_rows"] = $this->Car_resource_book->record_count($UserId);
-        $config["per_page"] = 20;
+
+        $config["total_rows"] =count( $this->Car_resource_book->allRbWithPbo($UserId, $UserRole));
+        $config["per_page"] = 2;
         $config["uri_segment"] = 3;
 
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-//        echo 'aaaaaaaaaaaaaaaaaaaaa';
-//        print_r($limit);
+
+        $this->data['page'] =$page+1;
+        $this->data["counts"] = $config["total_rows"];
+
+
         $this->data['ResourceBook'] = $this->Car_resource_book->allRbWithPbo($UserId, $UserRole, $config["per_page"], $page);
          $this->data["links"] = $this->pagination->create_links();
         $this->data['PboMessage'] = $this->session->flashdata('PBO');

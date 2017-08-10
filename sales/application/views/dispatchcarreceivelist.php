@@ -14,9 +14,39 @@
 
 
         <div class="right-pnel">
-            <form class="form animated fadeIn">
+                <form class="form animated fadeIn"  action="<?=site_url('index.php/dispatch/dispatchReceive_list')?>" method="post">
                 <fieldset>
                     <legend>Car Receive List</legend>
+                    <div class="feildwrap">
+                        <div class="">
+                            <label>Dispatch Number</label>
+                            <input type="text" data-validation="" name="idDispatch"
+                                   value="<?= isset($_POST['idDispatch']) ? $_POST['idDispatch'] : '' ?>"
+                                   placeholder="Search By id Dispatch">
+                        </div>
+                        <div class="">
+                            <label>Entry Date</label>
+                            <input type="text" data-validation="" name="entrydate" class="date"
+                                   value="<?= isset($_POST['entrydate']) ? $_POST['entrydate'] : '' ?>"
+                                   placeholder="Search By entrydate">
+                        </div>
+                        <div class="">
+                            <label>Arrival Date</label>
+                            <input type="text" data-validation="" name="arrivaldate" class="date"
+                                   value="<?= isset($_POST['arrivaldate']) ? $_POST['arrivaldate'] : '' ?>"
+                                   placeholder="Search By arrivaldate">
+                        </div>
+                        <div class="">
+                            <label>Remarks</label>
+                            <input type="text" data-validation="" name="remarks"
+                                   value="<?= isset($_POST['remarks']) ? ($_POST['remarks']) : '' ?>"
+                                   placeholder="Search By remarks">
+                        </div>
+
+
+                        <input type="submit" value="search" class="btn">
+                    </div>
+
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead>
@@ -34,12 +64,12 @@
 
                             <tbody id="finalResult">
                                 <?php
-                                $count = 1;
+//                                $count = 1;
                                 foreach ($receivelist as $row) {
 
                                     ?>
                                     <tr id="rbRes">
-                                        <td class="resId"><?= $count++ ?></td>
+                                        <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $row['idDispatch'] ?></td>
                                         <td class="tbl-variants"><?= $row['arrivaldate'] ?></td>
                                         <td class="tbl-name"><?= $row['entrydate'] ?></td>
@@ -52,6 +82,27 @@
                                 }
                                 ?>
                             </tbody>
+                            <tfoot>
+                            <tr>
+
+                                <td colspan="15">
+                                    <div id="paging">
+                                        <p style="color: #fff;font-weight: bold;text-align: right;padding: 5px 5px 5px 0;">
+                                            Total : <?php echo $counts ?>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="15">
+                                    <div id="paging">
+                                        <ul>
+                                            <?php echo $links ?>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </fieldset>
