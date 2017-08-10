@@ -1,0 +1,151 @@
+@charset "utf-8";
+/* CSS Document */
+*
+{padding:0; margin:0;}
+.container
+{border:1px solid #dfdfdf; padding:10px;}
+.header
+{height:auto; width:100%; display:table; margin-bottom: 5px;}
+.header .left
+{float:left; border-top: 1px solid #dfdfdf;  border-left: 1px solid #dfdfdf; border-bottom: 1px solid #dfdfdf;  padding: 5px;}
+.header .left .logo
+{padding:31px 0px;}
+
+.header .center 
+{        float: left;
+    border: 1px solid #dfdfdf;
+    min-height: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 68%;
+    padding-top: 2px;}
+.header .center h3
+{margin:0;}
+.header .right
+{float:right; text-align:right; border:1px solid #dfdfdf; padding:5px;}
+.header .right .rono
+{    border: 1px solid #dfdfdf;
+    padding: 22px 0px 0px 10px;
+    margin-top: 4px; text-align:left;}
+.p-l
+{padding-left:0px !important;}
+.p-r
+{padding-right:0px !important;}
+
+.td-w
+{width:60%;}
+.table-border
+{    border: 1px solid #dfdfdf;}
+.b-l
+{border-left:1px solid #dfdfdf;}
+.b-r
+{border-right:1px solid #dfdfdf;}
+.b-b
+{border-bottom:1px solid #dfdfdf;}
+.b-t
+{border-top:1px solid #dfdfdf;}
+.b-none
+{border:none !important;}
+.b-btm
+{border-bottom:1px solid #fff;}
+.m-r
+{margin-right:12px;}
+.td-pd
+{padding: 11px !important;
+    padding-bottom: 0px !important;}
+label
+{    font-weight: normal !important;
+    width: 15%; text-align:center;
+    margin-right: 8%;}
+.input-width
+{width:100%; padding-left:2px;}
+.group-input-w
+{width: 40px;
+    height: 17px; margin-right:-10px; line-height:17px; padding-left:2px;}
+
+
+
+.job-progress tr th
+{font-weight:bold;}
+
+
+
+/* Requisition */
+
+.requisition
+{height:auto;}
+
+.requisition tr td
+{border-right:1px solid #dfdfdf; text-align:center;}
+
+.requisition tr th:nth-child(1)
+{
+		width:5%;
+		text-align:center;
+}
+
+.requisition tr th:nth-child(2)
+{
+		width:30%;
+		text-align:center;
+}
+
+.requisition tr th:nth-child(3)
+{
+		width:20%;
+		text-align:center;
+}
+
+.requisition tr th:nth-child(4)
+{
+		width:8%;
+		text-align:center;
+}
+
+.requisition tr th:nth-child(5)
+{
+		width:10%;
+		text-align:center;
+}
+
+.signature
+{padding-top:40px; width:27%; border-bottom:1px solid #000; font-style:italic;}
+
+.border-btm
+{border-bottom:1px solid #000;}
+
+.span1 {
+  position:relative;
+  top:0px;
+   width: 50%;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+	border-bottom:1px solid #000;
+}
+
+.requisition span {
+  position:relative;
+  top:0px;
+   width: 65%;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+	border-bottom:1px solid #000;
+}
+
+.requisition .span2 {
+  position:relative;
+  top:0px;
+   width: 65%;
+    display: inline-block;
+    position: relative;
+    top: -8px;
+	font-size:20px;
+	border-bottom:1px solid #000;
+}
+.m-btm
+{margin-bottom:15px;}
+
+
+
