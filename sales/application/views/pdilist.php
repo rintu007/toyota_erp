@@ -14,9 +14,38 @@
 
 
         <div class="right-pnel">
-            <form class="form animated fadeIn">
+            <form class="form animated fadeIn"  method="post" action="<?= base_url() ?>/index.php/stockreport/pdi_list">
                 <fieldset>
                     <legend>PDI List</legend>
+                    <div class="feildwrap">
+                        <div class="">
+                            <label>Dispatch Number</label>
+                            <input type="text" data-validation="" name="idDispatch"
+                                   value="<?= isset($_POST['idDispatch']) ? $_POST['idDispatch'] : '' ?>"
+                                   placeholder="Search By Dispatch">
+                        </div>
+                        <div class="">
+                            <label>Inspector Name</label>
+                            <input type="text" data-validation="" name="inspectorname"
+                                   value="<?= isset($_POST['inspectorname']) ? $_POST['inspectorname'] : '' ?>"
+                                   placeholder="Search By Name">
+                        </div>
+                        <div class="">
+                            <label>Chasis Number</label>
+                            <input type="text" data-validation="" name="ChasisNo"
+                                   value="<?= isset($_POST['ChasisNo']) ? $_POST['ChasisNo'] : '' ?>"
+                                   placeholder="Search By Chasis Number">
+                        </div>
+                        <div class="">
+                            <label>Created Date</label>
+                            <input type="text" data-validation="" name="created_date" class="date"
+                                   value="<?= isset($_POST['created_date']) ? ($_POST['created_date']) : '' ?>"
+                                   placeholder="Search By Engine Number">
+                        </div>
+
+
+                        <input type="submit" value="search" class="btn">
+                    </div>
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead>
@@ -39,7 +68,7 @@
 
                                     ?>
                                     <tr id="rbRes">
-                                        <td class="resId"><?= $count++ ?></td>
+                                        <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $row['idDispatch'] ?></td>
                                         <td class="tbl-variants"><?= ($row['is_salereturn'])?'YES':'NO'?></td>
                                         <td class="tbl-name"><?= $row['inspectorname'] ?></td>
@@ -52,6 +81,26 @@
                                 }
                                 ?>
                             </tbody>
+                            <tfoot>
+                            <tr>
+
+                                <td colspan="15">
+                                    <div id="paging">
+                                        <p style="color: #fff;font-weight: bold;text-align: right;padding: 5px 5px 5px 0;">
+                                            Total : <?php echo $counts ?>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="13">
+                                    <div id="paging">
+                                        <ul>
+                                            <?php echo $links ?>
+                                        </ul>
+                                    </div>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </fieldset>

@@ -20,13 +20,54 @@ class Car_dispatch extends CI_Model {
         return $variants->result_array();
     }
 
-    function StockReport($FromDate = '', $ToDate = '') {
+    function StockReport($FromDate = '', $ToDate = '', $perpage = '', $limit = '') {
         if ($FromDate == NULL && $ToDate == NULL) {
-            $StockReport = $this->db->query('SELECT * FROM StockReport order by idDispatch desc');
-        } else {
+
+
+             $query = $this->db->select("*")
+                ->from('StockReport');
+
+
+            if(isset($_POST['pboid']) && $_POST['pboid']!='')
+            {
+                $this->db->where('pboid', $_POST['pboid']);
+            }
+            if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+            {
+                $this->db->where('idDispatch', $_POST['idDispatch']);
+            }
+            if(isset($_POST['ChasisNo ']) && $_POST['ChasisNo']!='')
+            {
+                $this->db->where('ChasisNo', $_POST['ChasisNo']);
+            }
+            if(isset($_POST['EngineNo']) && $_POST['EngineNo']!='')
+            {
+                $this->db->where('EngineNo', $_POST['EngineNo']);
+            }
+            if(isset($_POST['CustomerName']) && $_POST['CustomerName']!='')
+            {
+                $this->db->like('CustomerName', $_POST['CustomerName']);
+            }
+
+
+            if(  $perpage != '' or  $limit!='')
+                $this->db->limit($perpage, $limit);
+
+            $this->db->order_by('idDispatch','desc');
+
+            $StockReport = $query->get();
+        }
+        else
+            {
             $StockReport = $this->db->query("SELECT * FROM StockReport WHERE DispatchedDate BETWEEN '" . $FromDate . "' AND '" . $ToDate . "' order by idDispatch desc");
         }
+
         return $StockReport->result_array();
+    }
+
+    function StockReport_count()
+    {
+        return $this->db->count_all('StockReport');
     }
 
     function SaleReport($FromDate = '', $ToDate = '') {

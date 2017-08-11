@@ -52,7 +52,7 @@ class Pbo_List extends CI_Controller {
         $config["base_url"] = base_url() . "index.php/pbo_list/index";
 
         $config["total_rows"] =count( $this->Car_resource_book->allRbWithPbo($UserId, $UserRole));
-        $config["per_page"] = 2;
+        $config["per_page"] = 20;
         $config["uri_segment"] = 3;
 
         $this->pagination->initialize($config);

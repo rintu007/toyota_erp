@@ -4,37 +4,48 @@
         include 'include/admin_leftmenu.php';
         ?>
         <div class="right-pnel">
-            <form method="post" class="form animated fadeIn">
+            <form method="post" action="<?=site_url('index.php/salenote/getAllSaleNote/')?>" class="form animated fadeIn">
                 <h3><?= $PboMessage ?></h3>
                 <fieldset>
                     <legend>Sale Note List</legend>
                     <div class="feildwrap">
-                        <div>
-                            <label style="margin-left: -135px">Search</label>
-                            <input type="text" data-validation="required" name="search" id="search"
-                                   placeholder="Search By Name/Pbo Num">
+                        <div class="">
+                            <label>Dispatch ID</label>
+                            <input type="text" data-validation="" name="Dispatch"
+                                   value="<?= isset($_POST['Dispatch']) ? $_POST['Dispatch'] : '' ?>"
+                                   placeholder="Search ByDispatch">
                         </div>
+
+                        <div class="">
+                            <label>Customer Name</label>
+                            <input type="text" data-validation="" name="CustomerName"
+                                   value="<?= isset($_POST['CustomerName']) ? $_POST['CustomerName'] : '' ?>"
+                                   placeholder="Search By Customer Name">
+                        </div>
+
+                        <input type="submit" value="search" class="btn">
                     </div>
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead>
                                 <tr>
                                     <th width="7%">S No.</th>
+                                    <th width="17%">Dispatch Number</th>
                                     <th width="17%">Customer Name</th>
                                     <th width="10%">Vehicle Price</th>
                                     <th width="10%">Purchase Price</th>                                    
-                                    <th width="10%">Selling Price</th>
-                                    <th width="10%">Profit Percentage</th>
-                                    <th width="10%">Percentage</th>
+                                    <th width="">Selling Price</th>
+                                    <th width="">Profit Percentage</th>
+                                    <th width="">Percentage</th>
 
-                                    <th width="30%">Net Profit</th>
-                                    <th width="10%">Purchase From</th>
+                                    <th width="">Net Profit</th>
+                                    <th width="">Purchase From</th>
 
-                                    <th width="10%">Sale Person</th>
+                                    <th width="">Sale Person</th>
 
 
                                     <th width="18%">Date</th>
-                                    <th width="18%">Status</th>
+                                    <th width="">Status</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -54,7 +65,8 @@
 //                                    $ResourceBookId = $CarPboResourceBook['IdResourceBook'];
                                     ?>
                                     <tr id="rbRes">
-                                        <td class="resId" name="resId"><?= $count++ ?></td>
+                                        <td class="resId" name="resId"><?= $page++ ?></td>
+                                        <td class="tbl-name"><?= $SaleNoteList['Dispatch'] ?></td>
                                         <td class="tbl-name"><?= $SaleNoteList['CustomerName'] ?></td>
                                         <td class="tbl-date"><?= $SaleNoteList['VehiclePrice'] ?></td>
                                         <td class="tbl-date"><?= $SaleNoteList['PurchasePrice'] ?></td>                           

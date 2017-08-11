@@ -22,7 +22,6 @@
         <?php } ?>
 
         <div class="right-pnel">
-            <a href="<?=site_url("index.php/stockreport/pdi_list/")?>">PDI View</a>
 
             <form method="post" target="_blank" class="form animated fadeIn" action="<?= base_url() ?>/index.php/stockreport/report">
                 <fieldset>
@@ -54,7 +53,41 @@
                     </div>
                 </fieldset>
             </form>
-            <form class="form animated fadeIn">
+            <form class="form animated fadeIn"  method="post" action="<?= base_url() ?>/index.php/stockreport/index" >
+                <div class="feildwrap">
+                    <div class="">
+                        <label>Dispatch Number</label>
+                        <input type="text" data-validation="" name="idDispatch"
+                               value="<?= isset($_POST['idDispatch']) ? $_POST['idDispatch'] : '' ?>"
+                               placeholder="Search By Dispatch">
+                    </div>
+                    <div class="">
+                        <label>PboNumber</label>
+                        <input type="text" data-validation="" name="PboNumber"
+                               value="<?= isset($_POST['pboid']) ? $_POST['pboid'] : '' ?>"
+                               placeholder="Search By Name/Pbo Num">
+                    </div>
+                    <div class="">
+                        <label>Chasis Number</label>
+                        <input type="text" data-validation="" name="ChasisNo"
+                               value="<?= isset($_POST['ChasisNo']) ? $_POST['ChasisNo'] : '' ?>"
+                               placeholder="Search By Chasis Number">
+                    </div>
+                    <div class="">
+                        <label>Engine Number</label>
+                        <input type="text" data-validation="" name="EngineNo"
+                               value="<?= isset($_POST['EngineNo']) ? ($_POST['EngineNo']) : '' ?>"
+                               placeholder="Search By Engine Number">
+                    </div>
+                    <div class="">
+                        <label>Customer Name</label>
+                        <input type="text" data-validation="" name="CustomerName"
+                               value="<?= isset($_POST['CustomerName']) ? $_POST['CustomerName'] : '' ?>"
+                               placeholder="Search By Customer Name">
+                    </div>
+
+                    <input type="submit" value="search" class="btn">
+                </div>
                 <fieldset>
                     <legend>Stock List</legend>
                     <div class="btn-block-wrap datagrid">
@@ -64,6 +97,7 @@
                                     <th style="vertical-align: middle;" width="2%">S No.</th>
                                     <th width="17%">Model</th>
                                     <th width="10%">Color</th>
+                                    <th width="13%">Customer name</th>
                                     <th width="13%">Chassis Number</th>
                                     <th width="14%">Engine Number</th>
                                     <th width="15%">PBO Number</th>
@@ -74,24 +108,36 @@
                                 </tr>
                             </thead>
                             <tfoot>
-                                <tr>
-                                    <td colspan="8">
-                                        <div id="paging">
-                                            <ul>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+
+                                <td colspan="15">
+                                    <div id="paging">
+                                        <p style="color: #fff;font-weight: bold;text-align: right;padding: 5px 5px 5px 0;">
+                                            Total : <?php echo $counts ?>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="13">
+                                    <div id="paging">
+                                        <ul>
+                                            <?php echo $links ?>
+                                        </ul>
+                                    </div>
+                            </tr>
                             </tfoot>
+
                             <tbody id="finalResult">
                                 <?php
                                 $count = 1;
                                 foreach ($StockReport as $AllStockReport) {
                                     ?>
                                     <tr id="rbRes">
-                                        <td class="resId"><?= $count++ ?></td>
+                                        <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-name"><?= $AllStockReport['Variants'] ?></td>
                                         <td class="tbl-date"><?= $AllStockReport['ColorName'] ?></td>
+                                        <td class="tbl-date"><?= $AllStockReport['CustomerName'] ?></td>
                                         <td class="tbl-color"><?= $AllStockReport['ChasisNo'] ?></td>
                                         <td class="tbl-phone"><?= $AllStockReport['EngineNo'] ?></td>
                                         <td class="tbl-variants"><?= $AllStockReport['PboNumber'] ?></td>

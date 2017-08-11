@@ -16,12 +16,44 @@ class StockReport extends CI_Controller
 
     public function index()
     {
-
         $Data = array();
         $Dispatch = new Car_dispatch();
-        $Data['StockReport'] = $Dispatch->StockReport(NULL, NULL);
+
+        $config = array();
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['num_links'] = 1;
+        $config["base_url"] = base_url() . "index.php/stockreport/index";
+        $config["total_rows"] = $Dispatch->StockReport_count();
+        $this->data['counts']=  $config["total_rows"];
+        $config["per_page"] = 20;
+        $config["uri_segment"] = 3;
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->data['page'] = $page+1;
+        $this->data["links"] = $this->pagination->create_links();
+
+
+
+        $this->data['StockReport'] = $Dispatch->StockReport(NULL, NULL,$config["per_page"], $page);
         $this->load->view('header');
-        $this->load->view('stockreport', $Data);
+        $this->load->view('stockreport', $this->data);
         $this->load->view('footer');
     }
 
@@ -214,18 +246,40 @@ class StockReport extends CI_Controller
 
     function pdi_list()
     {
-        $query= $this->db->query("select pd.id,pd.idDispatch,pd.is_salereturn,pd.inspectorname,cd.ChasisNo,pb.RegistrationNumber,pd.created_date
-                                    from car_pdi pd
-                                    join car_dispatch cd
-                                    on pd.idDispatch=cd.idDispatch
-                                 left   join car_pbo pb
-                                    on pb.Id =cd.PboId
-                                    
-                                    order by pd.id desc");
-        $data = array();
-        $data['pdi'] = $query->result_array();
+        $config = array();
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['num_links'] = 1;
+        $config["base_url"] = base_url() . "index.php/stockreport/pdi_list";
+        $config["total_rows"] = $this->get_pdilist_count();
+        $this->data['counts']=  $config["total_rows"];
+        $config["per_page"] = 20;
+        $config["uri_segment"] = 3;
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->data['page'] = $page+1;
+        $this->data["links"] = $this->pagination->create_links();
+
+        $this->data['pdi'] = $this->get_pdilist($config["per_page"], $page);
+
         $this->load->view('header');
-        $this->load->view('pdilist', $data);
+        $this->load->view('pdilist', $this->data);
         $this->load->view('footer');
 
     }
@@ -249,6 +303,48 @@ class StockReport extends CI_Controller
         $this->load->view('pdi_view', $data);
         $this->load->view('footer');
 
+    }
+
+    function get_pdilist( $perpage = '', $limit = '')
+    {
+
+        $this->db->select('pd.id,pd.idDispatch,pd.is_salereturn,pd.inspectorname,cd.ChasisNo,pb.RegistrationNumber,pd.created_date')
+            ->from('car_pdi pd')
+            ->join('car_dispatch cd','pd.idDispatch=cd.idDispatch','left')
+            ->join('car_pbo pb','pb.Id = cd.PboId','left');
+
+        if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+        {
+            $this->db->where('pd.idDispatch', $_POST['idDispatch']);
+        }
+        if(isset($_POST['ChasisNo']) && $_POST['ChasisNo']!='')
+        {
+            $this->db->where('cd.ChasisNo', $_POST['ChasisNo']);
+        }
+        if(isset($_POST['inspectorname']) && $_POST['inspectorname']!='')
+        {
+            $this->db->like('inspectorname', $_POST['inspectorname']);
+        }
+        if(isset($_POST['created_date']) && $_POST['created_date']!='')
+        {
+            $this->db->where('date(created_date)', $_POST['created_date']);
+        }
+
+
+        if(  $perpage != '' or  $limit!='')
+            $this->db->limit($perpage, $limit);
+
+        $this->db->order_by('pd.id','desc');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    function get_pdilist_count()
+    {
+
+        return $this->db->count_all('car_pdi');
     }
 }
 

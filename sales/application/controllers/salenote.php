@@ -19,8 +19,6 @@ class Salenote extends CI_Controller {
 
         $cookieData = unserialize($_COOKIE['logindata']);
 
-        $this->data['ResourceBook'] = $this->Car_salenote->getAllSaleNote($limit = '', $offset = '');
-
         $config = array();
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -43,16 +41,16 @@ class Salenote extends CI_Controller {
         $config['num_links'] = 1;
         $config["base_url"] = base_url() . "index.php/salenote/getAllSaleNote";
         $config["total_rows"] = $this->Car_salenote->record_count();
-        $config["per_page"] = 20;
+        $config["per_page"] = 2;
         $config["uri_segment"] = 3;
-
         $this->pagination->initialize($config);
-
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->data['page'] = $page+1;
+
+
         $this->data['SaleNoteList'] = $this->Car_salenote->getAllSaleNote($config["per_page"], $page);
         $this->data["links"] = $this->pagination->create_links();
         $this->data['PboMessage'] = $this->session->flashdata('PBO');
-
         $this->load->view('header');
         $this->load->view('salenote_list', $this->data);
         $this->load->view('footer');

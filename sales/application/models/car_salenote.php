@@ -23,17 +23,27 @@ class Car_salenote extends CI_Model {
         $this->db->select('*');
         $this->db->from('car_salenote');
         $this->db->join('car_customer', 'car_salenote.Customer = car_customer.IdCustomer', 'LEFT OUTER');
-//        $this->db->join('car_variants', 'car_salenote.Vehicle = car_variants.IdVariants', 'LEFT OUTER');
+
+         if(isset($_POST['Dispatch']) && $_POST['Dispatch']!='')
+         {
+
+             $this->db->where('Dispatch', $_POST['Dispatch']);
+         }
+
+         if(isset($_POST['CustomerName']) && $_POST['CustomerName']!='')
+         {
+             $this->db->like('CustomerName', $_POST['CustomerName']);
+         }
+         if(  $offset != '' or  $limit!='')
+             $this->db->limit( $limit,$offset);
         $SaleNote = $this->db->get();
         return $SaleNote->result_array();
     }
     
      function record_count() {
-        $this->db->select('*');
-        $this->db->from('car_salenote');
-        
-        $SaleNote = $this->db->get();
-        return count($SaleNote);
+       return $this->db->count_all('car_salenote');
+
+
     }
 
     function oneSaleNote($idSaleNote) {
