@@ -73,7 +73,7 @@ class Pbo_List extends CI_Controller {
     }
     
     public function printPBO($PBOid = '') {
-        $PBOid = 625;
+//        $PBOid = 625;
 //         $idRb = 5081;
         $cookieData = unserialize($_COOKIE['logindata']);
         $UserId = $cookieData['userid'];

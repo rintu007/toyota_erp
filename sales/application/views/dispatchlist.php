@@ -1,3 +1,8 @@
+<style>
+    .red{
+        background-color: red; !important;
+    }
+</style>
 <div id="wrapper">
     <div id="content">
         <?php
@@ -96,7 +101,7 @@
                                         $wht = $AllDispatchList['WHTFiler'];
                                     }else $wht = 0;
                                     ?>
-                                    <tr id="rbRes">
+                                    <tr id="rbRes"  class="red !important">
                                         <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $AllDispatchList['PboNumber'] ?></td>
                                         <td class="tbl-variants"><?= $AllDispatchList['idDispatch'] ?></td>

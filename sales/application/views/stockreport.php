@@ -95,16 +95,19 @@
                             <thead>
                                 <tr>
                                     <th style="vertical-align: middle;" width="2%">S No.</th>
+                                    <th width="10%">PBO Number</th>
+                                    <th width="10%">Dispatch Number</th>
+                                    <th width="10%">Receiving Number</th>
+                                    <th width="10%">Receiving Date</th>
+                                    <th width="10%">Chassis Number</th>
+                                    <th width="14%">Engine Number</th>
+
                                     <th width="17%">Model</th>
                                     <th width="10%">Color</th>
-                                    <th width="13%">Customer name</th>
-                                    <th width="13%">Chassis Number</th>
-                                    <th width="14%">Engine Number</th>
-                                    <th width="15%">PBO Number</th>
-                                    <th width="15%">Dispatch Number</th>
-                                    <th width="10%">Invoice</th>
-                                    <th width="12%">Warranty Book</th>
-                                    <th width="18%"></th>
+                                    <th width="25%">Customer name</th>
+
+                                    <th width="5%">Warranty Book</th>
+                                    <th width="10%"></th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -135,14 +138,16 @@
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId"><?= $page++ ?></td>
+                                        <td class="tbl-variants"><?= $AllStockReport['PboNumber'] ?></td>
+                                        <td class="tbl-variants"><?= $AllStockReport['idDispatch'] ?></td>
+                                        <td class="tbl-variants"><?= $AllStockReport['idreceive'] ?></td>
+                                        <td class="tbl-variants"><?= $AllStockReport['receivedate'] ?></td>
+                                        <td class="tbl-color"><?= $AllStockReport['ChasisNo'] ?></td>
+                                        <td class="tbl-phone"><?= $AllStockReport['EngineNo'] ?></td>
                                         <td class="tbl-name"><?= $AllStockReport['Variants'] ?></td>
                                         <td class="tbl-date"><?= $AllStockReport['ColorName'] ?></td>
                                         <td class="tbl-date"><?= $AllStockReport['CustomerName'] ?></td>
-                                        <td class="tbl-color"><?= $AllStockReport['ChasisNo'] ?></td>
-                                        <td class="tbl-phone"><?= $AllStockReport['EngineNo'] ?></td>
-                                        <td class="tbl-variants"><?= $AllStockReport['PboNumber'] ?></td>
-                                        <td class="tbl-variants"><?= $AllStockReport['idDispatch'] ?></td>
-                                        <td class="tbl-phone"><?= $AllStockReport['TotalPrice'] ?></td>
+
                                         <td class="tbl-phone"><?= $AllStockReport['WarrantyBook'] ?></td>
                                         <td class="tbl-phone">
                                             <?php  if(!$AllStockReport['Pdi']){ ?>

@@ -224,11 +224,13 @@ class Car_dispatch extends CI_Model {
         {
             $this->db->like('remarks', $_POST['remarks']);
         }
+
+        $this->db->limit($perpage, $limit);
+        $this->db->order_by("id",'desc');
         $query =  $this->db->get("car_receive");
 
 
-        $this->db->limit($perpage, $limit);
-        $this->db->order_by("id");
+
 
         return $query->result_array();
 

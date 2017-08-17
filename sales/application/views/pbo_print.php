@@ -767,6 +767,10 @@ function convert_number_to_words($number) {
                                 </td>
 
                             </tr>
+                            <?php
+                            if($PBODetails['PayorderImage']!=null){
+                            ?>
+
                             <tr>
                                 <td>
                                     <label>Image Upload P.B.O.</label>
@@ -778,6 +782,8 @@ function convert_number_to_words($number) {
 
                                 </td>
                             </tr>
+                            <?php }
+                            ?>
                         </table>                       
                     </fieldset>
 

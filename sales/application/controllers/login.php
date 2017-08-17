@@ -27,22 +27,22 @@ class Login extends CI_Controller {
     }
 
     public function process() {
-//        $this->load->model('Login_model');
-//
-//        $result = $this->Login_model->validate();
-//
-//        if (!$result) {
-//            $msg = '<font color=red>Invalid username and/or password.</font><br />';
-//            $this->index($msg);
-//        } else {
-//            // If user did validate, 
-//            // Send them to members area
-//            if ($this->session->userdata('Role') == "Director") {
-//                redirect(base_url() . "index.php/pbo/index");
-//            } else {
-//                redirect(base_url() . "index.php/resourcebook/index");
-//            }
-//        }
+        $this->load->model('Login_model');
+
+        $result = $this->Login_model->validate();
+
+        if (!$result) {
+            $msg = '<font color=red>Invalid username and/or password.</font><br />';
+            $this->index($msg);
+        } else {
+            // If user did validate,
+            // Send them to members area
+            if ($this->session->userdata('Role') == "Director") {
+                redirect(base_url() . "index.php/pbo/index");
+            } else {
+                redirect(base_url() . "index.php/resourcebook/index");
+            }
+        }
     }
 
 }

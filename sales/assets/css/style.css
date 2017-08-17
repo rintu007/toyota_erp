@@ -660,4 +660,7 @@ span.jquery_form_help_date{ right:0; z-index:55; top: -32px;}
         padding-right: 7px;
         width: 126px;
     }
+    .red {
+        background-color: red;
+    }
 }

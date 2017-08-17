@@ -75,7 +75,7 @@
                                         <td class="tbl-name"><?= $row['entrydate'] ?></td>
                                         <td class="tbl-date"><?= $row['swappeddate'] ?></td>
                                         <td class="tbl-color"><?= $row['reminderdate'] ?></td>
-                                        <td class="tbl-phone"><?= $row['generalstock'] ?></td>
+                                        <td class="tbl-phone"><?= ($row['generalstock'])?'YES':'NO' ?></td>
                                         <td class="tbl-phone"><a href="<?=site_url(('index.php/dispatch/dispatchReceive_view').'/'.$row['id'])?>">View</a></td>
                                     </tr>
                                     <?php

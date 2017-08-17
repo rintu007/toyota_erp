@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             <label>Entry Date</label>
-                            <input type="text" class="date" name="entrydate" data-validation="required">
+                            <input type="text" class="" name="entrydate" value="<?php echo date('Y-m-d'); ?>" readonly data-validation="required">
                         </div>
                         <div>
 <!--                            --><?php // print_r($dispatchdata)?>
@@ -30,7 +30,7 @@
                         </div>
                         <div>
                             <label>Arrival Date</label>
-                            <input type="text" class="date" name="arrivaldate" data-validation="required">
+                            <input type="text" class="date" name="arrivaldate"  data-validation="required">
                         </div>
                         <div>
                             <label>Order Form No</label>
