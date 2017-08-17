@@ -101,7 +101,7 @@
                                         $wht = $AllDispatchList['WHTFiler'];
                                     }else $wht = 0;
                                     ?>
-                                    <tr id="rbRes"  class="red !important">
+                                    <tr id="rbRes"  class="">
                                         <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $AllDispatchList['PboNumber'] ?></td>
                                         <td class="tbl-variants"><?= $AllDispatchList['idDispatch'] ?></td>

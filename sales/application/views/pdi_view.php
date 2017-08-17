@@ -251,11 +251,7 @@ $cookieData = unserialize($_COOKIE['logindata']);
                             <input type="text" name="inspectorname" value="<?= $row['inspectorname']?>" id="searchnow"
                             / >
                         </div>
-                        <div>
-                            <label>Inspector's Name:</label>
-                            <input type="text" name="ddd" value="<?= $row['ddd']?>" id="searchnow"
-                            / >
-                        </div>
+
                         <div>
                             <label>Department:</label>
                             <input type="text" name="department" value="<?= $row['department']?>" id="searchnow"

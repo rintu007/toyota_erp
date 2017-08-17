@@ -95,19 +95,19 @@
                             <thead>
                                 <tr>
                                     <th style="vertical-align: middle;" width="2%">S No.</th>
-                                    <th width="10%">PBO Number</th>
-                                    <th width="10%">Dispatch Number</th>
-                                    <th width="10%">Receiving Number</th>
+                                    <th width="5%">PBO Number</th>
+                                    <th width="5%">Dispatch Number</th>
+                                    <th width="5%">Receiving Number</th>
                                     <th width="10%">Receiving Date</th>
                                     <th width="10%">Chassis Number</th>
-                                    <th width="14%">Engine Number</th>
+                                    <th width="12%">Engine Number</th>
 
-                                    <th width="17%">Model</th>
-                                    <th width="10%">Color</th>
-                                    <th width="25%">Customer name</th>
+                                    <th width="15%">Model</th>
+                                    <th width="5%">Color</th>
+                                    <th width="15%">Customer name</th>
 
                                     <th width="5%">Warranty Book</th>
-                                    <th width="10%"></th>
+                                    <th width="20%"></th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -153,6 +153,15 @@
                                             <?php  if(!$AllStockReport['Pdi']){ ?>
                                             <button><a  href="<?=site_url('index.php/stockReport/pdi/').'/'.$AllStockReport['idDispatch']?>">PDI</a></button>
                                             <?php }?>
+
+                                            <?php  if(!$AllStockReport['idpds']){
+                                            if($AllStockReport['pds_request']){?>
+                                                <br> <a>  Request Sent for PDS </a>
+                                            <?php }else{?>
+                                            <button><a onclick="return confirm('Do you want to send request for PDS?')" href="<?=site_url('index.php/invoice/pds_request').'/'.$AllStockReport['idDispatch']?>">Request for PDS</a></button>
+                                            <?php }}else{
+                                                echo "<br> <a>  OK for Delivery</a>";
+                                            }?>
                                         </td>
 <!--                                        <td class="tbl-phone"><button><a onclick="return confirm('Are you sure for Sale Return?')" href="--><?//=site_url('index.php/stockReport/insert_salereturn/').'/'.$AllStockReport['idDispatch']?><!--">Sale Return</a></button></td>-->
                                     </tr>

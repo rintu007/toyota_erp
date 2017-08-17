@@ -10,6 +10,48 @@ class Car_gatepass extends CI_Model {
         parent::__construct();
     }
 
+    function Gatepass_count()
+    {
+        return $this->db->count_all('car_gatepass');
+    }
+
+    function get_gatepass( $perpage = '', $limit = '')
+    {
+
+        $this->db->select('*')
+            ->from('car_gatepass');
+//            ->join('car_dispatch cd','pd.idDispatch=cd.idDispatch','left')
+//            ->join('car_pbo pb','pb.Id = cd.PboId','left');
+//
+//        if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
+//        {
+//            $this->db->where('pd.idDispatch', $_POST['idDispatch']);
+//        }
+//        if(isset($_POST['ChasisNo']) && $_POST['ChasisNo']!='')
+//        {
+//            $this->db->where('cd.ChasisNo', $_POST['ChasisNo']);
+//        }
+//        if(isset($_POST['inspectorname']) && $_POST['inspectorname']!='')
+//        {
+//            $this->db->like('inspectorname', $_POST['inspectorname']);
+//        }
+//        if(isset($_POST['created_date']) && $_POST['created_date']!='')
+//        {
+//            $this->db->where('date(created_date)', $_POST['created_date']);
+//        }
+//
+
+        if(  $perpage != '' or  $limit!='')
+            $this->db->limit($perpage, $limit);
+
+        $this->db->order_by('idGatePass','desc');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+
     function allGatepass() {
         $variants = $this->db->select('*')->from('car_gatepass')->get();
         return $variants->result_array();

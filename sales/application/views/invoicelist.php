@@ -29,7 +29,6 @@
                                     <th width="">Received From</th>
                                     <th width="">Invoice Amount</th>
                                     <th width="">Invoice Date</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -58,11 +57,7 @@
                                         <td class="tbl-variants"><?= $AllInvoiceList['ReceivedFrom'] ?></td>
                                         <td class="tbl-phone"><?= intval($AllInvoiceList['InvoiceAmount'])?></td>
                                         <td class="tbl-phone"><?= $AllInvoiceList['InvoiceDate'] ?></td>
-                                        <td>
-                                            <?php if($AllInvoiceList['idpds']==null){?>
-                                            <button class=""><a href="<?=site_url("index.php/invoice/pds/").'/'.$AllInvoiceList['DispatchId']?>">PDS</a></button>
-                                            <?php }?>
-                                        </td>
+
                                     </tr>
                                     <?php
                                 }

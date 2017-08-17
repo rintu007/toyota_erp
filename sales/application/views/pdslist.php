@@ -21,6 +21,7 @@
                             <thead>
                                 <tr>
                                     <th style="vertical-align: middle;" width="7%">S No.</th>
+                                    <th width="">Dispatch Number</th>
                                     <th width="">Type</th>
                                     <th width="">Model</th>
                                     <th width="">Line</th>
@@ -47,6 +48,7 @@
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId"><?= $count++ ?></td>
+                                        <td class="tbl-name"><?= $row['idDispatch'] ?></td>
                                         <td class="tbl-name"><?= $row['type'] ?></td>
                                         <td class="tbl-date"><?= $row['Model'] ?></td>
                                         <td class="tbl-date"><?= $row['Line'] ?></td>
@@ -55,7 +57,6 @@
 
                                         <td>
                                             <button class=""><a href="<?=site_url("index.php/invoice/pds_view/").'/'.$row['id']?>">PDS View</a></button>
-                                            <button class=""><a href="<?=site_url("index.php/invoice/nudc/").'/'.$row['id']?>">NUDC</a></button>
                                         </td>
                                     </tr>
                                     <?php

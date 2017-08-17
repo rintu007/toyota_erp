@@ -40,7 +40,7 @@
                                    />    
                         </div>
                         <div>
-                            <label>JOb Card/RO No</label>
+                            <label>Job Card/RO No</label>
                             <input type="text" name="Cardnumber" id="searchnow"
                                    />    
                         </div>
@@ -66,7 +66,7 @@
                         </div>
                         <div>
                             <label>DLR Receive Date</label>
-                            <input type="text" name="DLR" id="searchnow"
+                            <input type="text" name="DLR"  class="date"
                                    />    
                         </div>
                         <div>

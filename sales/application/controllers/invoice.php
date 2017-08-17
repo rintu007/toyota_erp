@@ -166,7 +166,13 @@ class Invoice extends CI_Controller {
 
     function pds($DispatchId) {
 
+        $q = $this->db->where('idDispatch',$DispatchId)->get('car_pds');
+        if($q->num_rows())
+        {
+            $this->session->set_flashdata('message', "PDS already Created.");
 
+            redirect(site_url("index.php/invoice/pds_view/").'/'.$q->row('id'));
+        }
         $data = array();
         $data['inp'] = $this->db->query("
                     select cc.IdCustomer,cc.CustomerName,cv.Variants,cv.ModelCode,cd.EngineNo,cd.idDispatch
@@ -195,6 +201,12 @@ class Invoice extends CI_Controller {
         $this->load->view('footer');
     }
 
+    function pds_request($idDispatch)
+    {
+        $this->db->where('idDispatch',$idDispatch)->update('car_dispatch',array('pds_request'=>1));
+        $this->session->set_flashdata('message', "PDS Request has been Requested of Dispatch Number $idDispatch.");
+        redirect(site_url('index.php/stockreport/index'));
+    }
 
     function pds_insert()
     {
@@ -203,14 +215,15 @@ class Invoice extends CI_Controller {
         $this->db->insert('car_pds',$post);
         $id  = $this->db->insert_id();
 
+        $this->db->where('idDispatch',$_POST['idDispatch'])->update('car_dispatch',array('pds_request'=>0));
+
         foreach ($_POST['p'] as $row=>$value)
         {
             $this->db->insert('car_pds_detail',array('id_pdi'=>$id,'id_input'=>$row,'value'=>$value));
         }
 
         $this->session->set_flashdata('message', "PDS no# $id has been inserted.");
-        redirect(site_url('index.php/invoice/lists'));
-
+        redirect(site_url('index.php/invoice/pds_list'));
 
 
     }
@@ -221,6 +234,16 @@ class Invoice extends CI_Controller {
         $Data['pdsList'] = $this->db->order_by('id','desc')->get('car_pds')->result_array();
         $this->load->view('header');
         $this->load->view('pdslist', $Data);
+        $this->load->view('footer');
+    }
+
+    function pds_requestlist()
+    {
+        $Data['pdsList'] = $this->db->
+        where('pds_request',1)->
+        order_by('idDispatch','desc')->get('car_dispatch')->result_array();
+        $this->load->view('header');
+        $this->load->view('pdsrequestlist', $Data);
         $this->load->view('footer');
     }
 

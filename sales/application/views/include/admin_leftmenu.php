@@ -42,12 +42,14 @@ $(document).ready(function(){
          <a href="<?= base_url() ?>index.php/stockreport/pdi_list">PDI List</a>
         <a href="<?= base_url() ?>index.php/invoice/index">Invoice</a>
         <a href="<?= base_url() ?>index.php/invoice/lists">Invoice List</a>
+        <a href="<?= base_url() ?>index.php/invoice/pds_requestlist">PDS Request List</a>
         <a href="<?= base_url() ?>index.php/invoice/pds_list">PDS List</a>
         <a href="#">Car Accessories</a>
       <!--  <a href="#">PDS</a>
         <a href="#">DO</a> -->
         <a href="#">Vehicle Registration</a>
         <a href="<?= base_url() ?>index.php/gatepass/index">Gate Pass Number</a>
+        <a href="<?= base_url() ?>index.php/gatepass/gatepass_list">Gate Pass List</a>
         <a href="<?= base_url() ?>index.php/ffs/index">FFS</a>
     <!--   <a href="#">NUDC</a> -->
         <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery FOrm</a>

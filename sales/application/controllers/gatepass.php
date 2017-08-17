@@ -27,7 +27,46 @@ class Gatepass extends CI_Controller {
         $this->load->view('gatepass', $Data);
         $this->load->view('footer');
     }
+    function gatepass_list()
+    {
+        $Gatepass = new Car_gatepass();
+        $config = array();
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['num_links'] = 1;
+        $config["base_url"] = base_url() . "index.php/gatepass/list";
+        $config["total_rows"] = $Gatepass->Gatepass_count();
+        $this->data['counts']=  $config["total_rows"];
+        $config["per_page"] = 20;
+        $config["uri_segment"] = 3;
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->data['page'] = $page+1;
+        $this->data["links"] = $this->pagination->create_links();
 
+        $this->data['gp'] = $Gatepass->get_gatepass($config["per_page"], $page);
+
+        $this->load->view('header');
+        $this->load->view('gatepass_list', $this->data);
+        $this->load->view('footer');
+
+    }
     public function index() {
         $Gatepass = new Car_gatepass();
         $Data = array();

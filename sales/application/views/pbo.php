@@ -195,10 +195,10 @@
                                         <?php
                                     }
                                     ?>
-                                    <th width="17%">Name</th>
                                     <th width="10%">Date</th>
+                                    <th width="17%">Customer Name</th>
                                     <th width="10%">Delivery Month</th>
-                                    <th width="20%">Car</th>
+                                    <th width="20%">Variant Interested</th>
                                     <th width="10%">Color</th>
                                     <th width="10%">Mobile No.</th>
                                     <th width="18%">Detail</th>
@@ -240,8 +240,8 @@
                                             <?php
                                         }
                                         ?>
-                                        <td class="tbl-name"><?= $CarPboResourceBook['CustomerName'] ?></td>
                                         <td class="tbl-date"><?= $CarPboResourceBook['Date'] ?></td>
+                                        <td class="tbl-name"><?= $CarPboResourceBook['CustomerName'] ?></td>
                                         <td class="tbl-date"><?= $CarPboResourceBook['DeliveryMonth'] ?></td>
                                         <td class="tbl-variants"><?= $CarPboResourceBook['Variants'] ?></td>
                                         <td class="tbl-color"><?= $CarPboResourceBook['ColorName'] ?></td>

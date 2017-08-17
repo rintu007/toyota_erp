@@ -52,7 +52,7 @@
                                 <tr>
                                     <th style="vertical-align: middle;" width="7%">S No.</th>
                                     <th width="15%">Dispatch Number</th>
-                                    <th width="15%">Sale Return</th>
+                                    <th width="~15%">Sale Return</th>
                                     <th width="17%">Inpsector Name</th>
                                     <th width="10%">Chassis No</th>
                                     <th width="13%">Reg Number</th>
