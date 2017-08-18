@@ -806,6 +806,12 @@ class Car_resource_book extends CI_Model {
         return $Customer;
     }
 
+    function CustomerDetailsByMobile($cell) {
+        $CustomerDetails = $this->db->query("SELECT * FROM car_customer WHERE Cellphone like  '$cell'");
+        $Customer = $CustomerDetails->result();
+        return $Customer;
+    }
+
     function fillSalesManCombo() {
         $query = $this->db->query('SELECT * FROM viewSalesman where RoleName = "Salesman"');
         $colorCombo = $query->result();

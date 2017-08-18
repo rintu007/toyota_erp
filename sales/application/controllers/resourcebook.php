@@ -392,6 +392,13 @@ class Resourcebook extends CI_Controller {
         echo json_encode($CustomerDetails);
     }
 
+    function getCustomerDetailsbyMobile() {
+        $Resourcebook = new Car_resource_book();
+        $Mobile_no = $this->input->post('Mobile_no');
+        $CustomerDetails = $Resourcebook->CustomerDetailsByMobile($Mobile_no);
+        echo json_encode($CustomerDetails);
+    }
+
     function getColor() {
         $Resourcebook = new Car_resource_book();
         $VariantId = $this->input->post('variantId');

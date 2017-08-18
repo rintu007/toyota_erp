@@ -20,7 +20,7 @@ if ($data['userid'] != "") {
                         <div class="feildwrap">
                             <div style="margin-left: 196px;">
                                 <input type='radio' class='customer_ex' data-validation='required' value='New_Customer' name='customer_ex'>New Customer
-                                <input type='radio' class='customer_ex' data-validation='required' value='Existing_Customer' name='customer_ex'>Existing Customer
+                                <input type='radio' class='customer_ex' id="customer_ex_check" data-validation='required' value='Existing_Customer' name='customer_ex'>Existing Customer
                             </div>
                             <br>
                             <div id="CustomerCombo" style="/*margin-left: 40px;*/">
@@ -36,6 +36,10 @@ if ($data['userid'] != "") {
                                 <label>Date</label>
                                 <input type="text" name="date" class="date" value="<?= date('Y/m/d') ?>"
                                        >
+                            </div>
+                            <div id="Mobile">
+                                <label>Mobile Tel#</label>
+                                <input type="text" name="Mobile_no" id="Mobile_no">
                             </div>
                             <div>
                                 <label>Contact Type</label>
@@ -140,6 +144,7 @@ if ($data['userid'] != "") {
                                 <label>City</label>
                                 <select name="city" id="city">
                                     <option>Select City</option>
+                                    <option value="Faislabad">Faislabad</option>
                                     <option value="Karachi">Karachi</option>
                                     <option value="Lahore">Lahore</option>
                                     <option value="Islamabad">Islamabad</option>
@@ -158,10 +163,7 @@ if ($data['userid'] != "") {
                                 <label>Residential Tel#</label>
                                 <input type="text" name="Residential_no" id="Residential_no">
                             </div>
-                            <div id="Mobile">
-                                <label>Mobile Tel#</label>
-                                <input type="text" name="Mobile_no" id="Mobile_no">
-                            </div>
+
                             <div id="officeNumber">
                                 <label>Office Tel#</label>
                                 <input type="text" name="Office_no" id="Office_no">
@@ -600,7 +602,6 @@ if ($data['userid'] != "") {
         });
         $("#cusId").change(function () {
             var Customer = $('#cusId').val();
-            console.log(Customer);
             $.ajax({
                 url: "<?= base_url() ?>index.php/resourcebook/getCustomerDetails",
                 type: "POST",
@@ -631,6 +632,58 @@ if ($data['userid'] != "") {
                                 $('input[name=postal_no]').val(val.postal_code);
                                 $('input[name=fax_no]').val(val.Fax);
                                 $('input[name=postal_no]').val(val.postal_code);
+                            });
+                        }
+                        catch (e) {
+                            console.log(e);
+                        }
+                    } else {
+                        console.log("empty");
+                    }
+                }
+            });
+        });
+
+
+        $("#Mobile_no").change(function () {
+            var Mobile_no = $('#Mobile_no').val();
+            $.ajax({
+                url: "<?= base_url() ?>index.php/resourcebook/getCustomerDetailsbyMobile",
+                type: "POST",
+                data: {Mobile_no: Mobile_no},
+                success: function (data) {
+                    var a = JSON.parse(data);
+                    console.log(a);
+                    if (a.length > 0) {
+                        try {
+                            $("#customer_ex_check").click();
+
+                            //                        var items = ;
+                            $.each(a, function (i, val) {
+                                //                            items += "<option value='" + val.IdCustomer + "'>" + val.CustomerName + "</option>";
+                                $('#cusId').val(val.IdCustomer);
+                                $('#customerName').val(val.CustomerName);
+                                $('input[name=f_name]').val(val.FatherName);
+                                $('input[name=dob]').val(val.DateOfBirth);
+                                $('input[name=company_name]').val(val.CompanyName);
+                                $('input[name=designation]').val(val.Designation);
+                                $('textarea[name=address]').val(val.AddressDetails);
+                                $('textarea[name=address2]').val(val.AddressTwoDetails);
+                                $('select#province').val(val.Province);
+                                $('select#city').val(val.City);
+                                $('input[name=Residential_no]').val(val.Telephone);
+//                                $('input[name=Mobile_no]').val(val.Cellphone);
+                                $('input[name=Office_no]').val(val.OfficeNumber);
+                                $('input[name=email]').val(val.Email);
+                                $('input[name=CNIC_no]').val(val.Cnic);
+                                $('input[name=NTN_no]').val(val.Ntn);
+                                $('input[name=postal_no]').val(val.postal_code);
+                                $('input[name=fax_no]').val(val.Fax);
+                                $('input[name=postal_no]').val(val.postal_code);
+                                items = "<option value='"+ val.IdCustomer+"'>"+val.CustomerName +"</option>"
+                                $('#cusId').html(items);
+                                $('#CustomerCombo').show();
+
                             });
                         }
                         catch (e) {
