@@ -18,4 +18,18 @@ class Quotation extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function edit($idRb) {
+        $this->data['Quotation'] = $this->Rb_quotation->generateQuotation($idRb);
+        $this->load->view('header');
+        $this->load->view('quotation_edit', $this->data);
+        $this->load->view('footer');
+    }
+
+    public function editprint() {
+
+        $this->load->view('header');
+        $this->load->view('quotation_editprint');
+        $this->load->view('footer');
+    }
+
 }

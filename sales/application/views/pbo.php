@@ -188,6 +188,9 @@
                             <thead>
                                 <tr>
                                     <th width="7%">S No.</th>
+                                    <th width="10%">Date</th>
+                                    <th width="7%">Resource Book No</th>
+
                                     <?php
                                     if ($cookieData["Role"] == 'Director' || $cookieData["Role"] == 'Admin' || $cookieData["Role"] == 'CEO' || $cookieData["Role"] == 'Senior Director' || $cookieData["Role"] == 'Manager') {
                                         ?>
@@ -195,12 +198,13 @@
                                         <?php
                                     }
                                     ?>
-                                    <th width="10%">Date</th>
                                     <th width="17%">Customer Name</th>
-                                    <th width="10%">Delivery Month</th>
+                                    <th width="10%">Mobile No.</th>
+                                    <th width="10%">Birth Date</th>
+
                                     <th width="20%">Variant Interested</th>
                                     <th width="10%">Color</th>
-                                    <th width="10%">Mobile No.</th>
+                                    <th width="10%">Delivery Month</th>
                                     <th width="18%">Detail</th>
                                 </tr>
                             </thead>
@@ -233,6 +237,10 @@
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId" name="resId"><?= $count++ ?></td>
+
+                                        <td class="tbl-date"><?= $CarPboResourceBook['Date'] ?></td>
+                                        <td class="tbl-date"><?= $CarPboResourceBook['IdResourceBook'] ?></td>
+
                                         <?php
                                         if ($cookieData["Role"] == 'Director' || $cookieData["Role"] == 'Admin' || $cookieData["Role"] == 'CEO' || $cookieData["Role"] == 'Senior Director' || $cookieData["Role"] == 'Manager') {
                                             ?>
@@ -240,13 +248,14 @@
                                             <?php
                                         }
                                         ?>
-                                        <td class="tbl-date"><?= $CarPboResourceBook['Date'] ?></td>
                                         <td class="tbl-name"><?= $CarPboResourceBook['CustomerName'] ?></td>
-                                        <td class="tbl-date"><?= $CarPboResourceBook['DeliveryMonth'] ?></td>
+                                        <td class="tbl-phone"><?= $CarPboResourceBook['Cellphone'] ?></td>
+                                        <td class="tbl-phone"><?= $CarPboResourceBook['DateOfBirth'] ?></td>
+
                                         <td class="tbl-variants"><?= $CarPboResourceBook['Variants'] ?></td>
                                         <td class="tbl-color"><?= $CarPboResourceBook['ColorName'] ?></td>
-                                        <td class="tbl-phone"><?= $CarPboResourceBook['Cellphone'] ?></td>
-                                        
+                                        <td class="tbl-date"><?= $CarPboResourceBook['DeliveryMonth'] ?></td>
+
                                         <td>
                                             <a href="<?= base_url() ?>index.php/quotation/index/<?= $ResourceBookId ?>">Quotation</a> /
                                             <?php if (($CarPboResourceBook['IsLost'] == 0) && ($CarPboResourceBook['isPboCreated'] == 0)) { ?>                                               

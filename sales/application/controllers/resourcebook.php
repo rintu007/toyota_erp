@@ -14,6 +14,7 @@ class Resourcebook extends CI_Controller {
     }
 
     function index() {
+//        var_dump($_POST);die;
 //        echo 'aa';
 //        die;
         //validate form input
@@ -109,7 +110,8 @@ class Resourcebook extends CI_Controller {
                 'Email' => $this->input->post('email'),
                 'Fax' => $this->input->post('fax_no'),
                 'postal_code' => $this->input->post('postal_no'),
-                'idUserProfile' => $cookieData["userid"]
+                'idUserProfile' => $cookieData["userid"],
+                'preferedcontactway' =>  $this->input->post('preferedcontactway')
             );
             $CustomerId = $this->input->post('customer_id');
             $rbData = array(
@@ -152,6 +154,7 @@ class Resourcebook extends CI_Controller {
         $this->data['followup'] = $this->Car_resource_book->fillFollowUpCombo();
         $this->data['accessories'] = $this->Car_resource_book->fillAccessoriesCheckBox();
         $this->data['Model'] = $this->Car_resource_book->fillModelCombo();
+        $this->data['campaigns'] = $this->Car_resource_book->getCampaigns();
         $this->data['Bank'] = $this->Car_resource_book->fillFinancerCombo();
         $this->data['AllotedSalesMan'] = $this->Car_resource_book->fillSalesManCombo();
         $this->data['ActualSalesMan'] = $this->Car_resource_book->fillAllSalesManCombo();
@@ -289,7 +292,16 @@ class Resourcebook extends CI_Controller {
                  'visitplanId' => $this->input->post('visit_plan'),
                 'Color1' => $Color1,
                 'Color2' => $Color1,
-                'LeadBy' => $LeadBy);
+                'LeadBy' => $LeadBy,
+                'idCampaign'    => $this->input->post('idCampaign'),
+                'replacement'   => $this->input->post('replacement'),
+                'replacementmodel'  => $this->input->post('replacementmodel'),
+                'replacementyear'   => $this->input->post('replacementyear'),
+                'replacementvariant'    => $this->input->post('replacementvariant'),
+                'replacementmileage'    => $this->input->post('replacementmileage'),
+                'replacementreffered'   => $this->input->post('replacementreffered'),
+                'replacementregno'  => $this->input->post('replacementregno'),
+                'preferedcontactway' =>  $this->input->post('preferedcontactway'));
 
             $AccessoriesData = array();
             $accessory = $this->input->post('accessories');
@@ -311,6 +323,7 @@ class Resourcebook extends CI_Controller {
             $this->data['payment_mode'] = $this->Car_resource_book->rbfillPaymentTypeCombo();
             $this->data['rbPayment'] = $this->Car_resource_book->fillPaymentTypeCombo();
             $this->data['vehicle_interst'] = $this->Car_resource_book->rbfillVariantsCombo($resourcebook['ModelId']);
+//            var_dump($this->data['vehicle_interst']);die;
             $this->data['rbVariant'] = $this->Car_resource_book->fillVariantsCombo($resourcebook['ModelId']);
             $this->data['color_choice_one'] = $this->Car_resource_book->rbfillColorCombo();
             $this->data['color1'] = $this->Car_resource_book->fillColorCombo();
@@ -325,6 +338,10 @@ class Resourcebook extends CI_Controller {
             $this->data['accessories'] = $this->Car_resource_book->fillAccessoriesChecked($ResourceBookId);
             $this->data['LeadBy'] = $this->Car_resource_book->rbfillSalesManCombo();
             $this->data['AllotedSalesMan'] = $this->Car_resource_book->fillSalesManCombo();
+
+            $this->data['Model'] = $this->Car_resource_book->fillModelCombo();
+            $this->data['campaigns'] = $this->Car_resource_book->getCampaigns();
+
         $this->data['ActualSalesMan'] = $this->Car_resource_book->fillAllSalesManCombo();
 //            $this->data['accessories1'] = $this->Car_resource_book->fillAccessoriesCheckBox();
             $months = array();
@@ -397,6 +414,13 @@ class Resourcebook extends CI_Controller {
         $Mobile_no = $this->input->post('Mobile_no');
         $CustomerDetails = $Resourcebook->CustomerDetailsByMobile($Mobile_no);
         echo json_encode($CustomerDetails);
+    }
+
+    function getCampaign() {
+        $Resourcebook = new Car_resource_book();
+        $idCampaign = $this->input->post('idCampaign');
+        $camp = $Resourcebook->getCampaign($idCampaign);
+        echo json_encode($camp);
     }
 
     function getColor() {
@@ -538,6 +562,9 @@ class Resourcebook extends CI_Controller {
             $this->data['rbFollowup'] = $this->Car_resource_book->fillFollowUpCombo();
             $this->data['accessories'] = $this->Car_resource_book->fillAccessoriesChecked($ResourceBookId);
             $this->data['LeadBy'] = $this->Car_resource_book->rbfillSalesManCombo();
+
+            $this->data['Model'] = $this->Car_resource_book->fillModelCombo();
+            $this->data['campaigns'] = $this->Car_resource_book->getCampaigns();
             
              $this->data['AllotedSalesMan'] = $this->Car_resource_book->fillSalesManCombo();
         $this->data['ActualSalesMan'] = $this->Car_resource_book->fillAllSalesManCombo();

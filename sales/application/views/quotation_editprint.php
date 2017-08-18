@@ -44,7 +44,6 @@
                 <div class="span12 text-center">
                     <input type="button" value="Print" class="btn-primary" onclick="PrintDoc()"/>
                     <input type="button" value="Print Preview" class="btn-info" onclick="PrintPreview()"/>
-                    <button type="button" class="btn"><a href="<?=site_url('index.php/quotation/edit/').'/'.$Quotation[0]['IdResourceBook']?>">Edit</a> </button>
                 </div>
             </div>
         </div>
@@ -71,7 +70,7 @@
                                 <span class="bold">Attn :</span>
                             </div>
                             <div class="span8">
-                                <span ><?= $Quotation[0]['FullName'] ?> </span>
+                                <span ><?= $_POST['FullName'] ?> </span>
                             </div>
                         </div>
                     </div>
@@ -91,7 +90,7 @@
                                 <span class="bold">M/S :</span>
                             </div>
                             <div class="span8">
-                                <span ><?= $Quotation[0]['BankName'] ?></span>
+                                <span ><?= $_POST['BankName'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -101,7 +100,7 @@
                                 <span class="bold">Reference#:</span>
                             </div>
                             <div class="span6">
-                                <span>TWM/<?= date('Y') ?>/<?= $Quotation[0]['IdResourceBook'] ?></span>
+                                <span>TWM/<?= $_POST['IdResourceBook'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -115,7 +114,7 @@
                                 <span class="bold">Date:</span>
                             </div>
                             <div class="span6">
-                                <span><?= $Quotation[0]['Date'] ?></span>
+                                <span><?= $_POST['Date'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -128,7 +127,7 @@
                                 <span class="bold">A/C:</span>
                             </div>
                             <div class="span8">
-                                <span ><?= $Quotation[0]['CustomerName'] . " " . $Quotation[0]['FatherName'] ?></span>
+                                <span ><?=  $_POST['FatherName'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -146,20 +145,16 @@
                             <th style="text-align: center;width: 20%;">Total Amount</th>
                             </thead>
                             <tbody>
-                                <?php
-                                $count = 1;
-                                foreach ($Quotation as $quotation) {
-                                    ?>
+
+
                                     <tr>
-                                        <td style="text-align: center;"><?= $count++ ?></td>
-                                        <td><?= $quotation['Variants'] ?></td>
                                         <td style="text-align: center;">1</td>
-                                        <td style="text-align: center;"><?= $quotation['Price'] ?></td>
-                                        <td style="text-align: right;"><?= $quotation['TotalPrice'] ?></td>
+                                        <td><?= $_POST['Variants'] ?></td>
+                                        <td style="text-align: center;">1</td>
+                                        <td style="text-align: center;"><?= $_POST['Price'] ?></td>
+                                        <td style="text-align: right;"><?= $_POST['TotalPrice'] ?></td>
                                     </tr>
-                                    <?php
-                                }
-                                ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -174,7 +169,7 @@
                                 <span class="bold">Displacement :</span>
                             </div>
                             <div class="span8">
-                                <span><?= $Quotation[0]['DisplacementName'] ?></span>
+                                <span><?= $_POST['DisplacementName'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -187,7 +182,7 @@
                                 <span class="bold">Model :</span>
                             </div>
                             <div class="span8">
-                                <span><?= $Quotation[0]['Model'] ?></span>
+                                <span><?= $_POST['Model'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -200,7 +195,7 @@
                                 <span class="bold">Color :</span>
                             </div>
                             <div class="span8">
-                                <span><?= $Quotation[0]['ColorName'] ?></span>
+                                <span><?= $_POST['ColorName'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -213,7 +208,7 @@
                                 <span class="bold">Delivery :</span>
                             </div>
                             <div class="span8">
-                                <span><?= $Quotation[0]['DeliveryMonth'] ?></span>
+                                <span><?= $_POST['DeliveryMonth'] ?></span>
                             </div>
                         </div>
                     </div>

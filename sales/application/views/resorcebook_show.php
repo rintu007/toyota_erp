@@ -395,6 +395,84 @@
                                 <span class="check">This feild must be filled!</span>
                             </div>
                         </fieldset>
+
+                        <fieldset>
+                            <legend>Campaign</legend>
+
+                            <div class="feildwrap">
+
+                                <div>
+                                    <label>Select campaign</label>
+                                    <select name="idCampaign" id="idCampaign" class="" data-validation="required">
+                                        <option value="">Select campaign</option>
+                                        <?php
+                                        foreach ($campaigns as $row) {?>
+                                            <option value="<?= $row['idCampaign'] ?>" <?=(($resourcebook['idCampaign']==$row['idCampaign'])?'selected':'')?> ><?= $row['campaignType'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Description</label>
+                                    <input type="text" id="cmpaigndescription">
+                                </div>
+                                <div >
+                                    <label>Remarks</label>
+                                    <input type="text" id="cmpaignremarks">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Replacement</legend>
+
+                            <div class="feildwrap">
+
+                                <div>
+                                    <label>Replacement</label>
+                                    <select name="replacement" id="replacement" class="" data-validation="required">
+                                        <option <?=($resourcebook['FollowupStatus']?'selected':'')?> value="1">No</option>
+                                        <option <?=($resourcebook['FollowupStatus']?'selected':'')?> value="0">Yes</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Model</label>
+
+                                    <select name="replacementmodel" id="">
+                                        <option value="">Select Model</option>
+                                        <?php
+                                        foreach ($Model as $CarModel) {
+                                            $ModelId = $CarModel['Id'];
+                                            ?>
+                                            <option value="<?= $CarModel['Id'] ?>"  <?=(($resourcebook['replacementmodel']==$CarModel['Id'])?'selected':'')?>><?= $CarModel['Model'] ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div >
+                                    <label>Model Year</label>
+                                    <input type="text" id="replacementyear" value="<?=$resourcebook['replacementyear']?>" name="replacementyear">
+                                </div>
+                                <div >
+                                    <label>Variant</label>
+                                    <?= form_dropdown('lead', $vehicle_interst, $resourcebook['replacementvariant']); ?>
+
+                                </div>
+                                <div >
+                                    <label>Mileage</label>
+                                    <input type="text"  value="<?= $resourcebook['replacementmileage']?>" name="replacementmileage">
+                                </div>
+                                <div >
+                                    <label>Referred To</label>
+                                    <input type="text" value="<?= $resourcebook['replacementreffered']?>" name="replacementreffered">
+                                </div>
+                                <div >
+                                    <label>Reg No#</label>
+                                    <input type="text" value="<?= $resourcebook['replacementregno']?>" name="replacementregno">
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
 
                 </div>

@@ -34,16 +34,15 @@ if ($data['userid'] != "") {
 
                             <div>
                                 <label>Date</label>
-                                <input type="text" name="date" class="date" value="<?= date('Y/m/d') ?>"
-                                       >
+                                <input type="text" name="date" class="date" value="<?= date('Y/m/d') ?>">
                             </div>
                             <div id="Mobile">
                                 <label>Mobile Tel#</label>
-                                <input type="text" name="Mobile_no" id="Mobile_no">
+                                <input type="text" name="Mobile_no" data-validation='required' id="Mobile_no">
                             </div>
                             <div>
                                 <label>Contact Type</label>
-                                <select name="contact_type" class="conType" id="conType">
+                                <select name="contact_type" class="conType" data-validation='required' id="conType">
                                     <option>Select Contact Type</option>
                                     <?php
                                     foreach ($contact_type as $ContactType) {
@@ -93,7 +92,7 @@ if ($data['userid'] != "") {
                             <div id="dob">
                                 <label>Date of Birth</label>
                                 <!--<input type="date" class="dob" name="dob" style="width:250px;">-->
-                                <input type="text" name="dob" class="date dob"/>
+                                <input type="text" name="dob" data-validation='required' class="date dob"/>
                             </div>
 
                             <div>
@@ -183,6 +182,11 @@ if ($data['userid'] != "") {
                             <div>
                                 <label>NTN #</label>
                                 <input type="text" name="NTN_no" id="NTN_no">
+                            </div>
+
+                            <div>
+                                <label>Preffered way to Contact</label>
+                                <input type="text" name="preferedcontactway" placeholder="SMS,EMAIL,FAX" id="NTN_no">
                             </div>
                         </div>
                     </fieldset>
@@ -396,6 +400,98 @@ if ($data['userid'] != "") {
                         </fieldset>
                     </div>
                     <div class="btn-block-wrap">
+
+
+                        <fieldset>
+                            <legend>Campaign</legend>
+
+                            <div class="feildwrap">
+
+                                <div>
+                                    <label>Select campaign</label>
+                                    <select name="idCampaign" id="idCampaign" class="" data-validation="required">
+                                        <option value="">Select campaign</option>
+                                        <?php
+                                        foreach ($campaigns as $row) {?>
+                                            <option value="<?= $row['idCampaign'] ?>" ><?= $row['campaignType'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Description</label>
+                                    <input type="text" id="cmpaigndescription">
+                                </div>
+                                <div >
+                                    <label>Remarks</label>
+                                    <input type="text" id="cmpaignremarks">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Replacement</legend>
+
+                            <div class="feildwrap">
+
+                                <div>
+                                    <label>Replacement</label>
+                                    <select name="replacement" id="replacement" class="" data-validation="required">
+                                        <option value="1">No</option>
+                                        <option value="0">Yes</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Model</label>
+                                    <select name="replacementmodel" id="">
+                                        <option value="">Select Model</option>
+                                    <?php
+                                    foreach ($Model as $CarModel) {
+                                        $ModelId = $CarModel['Id'];
+                                        ?>
+                                        <option value="<?= $CarModel['Id'] ?>" ><?= $CarModel['Model'] ?></option>
+                                        <?php }
+                                    ?>
+                                    </select>
+                                </div>
+                                <div >
+                                    <label>Model Year</label>
+                                    <input type="text" id="replacementyear" name="replacementyear">
+                                </div>
+                                <div >
+                                    <label>Variant</label>
+
+                                    <select name="replacementvariant" id="">
+                                        <option value="">Select Variant</option>
+
+                                        <?php
+                                        foreach ($vehicle_interst as $row) {
+//                                            $ModelId = $CarModel['IdVariants'];
+                                            ?>
+                                            <option value="<?= $row['Id'] ?>" ><?= $row['Variants'] ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+
+<!--                                    <input type="text" id="replacementvariant">-->
+                                </div>
+                                <div >
+                                    <label>Mileage</label>
+                                    <input type="text" name="replacementmileage">
+                                </div>
+                                <div >
+                                    <label>Referred To</label>
+                                    <input type="text" name="replacementreffered">
+                                </div>
+                                <div >
+                                    <label>Reg No#</label>
+                                    <input type="text" name="replacementregno">
+                                </div>
+                            </div>
+                        </fieldset>
+
+
                         <label>&nbsp;</label>
                         <input type="submit" class="btn" value="Save Resourcebook" style="margin-left: 445px;">
                     </div>
@@ -578,6 +674,8 @@ if ($data['userid'] != "") {
                                 $("input[name=email]").val(val.Email);
                                 $("input[name=CNIC_no]").val(val.Cnic);
                                 $("input[name=NTN_no]").val(val.Ntn);
+                                $('input[name=preferedcontactway]').val(val.preferedcontactway);
+
                             });
                         } catch (e) {
                             console.log(e);
@@ -632,6 +730,7 @@ if ($data['userid'] != "") {
                                 $('input[name=postal_no]').val(val.postal_code);
                                 $('input[name=fax_no]').val(val.Fax);
                                 $('input[name=postal_no]').val(val.postal_code);
+                                $('input[name=preferedcontactway]').val(val.preferedcontactway);
                             });
                         }
                         catch (e) {
@@ -640,6 +739,21 @@ if ($data['userid'] != "") {
                     } else {
                         console.log("empty");
                     }
+                }
+            });
+        });
+
+        $("#idCampaign").change(function () {
+            var idCampaign = $('#idCampaign').val();
+            $.ajax({
+                url: "<?= base_url() ?>index.php/resourcebook/getCampaign",
+                type: "POST",
+                data: {idCampaign: idCampaign},
+                success: function (data) {
+                    var a = JSON.parse(data);
+                    console.log(a);
+                    $('#cmpaigndescription').val(a.description)
+                    $('#cmpaignremarks').val(a.remarks)
                 }
             });
         });
@@ -680,6 +794,8 @@ if ($data['userid'] != "") {
                                 $('input[name=postal_no]').val(val.postal_code);
                                 $('input[name=fax_no]').val(val.Fax);
                                 $('input[name=postal_no]').val(val.postal_code);
+                                $('input[name=preferedcontactway]').val(val.preferedcontactway);
+
                                 items = "<option value='"+ val.IdCustomer+"'>"+val.CustomerName +"</option>"
                                 $('#cusId').html(items);
                                 $('#CustomerCombo').show();

@@ -286,7 +286,23 @@ class Car_resource_book extends CI_Model {
                     'IsLost' => 0,
                     'visitplanId' => $this->input->post('visit_plan'),
                     'SalesmanId' => $AllotedSalesMan,
-                    'ActualSalesman' => $ActualSalesMan);
+                    'ActualSalesman' => $ActualSalesMan,
+
+                    'idCampaign'    => $this->input->post('idCampaign'),
+                    'replacement'   => $this->input->post('replacement'),
+                    'replacementmodel'  => $this->input->post('replacementmodel'),
+                    'replacementyear'   => $this->input->post('replacementyear'),
+                    'replacementvariant'    => $this->input->post('replacementvariant'),
+                    'replacementmileage'    => $this->input->post('replacementmileage'),
+                    'replacementreffered'   => $this->input->post('replacementreffered'),
+                    'replacementregno'  => $this->input->post('replacementregno'),
+                    'preferedcontactway' =>  $this->input->post('preferedcontactway')
+
+
+
+                );
+
+
                 $this->db->insert('car_resource_book', $rbData);
             } else {
                 $this->db->where('IdCustomer', $CustomerId);
@@ -313,7 +329,18 @@ class Car_resource_book extends CI_Model {
                     'IsLost' => 0,
                     'visitplanId' => $this->input->post('visit_plan'),
                     'SalesmanId' => $AllotedSalesMan,
-                    'ActualSalesman' => $ActualSalesMan);
+                    'ActualSalesman' => $ActualSalesMan,
+                    'preferedcontactway' =>  $this->input->post('preferedcontactway'),
+
+                    'idCampaign'    => $this->input->post('idCampaign'),
+                    'replacement'   => $this->input->post('replacement'),
+                    'replacementmodel'  => $this->input->post('replacementmodel'),
+                    'replacementyear'   => $this->input->post('replacementyear'),
+                    'replacementvariant'    => $this->input->post('replacementvariant'),
+                    'replacementmileage'    => $this->input->post('replacementmileage'),
+                    'replacementreffered'   => $this->input->post('replacementreffered'),
+                    'replacementregno'  => $this->input->post('replacementregno')
+                    );
                 $this->db->insert('car_resource_book', $rbData);
             }
 
@@ -416,7 +443,18 @@ class Car_resource_book extends CI_Model {
                     'IsLost' => 0,
                     'visitplanId' => $this->input->post('visit_plan'),
                     'SalesmanId' => $cookieData['userid'],
-                    'ActualSalesman' => $cookieData['userid']);
+                    'ActualSalesman' => $cookieData['userid'],
+                    'preferedcontactway' =>  $this->input->post('preferedcontactway'),
+
+                    'idCampaign'    => $this->input->post('idCampaign'),
+                    'replacement'   => $this->input->post('replacement'),
+                    'replacementmodel'  => $this->input->post('replacementmodel'),
+                    'replacementyear'   => $this->input->post('replacementyear'),
+                    'replacementvariant'    => $this->input->post('replacementvariant'),
+                    'replacementmileage'    => $this->input->post('replacementmileage'),
+                    'replacementreffered'   => $this->input->post('replacementreffered'),
+                    'replacementregno'  => $this->input->post('replacementregno')
+                    );
                 $this->db->insert('car_resource_book', $rbData);
             } else {
                 $this->db->where('IdCustomer', $CustomerId);
@@ -443,7 +481,17 @@ class Car_resource_book extends CI_Model {
                     'IsLost' => 0,
                     'visitplanId' => $this->input->post('visit_plan'),
                     'SalesmanId' => $cookieData['userid'],
-                    'ActualSalesman' => $cookieData['userid']);
+                    'ActualSalesman' => $cookieData['userid'],
+                    'idCampaign'    => $this->input->post('idCampaign'),
+                    'replacement'   => $this->input->post('replacement'),
+                    'replacementmodel'  => $this->input->post('replacementmodel'),
+                    'replacementyear'   => $this->input->post('replacementyear'),
+                    'replacementvariant'    => $this->input->post('replacementvariant'),
+                    'replacementmileage'    => $this->input->post('replacementmileage'),
+                    'replacementreffered'   => $this->input->post('replacementreffered'),
+                    'replacementregno'  => $this->input->post('replacementregno'),
+                    'preferedcontactway' =>  $this->input->post('preferedcontactway')
+                );
                 $this->db->insert('car_resource_book', $rbData);
             }
 
@@ -1172,4 +1220,13 @@ class Car_resource_book extends CI_Model {
         return $PartialAmount->result_array();
     }
 
+    public function getCampaigns()
+    {
+        return $this->db->get('car_campaign')->result_array();
+    }
+
+    public function getCampaign($idCampaign)
+    {
+        return $this->db->where('idCampaign',$idCampaign)->get('car_campaign')->row();
+    }
 }
