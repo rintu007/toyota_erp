@@ -85,7 +85,7 @@ $("#addVisitPlan").on('click',function(){
    html += "<tr>";
    html += "<td><select name = 'sale_person[]'>"+saleperson_option+"</select></td>";
    html += "<td><select name = 'location[]'>"+location_option+"</select></td>";
-   html += "<td><input type = 'text' name = 'visit_date[]' class='textoq' /> </td>";
+   html += "<td><input type = 'date' onchange='getday(this)' name = 'visit_date[]' class='textoq' /> </td>";
    html += "<td><input type = 'text' name = 'day_of_visit[]' class='textoq' /> </td>";
    html += "<td style='text-align:center !important;'><a href='#' class = 'remCF textoq'>Remove</a></td>"
    html += "</tr>";
@@ -93,9 +93,21 @@ $("#addVisitPlan").on('click',function(){
    $('#visitplan_tbody').append(html);
 });
 
+
 $("#addVisitPlan").on('click','.remCF',function(){
         $('#submit').hide();
         $(this).parent().parent().remove();
         
     });
+var day;
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function getday(a)
+{
+
+    var d = new Date(a.value);
+    day = days[d.getDay()]
+    $($($(a).parent().next()).find('input')[0]).val(day)
+
+}
 </script>

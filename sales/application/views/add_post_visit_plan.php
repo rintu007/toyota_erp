@@ -13,8 +13,14 @@
                     <fieldset>
                         <legend>Add Post Visit Plan</legend>
                         <div>
-                            <label>Entry Post Visit Plan Plan No</label>
-                            <input type="text" name="entery_no" id="entery_no" value="<?= $entery_no ?>" readonly >
+                            <label>Post Visit Plan No</label>
+<!--                            <input type="text" name="entery_no" id="entery_no" value="--><?//= $entery_no ?><!--" readonly >-->
+                            <select name="entery_no" id="entery_no">
+                                <?php foreach ( $entery_no as $item) { ?>
+                                    <option value="<?=$item->idvisitplan?>"><?=$item->idvisitplan?></option>
+
+                                <?php   }?>
+                            </select>
                         </div>
                     </fieldset> 
                     <fieldset>
@@ -108,17 +114,17 @@
         var html;
         var customername = <?= json_encode($customername) ?>;
         var customername_option;
-        $.each(customername, function (i, val) {
-            customername_option += "<option value = " + val['IdCustomer'] + " >" + val['CustomerName'] + "</option>";
-        });
+//        $.each(customername, function (i, val) {
+//            customername_option += "<option value = " + val['IdCustomer'] + " >" + val['CustomerName'] + "</option>";
+//        });
         html += "<tr>";     
-        html += "<td><select name = 'customername[]'>" + customername_option + "</select></td>";
+        html += "<td><input type='text' name = 'customername[]'/></td>";
         html += "<td><input type = 'text' name = 'address[]'  /> </td>";
-        html += "<td><input type = 'text' name = 'mobile[]'  /> </td>";
-        html += "<td><input type = 'text' name = 'telephone[]'  /> </td>";
+        html += "<td><input type = 'text' onchange='getcustomer(this)' name = 'mobile[]'  /> </td>";
+        html += "<td><input type = 'text' onchange='getcustomer(this)' name = 'telephone[]'  /> </td>";
         html += "<td><input type = 'text' name = 'email[]'  /> </td>";
         html += "<td><input type = 'text' name = 'businessname[]'  /> </td>";
-        html += "<td><input type = 'text' name = 'businessaddress[]'  /> </td>";
+        html += "<td><input type = 'text' name = 'businessaddress[]'  /><input type='hidden' name = 'IdCustomer[]' value=''/> </td>";
         html += "<td style='text-align:center !important;'><a href='#' class = 'remCF textoq'>Remove</a></td>"
         html += "</tr>";
 
@@ -127,5 +133,49 @@
     $(document).on('click', '.remCF', function () {
         $(this).parent().parent().remove();
     });
+    var elem
+    function getcustomer(num){
+        elem = num
+        number = num.value
+
+        $.ajax({
+            url: "<?= base_url() ?>index.php/visitplanpost/serviceexistingcustomer",
+            type: "POST", data: {searchby: 'Contact Number', searchnow: number},
+            dataType: "json",
+            success: function(data) {
+                console.log(data)
+
+//                $($(p).find('input')[5]).val(data['customer'][0]['Name'])
+//                $($(p).find('input')[6]).val(data['customer'][0]['Name'])
+
+                if (data['customer'].length > 0) {
+
+                    var p = $(elem).parent().parent()[0]
+                    $($(p).find('input')[0]).val(data['customer'][0]['Name'])
+                    $($(p).find('input')[1]).val(data['customer'][0]['Address'])
+                    $($(p).find('input')[3]).val(data['customer'][0]['PhoneNumber'])
+                    $($(p).find('input')[4]).val(data['customer'][0]['Email'])
+                    $($(p).find('input')[7]).val(data['customer'][0]['IdCustomer'])
+
+//                    $('#CustomerQueryResult').html('Customer is Already Registered');
+//                    $('#CustomerQueryResult').show();
+//                    $('#shwvehicle').html(' ');
+//                    $('#shwcustomername').val(data['customer'][0]['Name']);
+//                    $('#showphonenum').val(data['customer'][0]['PhoneNumber']);
+//                    $('#shwmobilnum').val(data['customer'][0]['MobileNumber']);
+//                    $('#shwemail').val(data['customer'][0]['Email']);
+//                    $('#shwaddress').val(data['customer'][0]['Address']);
+//                    $('#shwvehicle').append($("<option>Select Variant</option>").val(data['customer'][0]['VariantId']).html(data['crcustomer'][0]['VehicleName']));
+//                    $('#shwvehiclechassisnum').val(data['customer'][0]['ChassisNumber']);
+//                    $('#shwvehicleenginenum').val(data['customer'][0]['EngineNumber']);
+                }
+
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+
+    }
 
 </script>

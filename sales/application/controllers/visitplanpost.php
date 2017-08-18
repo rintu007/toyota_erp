@@ -48,7 +48,7 @@ class Visitplanpost extends CI_Controller {
 
     public function addPostVisit() {
         $data = array(
-            'entery_no' => $this->Car_visitplanpost->getEnteryNo(),
+            'entery_no' => $this->Car_visitplanpost->getallEntry(),
             'customername' => $this->Car_visitplanpost->getSalePersonCustomerName()
         );
         $this->load->view('header');
@@ -61,6 +61,12 @@ class Visitplanpost extends CI_Controller {
         $this->load->view('header');
         $this->load->view('view_post_visit_plan', $data);
         $this->load->view('footer');
+    }
+
+    public function serviceexistingcustomer() {
+
+        $getapproless =  $this->Car_visitplanpost->getexistingcustomer();
+        echo json_encode($getapproless);
     }
 
 }
