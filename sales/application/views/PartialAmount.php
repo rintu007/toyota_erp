@@ -25,11 +25,8 @@
                                     <th width="10%">ChasisNumber</th>
                                     <th width="30%">EngineNumber</th>
                                     <th width="10%">TotalAmount</th>
-                                    <th width="10%">ChequeOne</th>
-                                    <th width="10%">ChequeTwo</th>
-                                    <th width="10%">ChequeThree</th>
-                                    <!--				    <th width="10%">BankThree</th>
-                                                        <th width="10%">BranhThree</th>-->
+                                    <th width="">Payment Type</th>
+
                                     <th width="10%">Remaning Amount</th>
                                     <th width="10%">Receive Amount</th>
 
@@ -61,7 +58,7 @@
                                 <?php
                                 $count = 1;
                                 foreach ($PartialAmount as $Amount) {
-                                    $remaining = intval($Amount['TotalAmount']) - (intval($Amount['ChequeOne']) + intval($Amount['ChequeTwo']) + intval($Amount['ChequeThree']));
+                                    $remaining = intval($Amount['TotalAmount']) - $Amount['TotalPartialAmount'];
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId" name="resId"><?= $count++ ?></td>
@@ -70,15 +67,14 @@
                                         <td class="tbl-date"><?= $Amount['ChasisNumber'] ?></td>
                                         <td class="tbl-variants"><?= $Amount['EngineNumber'] ?></td>
                                         <td class="tbl-color"><?= $Amount['TotalAmount'] ?></td>
-                                        <td class="tbl-phone"><?= $Amount['ChequeOne'] ?></td>
-                                        <td class="tbl-phone"><?= $Amount['ChequeTwo'] ?></td>
-                                        <td class="tbl-phone"><?= $Amount['ChequeThree'] ?></td>
+                                        <td class="tbl-phone"><?= $Amount['paymenttype'] ?></td>
+
                                         <td class="tbl-phone"><?= $remaining; ?></td>
                                         <!--					<td class="tbl-phone"><?= $Amount['BankThree'] ?></td>
                                             <td class="tbl-phone"><?= $Amount['BranchThree'] ?></td>-->
 
                                         <td class="tbl-phone">
-                                            <?php if ($remaining != 0) { ?><a href="<?= base_url() ?>index.php/ReceiveAmount/index/<?= $Amount['PboNumber'] ?>">Receive</a><?php } else { ?> <span style="color: green;">Paid</span></span> <?php } ?>
+                                            <?php if ($remaining > 0) { ?><a href="<?= base_url() ?>index.php/ReceiveAmount/index/<?= $Amount['idpbo'] ?>">Receive</a><?php } else { ?> <span style="color: green;">Paid</span></span> <?php } ?>
                                         </td>
 
                                     </tr>

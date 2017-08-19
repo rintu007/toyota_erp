@@ -409,7 +409,7 @@ if ($data['userid'] != "") {
 
                                 <div>
                                     <label>Select campaign</label>
-                                    <select name="idCampaign" id="idCampaign" class="" data-validation="required">
+                                    <select name="idCampaign" id="idCampaign" class="">
                                         <option value="">Select campaign</option>
                                         <?php
                                         foreach ($campaigns as $row) {?>

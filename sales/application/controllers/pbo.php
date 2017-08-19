@@ -107,7 +107,8 @@ class Pbo extends CI_Controller {
         if (isset($_FILES['ImgPbo']['error']) && ($_FILES['ImgPbo']['error'] != 4)) {
             $check_file_upload = TRUE;
         }
-        if (!$this->form_validation->run() || ($check_file_upload && !$this->upload->do_upload('ImgPbo'))) {
+        if (!$this->form_validation->run() || ($check_file_upload && !$this->upload->do_upload('ImgPbo')))
+        {
             redirect(base_url() . "index.php/resourcebook/index");
         } else {
             $upload_data = $this->upload->data();
@@ -229,6 +230,7 @@ class Pbo extends CI_Controller {
         $this->data['AllocationType'] = $this->Car_resource_book->fillAllocationTypeCombo();
         $this->data['OrderType'] = $this->Car_resource_book->fillOrderTypeCombo();
         $this->data['Filer'] = $this->Car_resource_book->getFiler($idVariant);
+        $this->data['pd'] = $this->Car_resource_book->get_car_pbo_paymentdetail($PBOid);
         $this->data['NFiler'] = $this->Car_resource_book->getNFiler($idVariant);
         $months = array();
         $month = date('n'); // current month
@@ -292,6 +294,7 @@ class Pbo extends CI_Controller {
         $this->data['OrderType'] = $this->Car_resource_book->fillOrderTypeCombo();
         $this->data['Filer'] = $this->Car_resource_book->getFiler($idVariant);
         $this->data['NFiler'] = $this->Car_resource_book->getNFiler($idVariant);
+        $this->data['pd'] = $this->Car_resource_book->get_car_pbo_paymentdetail($PBOid);
         $months = array();
         $month = date('n'); // current month
         for ($x = 0; $x < 12; $x++) {
@@ -330,7 +333,12 @@ class Pbo extends CI_Controller {
         $post = $this->input->post();
 //        print_r($post);
         if ((isset($_FILES['ImgPbo']['name'])) && ($_FILES['ImgPbo']['name'] !== '')) {
-            $data['PayorderImage'] = $imgPbo;
+            $upload_data = $this->upload->data();
+            if (isset($upload_data['file_name'])) {
+                $imgPbo = $upload_data['file_name'];
+                $data['PayorderImage'] = $imgPbo;
+            }
+
         }
         $ChasisNo = $this->input->post('ChasisNumber');
         $EngineNo = $this->input->post('EngineNumber');
@@ -362,6 +370,7 @@ class Pbo extends CI_Controller {
         $data['FIAmount'] = $this->input->post('Freightamount');
         $data['TotalAmount'] = $TotalAmount;
         $data['PurchaseOrderNumber'] = $this->input->post('PurchaseOrder');
+        $data['TotalPartialAmount'] = $this->input->post('TotalPartialAmount');
         $data['PurchaseDate'] = $this->input->post('PurchaseDate');
         $data['PboSerialNumber'] = $this->input->post('PboSerial');
 //        print_r($data);

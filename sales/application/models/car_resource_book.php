@@ -1229,4 +1229,9 @@ class Car_resource_book extends CI_Model {
     {
         return $this->db->where('idCampaign',$idCampaign)->get('car_campaign')->row();
     }
+
+    public function get_car_pbo_paymentdetail($idpbo)
+    {
+        return $this->db->where('idpbo',$idpbo)->get('car_pbo_paymentdetail')->result_array();
+    }
 }

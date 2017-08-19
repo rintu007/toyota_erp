@@ -97,14 +97,34 @@ class Car_pbo extends CI_Model {
                     'FIBankCity' => $this->input->post('fiBankCity'),
                     'FIAmount' => $this->input->post('Freightamount'),
                     'TotalAmount' => $TotalAmount,
+                    'TotalPartialAmount' => $this->input->post('TotalPartialAmount'),
                     'PurchaseOrderNumber' => $this->input->post('PurchaseOrder'),
                     'PurchaseDate' => $this->input->post('PurchaseDate'),
                     'PboSerialNumber' => $this->input->post('PboSerial'),
                     'InvoiceCreated' => 0
+
                 );
 
                 $this->db->insert('car_pbo', $pbo);
                 $insert_id = $this->db->insert_id();
+
+                $count = 0;
+                foreach ($_POST['paymenttype'] as $row)
+                {
+                    $data = array(
+                        'idpbo'             =>  $insert_id,
+                        'paymenttype'       =>  $_POST['paymenttype'][$count],
+                        'instrumenttype'    =>  $_POST['instrumenttype'][$count],
+                        'number'            =>  $_POST['number'][$count],
+                        'date'              =>  $_POST['date'][$count],
+                        'bank'              =>  $_POST['bank'][$count],
+                        'partialamount'            =>  $_POST['partialamount'][$count]
+                    );
+                    $count++;
+
+                    $this->db->insert('car_pbo_paymentdetail',$data);
+
+                }
                 $this->db->query("UPDATE car_allocation SET BalanceQuantity = {$BalanceQty}-1, ConsumedQuantity = {$ConsumedQty}+1 WHERE VariantId = '{$VariantId}' AND Month = '{$DeliveryMonth}' AND ColorId = '{$ColorId}' AND AllocationTypeId = '{$AllocationType}'");
                 $this->db->select('idDispatch');
                 $this->db->where('EngineNo', $EngineNo);
@@ -138,7 +158,8 @@ class Car_pbo extends CI_Model {
 
                   } */
                 return "PBO Has Been Generated.";
-            } else if ($this->input->post('order_type') == 3) {
+            }
+            else if ($this->input->post('order_type') == 3) {
                 $this->db->trans_start();
                 $this->db->where('idResourcebook', $this->input->post('idRes'));
                 $this->db->update('car_resource_book', $isPboCreated);
@@ -175,6 +196,8 @@ class Car_pbo extends CI_Model {
                     'FIBankCity' => $this->input->post('fiBankCity'),
                     'FIAmount' => $this->input->post('Freightamount'),
                     'TotalAmount' => $TotalAmount,
+                    'TotalPartialAmount' => $this->input->post('TotalPartialAmount'),
+
                     'PurchaseOrderNumber' => $this->input->post('PurchaseOrder'),
                     'PurchaseDate' => $this->input->post('PurchaseDate'),
                     'PboSerialNumber' => $this->input->post('PboSerial'),
@@ -182,7 +205,26 @@ class Car_pbo extends CI_Model {
                 );
 
                 $this->db->insert('car_pbo', $pbo);
+
+
                 $insert_id = $this->db->insert_id();
+                $count = 0;
+                foreach ($_POST['paymenttype'] as $row)
+                {
+                    $data = array(
+                        'idpbo'             =>  $insert_id,
+                        'paymenttype'       =>  $_POST['paymenttype'][$count],
+                        'instrumenttype'    =>  $_POST['instrumenttype'][$count],
+                        'number'            =>  $_POST['number'][$count],
+                        'date'              =>  $_POST['date'][$count],
+                        'bank'              =>  $_POST['bank'][$count],
+                        'partialamount'            =>  $_POST['partialamount'][$count]
+                    );
+                    $count++;
+
+                    $this->db->insert('car_pbo_paymentdetail',$data);
+
+                }
                 $this->db->query("UPDATE car_allocation SET BalanceQuantity = {$BalanceQty}-1, ConsumedQuantity = {$ConsumedQty}+1 WHERE VariantId = '{$VariantId}' AND Month = '{$DeliveryMonth}' AND ColorId = '{$ColorId}' AND AllocationTypeId = '{$AllocationType}'");
                 $this->db->select('idDispatch');
                 $this->db->where('EngineNo', $EngineNo);
@@ -195,7 +237,8 @@ class Car_pbo extends CI_Model {
                 $this->db->update('car_dispatch');
                 $this->db->trans_complete();
                 return "PBO Has Been Generated.";
-            } else if ($this->input->post('order_type') == 5) {
+            }
+            else if ($this->input->post('order_type') == 5) {
                 $this->db->trans_start();
                 $EFAmount = $this->input->post('amount');
                 $FIAmount = $this->input->post('Freightamount');
@@ -225,6 +268,8 @@ class Car_pbo extends CI_Model {
                     'FIBankCity' => $this->input->post('fiBankCity'),
                     'FIAmount' => $this->input->post('Freightamount'),
                     'TotalAmount' => $TotalAmount,
+                    'TotalPartialAmount' => $this->input->post('TotalPartialAmount'),
+
                     'PurchaseOrderNumber' => $this->input->post('PurchaseOrder'),
                     'PurchaseDate' => $this->input->post('PurchaseDate'),
                     'PboSerialNumber' => $this->input->post('PboSerial'),
@@ -235,28 +280,45 @@ class Car_pbo extends CI_Model {
                 $this->db->where('idResourcebook', $this->input->post('idRes'));
                 $this->db->update('car_resource_book', $isPboCreated);
                 $this->db->insert('car_pbo', $pboData);
-                $this->db->insert_id();
+                $insert_id = $this->db->insert_id();
+                $count = 0;
+                foreach ($_POST['paymenttype'] as $row)
+                {
+                    $data = array(
+                        'idpbo'             =>  $insert_id,
+                        'paymenttype'       =>  $_POST['paymenttype'][$count],
+                        'instrumenttype'    =>  $_POST['instrumenttype'][$count],
+                        'number'            =>  $_POST['number'][$count],
+                        'date'              =>  $_POST['date'][$count],
+                        'bank'              =>  $_POST['bank'][$count],
+                        'partialamount'     =>  $_POST['partialamount'][$count]
+                    );
+                    $count++;
+
+                    $this->db->insert('car_pbo_paymentdetail',$data);
+
+                }
                 $this->db->query("UPDATE car_allocation SET BalanceQuantity = {$BalanceQty}-1, ConsumedQuantity = {$ConsumedQty}+1 WHERE VariantId = '{$VariantId}' AND Month = '{$DeliveryMonth}' AND ColorId = '{$ColorId}' AND AllocationTypeId = '{$AllocationType}'");
 
                 //-------- New Code ------///
-                $chequeone = $this->input->post('ChequeOne');
-                $chequetwo = $this->input->post('ChequeTwo');
-                $chequethree = $this->input->post('ChequeThree');
-                $partial = array(
-                    'PboNumber' => $this->input->post('PboNumber'),
-                    //'ActualSalePerson' => $this->input->post('ActualSalePerson'),
-                    'ChequeOne' => $chequeone,
-                    'ChequeTwo' => $chequetwo,
-                    'ChequeThree' => $chequethree,
-                    'BankOne' => $this->input->post('BankOne'),
-                    'BranchOne' => $this->input->post('BranchOne'),
-                    //'BankTwo' => $this->input->post('BankTwo'),
-                    //'BranchTwo' => $this->input->post('BranchTwo'),
-                    //'BankThree' => $this->input->post('BankThree'),
-                    //'BranchThree' =>$this->input->post('BranchThree'),
-                    'ChequeNoOne' => $this->input->post('Chequeoneno')
-                );
-                $this->db->insert('car_partial_amount', $partial);
+//                $chequeone = $this->input->post('ChequeOne');
+//                $chequetwo = $this->input->post('ChequeTwo');
+//                $chequethree = $this->input->post('ChequeThree');
+//                $partial = array(
+//                    'PboNumber' => $this->input->post('PboNumber'),
+//                    //'ActualSalePerson' => $this->input->post('ActualSalePerson'),
+//                    'ChequeOne' => $chequeone,
+//                    'ChequeTwo' => $chequetwo,
+//                    'ChequeThree' => $chequethree,
+//                    'BankOne' => $this->input->post('BankOne'),
+//                    'BranchOne' => $this->input->post('BranchOne'),
+//                    //'BankTwo' => $this->input->post('BankTwo'),
+//                    //'BranchTwo' => $this->input->post('BranchTwo'),
+//                    //'BankThree' => $this->input->post('BankThree'),
+//                    //'BranchThree' =>$this->input->post('BranchThree'),
+//                    'ChequeNoOne' => $this->input->post('Chequeoneno')
+//                );
+//                $this->db->insert('car_partial_amount', $partial);
                 $this->db->trans_complete();
                 return "PBO Has Been Generated.";
             } else {
@@ -300,6 +362,26 @@ class Car_pbo extends CI_Model {
     }
 
     function updatePBOO($pboData) {
+
+        $this->db->where('idpbo', $pboData['Id'])->delete('car_pbo_paymentdetail');
+
+        $count = 0;
+        foreach ($_POST['paymenttype'] as $row)
+        {
+            $data = array(
+                'idpbo'             =>  $pboData['Id'],
+                'paymenttype'       =>  $_POST['paymenttype'][$count],
+                'instrumenttype'    =>  $_POST['instrumenttype'][$count],
+                'number'            =>  $_POST['number'][$count],
+                'date'              =>  $_POST['date'][$count],
+                'bank'              =>  $_POST['bank'][$count],
+                'partialamount'     =>  $_POST['partialamount'][$count]
+            );
+            $count++;
+
+            $this->db->insert('car_pbo_paymentdetail',$data);
+
+        }
         $this->db->where('Id', $pboData['Id']);
         $this->db->update('car_pbo', $pboData);
         return $this->db->affected_rows();
@@ -378,9 +460,11 @@ class Car_pbo extends CI_Model {
 //      FROM car_partial_amount cp
 //      LEFT JOIN car_pbo cr
 //      ON cp.PboNumber = cr.PboNumber;");
-        $this->db->select('cp.PboNumber , cr.ResourcebookId , cr.ChasisNumber , cr.EngineNumber , cr.TotalAmount , cp.ChequeOne ,cp.ChequeTwo , cp.ChequeThree');
-        $this->db->from('car_partial_amount cp');
-        $this->db->join('car_pbo cr', 'cp.PboNumber = cr.PboNumber', 'LEFT');
+        $this->db->select('cp.idpbo,cr.PboNumber , cr.ResourcebookId , cr.ChasisNumber , cr.EngineNumber , cr.TotalAmount ,cr.TotalPartialAmount , cp.paymenttype');
+        $this->db->where('cr.Is_partial',1);
+        $this->db->from('car_pbo_paymentdetail cp');
+        $this->db->join('car_pbo cr', 'cp.idpbo = cr.Id', 'LEFT');
+        $this->db->group_by('cp.idpbo');
         if (($limit)) {
             $this->db->limit($limit, $start);
         }
@@ -390,60 +474,96 @@ class Car_pbo extends CI_Model {
         return $amount;
     }
 
-    function ReceiveAmount($pbonumber) {
-        $receive = $this->db->query("select * from view_partialdetail where PboNumber = " . $pbonumber);
-        $rcvamount = $receive->result_array();
+    function ReceiveAmount($idpbo) {
+        $receive =
+            $this->db->select('*')
+            ->from('car_pbo_paymentdetail pd')
+            ->join('car_pbo pbo','pbo.Id=pd.idpbo')
+        ->where('idpbo',$idpbo);
+
+        $rcvamount = $receive->get()->result_array();
 //		var_dump
         return $rcvamount;
     }
 
     function UpdateAmount($pbo) {
-        $Amount = array(
-            'ChequeOne' => $this->input->post('ChequeOne'),
-            'ChequeTwo' => $this->input->post('ChequeTwo'),
-            'ChequeThree' => $this->input->post('ChequeThree'),
-            'BankOne' => $this->input->post('BankOne'),
-            'BranchOne' => $this->input->post('BranchOne'),
-            'BankTwo' => $this->input->post('BankTwo'),
-            'BranchTwo' => $this->input->post('BranchTwo'),
-            'BankThree' => $this->input->post('BankThree'),
-            'BranchThree' => $this->input->post('BranchThree'),
-            'ChequeNoOne' => $this->input->post('ChequeNoOne'),
-            'ChequeNoTwo' => $this->input->post('ChequeNoTwo'),
-            'ChequeNoThree' => $this->input->post('ChequeNoThree'),
-        );
+//        var_dump($_POST);die;
+//        $Amount = array(
+//            'ChequeOne' => $this->input->post('ChequeOne'),
+//            'ChequeTwo' => $this->input->post('ChequeTwo'),
+//            'ChequeThree' => $this->input->post('ChequeThree'),
+//            'BankOne' => $this->input->post('BankOne'),
+//            'BranchOne' => $this->input->post('BranchOne'),
+//            'BankTwo' => $this->input->post('BankTwo'),
+//            'BranchTwo' => $this->input->post('BranchTwo'),
+//            'BankThree' => $this->input->post('BankThree'),
+//            'BranchThree' => $this->input->post('BranchThree'),
+//            'ChequeNoOne' => $this->input->post('ChequeNoOne'),
+//            'ChequeNoTwo' => $this->input->post('ChequeNoTwo'),
+//            'ChequeNoThree' => $this->input->post('ChequeNoThree'),
+//        );
+//
+//        $this->db->where('PboNumber', $pbo);
+//        $this->db->update('car_partial_amount', $Amount);
+        $this->db->where('idpbo', $pbo)->delete('car_pbo_paymentdetail');
 
-        $this->db->where('PboNumber', $pbo);
-        $this->db->update('car_partial_amount', $Amount);
+        $count = 0;
+        foreach ($_POST['paymenttype'] as $row)
+        {
+            $data = array(
+                'idpbo'             =>  $pbo,
+                'paymenttype'       =>  $_POST['paymenttype'][$count],
+                'instrumenttype'    =>  $_POST['instrumenttype'][$count],
+                'number'            =>  $_POST['number'][$count],
+                'date'              =>  $_POST['date'][$count],
+                'bank'              =>  $_POST['bank'][$count],
+                'partialamount'     =>  $_POST['partialamount'][$count]
+            );
+            $count++;
 
-        $this->db->select('*');
-        $this->db->from('car_pbo');
-        $this->db->where('PboNumber', $pbo);
-        $return = $this->db->get();
-        $query = $return->result_array()[0];
-        
-        if ($query) {
-             $pboTotalAmount = array(
-                'PboNumber' => $pbo,
-                'Is_partial_amount' => $query['TotalAmount'],
-            );
-            $this->db->where('PboNumber', $pbo);
-            $this->db->update('car_pbo', $pboTotalAmount);
-            
-             $this->db->select('*');
-            $this->db->from('car_pbo');
-            $this->db->where('PboNumber', $pbo);
-            $return2 = $this->db->get();
-            $query2 = $return2->result_array()[0];
-            $pboDetail = array(
-                'PboNumber' => $pbo,
-                'Is_partial_amount' => $query2['Is_partial_amount'] - ($Amount['ChequeOne'] + $Amount['ChequeTwo'] + $Amount['ChequeThree']),
-            );
-             
-            $this->db->where('PboNumber', $pbo);
-            $this->db->update('car_pbo', $pboDetail);
-//            die;
+            $this->db->insert('car_pbo_paymentdetail',$data);
         }
+
+
+        $arr = array(
+                'Is_partial_amount' => $_POST['Remaining'],
+                'TotalPartialAmount' => $_POST['TotalPartialAmount']
+            );
+
+            $this->db->where('id',$pbo)
+                ->update('car_pbo',$arr);
+
+            return true;
+
+
+
+//        $this->db->select('*');
+//        $this->db->from('car_pbo');
+//        $this->db->where('PboNumber', $pbo);
+//        $return = $this->db->get();
+//        $query = $return->result_array()[0];
+//
+//        if ($query) {
+//             $pboTotalAmount = array(
+//                'PboNumber' => $pbo,
+//                'Is_partial_amount' => $query['TotalAmount'],
+//            );
+//            $this->db->where('PboNumber', $pbo);
+//            $this->db->update('car_pbo', $pboTotalAmount);
+//
+//            $this->db->select('*');
+//            $this->db->from('car_pbo');
+//            $this->db->where('PboNumber', $pbo);
+//            $return2 = $this->db->get();
+//            $query2 = $return2->result_array()[0];
+//            $pboDetail = array(
+//                'PboNumber' => $pbo,
+//                'Is_partial_amount' => $query2['Is_partial_amount'] - ($Amount['ChequeOne'] + $Amount['ChequeTwo'] + $Amount['ChequeThree']),
+//            );
+//
+//            $this->db->where('PboNumber', $pbo);
+//            $this->db->update('car_pbo', $pboDetail);
+//            die;
 
 //        return true;
     }

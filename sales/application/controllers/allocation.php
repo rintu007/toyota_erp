@@ -75,6 +75,9 @@ class Allocation extends CI_Controller {
     }
 
     function addallocation() {
+
+
+
         $Allocation = new Car_allocation();
         //validate form input
         $this->form_validation->set_rules('allocation_month', 'Allocation Month', 'required|xss_clean');
@@ -91,8 +94,14 @@ class Allocation extends CI_Controller {
             } else {
                 $checkAllocation = $Allocation->checkAllocation()[0];
                 if (empty($checkAllocation)) {
+
+                    $month = $this->input->post('allocation_month');
+                    $arr = (explode('-',$month));
+                    $monthformat = $arr[1].'-'.$arr['0'];
+
+
                     $AllocationData = array(
-                        'Month' => $this->input->post('allocation_month'),
+                        'Month' => $monthformat,
                         'VariantId' => $this->input->post('variant'),
                         'ColorId' => $this->input->post('color') == 'Select Color' ? '15' : $this->input->post('color') ,
                         'Quantity' => $this->input->post('quantity'),

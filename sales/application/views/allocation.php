@@ -73,124 +73,12 @@
                         </div>
                         <div>
                             <label>Allocation Month</label>
-                            <select name="allocation_month" class="allocationMonth">
-                                <option>Select Allocation Month</option>
-                                <option>June 2013</option>
-                                <option>July 2013</option>
-                                <option>August 2013</option>
-                                <option>September 2013</option>
-                                <option>October 2013</option>
-                                <option>November 2013</option>
-                                <option>December 2013</option>
-                                <option>January 2014</option>
-                                <option>February 2014</option>
-                                <option>March 2014</option>
-                                <option>April 2014</option>
-                                <option>May 2014</option>
-                                <option>June 2014</option>
-                                <option>July 2014</option>
-                                <option>August 2014</option>
-                                <option>September 2014</option>
-                                <option>October 2014</option>
-                                <option>November 2014</option>
-                                <option>December 2014</option>
-                                <option>January 2015</option>
-                                <option>February 2015</option>
-                                <option>March 2015</option>
-                                <option>April 2015</option>
-                                <option>May 2015</option>
-                                <option>June 2015</option>
-                                <option>July 2015</option>
-                                <option>August 2015</option>
-                                <option>September 2015</option>
-                                <option>October 2015</option>
-                                <option>November 2015</option>
-                                <option>December 2015</option>
-                                <option>January 2015</option>
-                                <option>February 2015</option>
-                                <option>March 2015</option>
-                                <option>April 2015</option>
-                                <option>May 2015</option>
-                                <option>June 2015</option>
-                                <option>July 2015</option>
-                                <option>August 2015</option>
-                                <option>September 2015</option>
-                                <option>October 2015</option>
-                                <option>November 2015</option>
-                                <option>December 2015</option>
-                                <option>January 2016</option>
-                                <option>February 2016</option>
-                                <option>March 2016</option>
-                                <option>April 2016</option>
-                                <option>May 2016</option>
-                                <option>June 2016</option>
-                                <option>July 2016</option>
-                                <option>August 2016</option>
-                                <option>September 2016</option>
-                                <option>October 2016</option>
-                                <option>November 2016</option>
-                                <option>December 2016</option>
-                                 <option>January 2017</option>
-                                <option>February 2017</option>
-                                <option>March 2017</option>
-                                <option>April 2017</option>
-                                <option>May 2017</option>
-                                <option>June 2017</option>
-                                <option>July 2017</option>
-                                <option>August 2017</option>
-                                <option>September 2017</option>
-                                <option>October 2017</option>
-                                <option>November 2017</option>
-                                <option>December 2017</option>
-                                <option>January 2018</option>
-                                <option>February 2018</option>
-                                <option>March 2018</option>
-                                <option>April 2018</option>
-                                <option>May 2018</option>
-                                <option>June 2018</option>
-                                <option>July 2018</option>
-                                <option>August 2018</option>
-                                <option>September 2018</option>
-                                <option>October 2018</option>
-                                <option>November 2018</option>
-                                <option>December 2018</option>
-                                <option>January 2019</option>
-                                <option>February 2019</option>
-                                <option>March 2019</option>
-                                <option>April 2019</option>
-                                <option>May 2019</option>
-                                <option>June 2019</option>
-                                <option>July 2019</option>
-                                <option>August 2019</option>
-                                <option>September 2019</option>
-                                <option>October 2019</option>
-                                <option>November 2019</option>
-                                <option>December 2019</option>
-                                <option>January 2020</option>
-                                <option>February 2020</option>
-                                <option>March 2020</option>
-                                <option>April 2020</option>
-                                <option>May 2020</option>
-                                <option>June 2020</option>
-                                <option>July 2020</option>
-                                <option>August 2020</option>
-                                <option>September 2020</option>
-                                <option>October 2020</option>
-                                <option>November 2020</option>
-                                <option>December 2020</option>
-                                
-                                //<?php
-//                                foreach ($Month as $AllocationMonth) {
-//                                    
-                                ?>
-                                    <!--<option value="//<?= $AllocationMonth ?>" ><?= $AllocationMonth ?></option>-->
-                                //<?php
-//                                }
-//                                
-                                ?>
-                            </select>
+
+                            <input type="month" name="allocation_month"  id="allocation_month" data-validation="required">
                         </div>
                         <div>
+                            <br>
+
                             <label>Allocation Quantity</label>
                             <input type="text" name="quantity" data-validation="required">
                         </div>

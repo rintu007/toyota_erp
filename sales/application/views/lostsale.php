@@ -25,11 +25,16 @@
                             <thead>
                                 <tr>
                                     <th width="7%">S No.</th>
-                                    <th width="14%">Name</th>
                                     <th width="10%">Date</th>
-                                    <th width="30%">Car</th>
-                                    <th width="10%">Color</th>
+                                    <th width="7%">Resource Book No</th>
+
+                                    <th width="17%">Customer Name</th>
                                     <th width="10%">Mobile No.</th>
+                                    <th width="10%">Birth Date</th>
+
+                                    <th width="20%">Variant Interested</th>
+                                    <th width="10%">Color</th>
+                                    <th width="10%">Delivery Month</th>
                                     <th width="18%">Detail</th>
                                 </tr>
                             </thead>
@@ -57,11 +62,16 @@
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId" name="resId"><?= $count++ ?></td>
-                                        <td class="tbl-name"><?= $CarLostSale['CustomerName'] ?></td>
                                         <td><?= $CarLostSale['Date'] ?></td>
+                                        <td class="tbl-date"><?= $CarLostSale['IdResourceBook'] ?></td>
+
+
+                                        <td class="tbl-name"><?= $CarLostSale['CustomerName'] ?></td>
+                                        <td ><?= $CarLostSale['Cellphone'] ?></td>
+                                        <td ><?= $CarLostSale['DateOfBirth'] ?></td>
                                         <td><?= $CarLostSale['Variants'] ?></td>
                                         <td><?= $CarLostSale['ColorName'] ?></td>
-                                        <td><?= $CarLostSale['Cellphone'] ?></td>
+                                        <td><?= $CarLostSale['DeliveryMonth'] ?></td>
                                         <td>Lost Sale</td>
                                     </tr>
                                     <?php

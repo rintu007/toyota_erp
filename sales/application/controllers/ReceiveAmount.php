@@ -10,18 +10,20 @@ class ReceiveAmount extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Car_pbo');
+        $this->load->model('Car_resource_book');
         $this->load->library('form_validation');
     }
 
-    function index($PboNumber) {
-        $this->data['receive'] = $this->Car_pbo->ReceiveAmount($PboNumber);
+    function index($idpbo) {
+        $this->data['receive'] = $this->Car_pbo->ReceiveAmount($idpbo);
+        $this->data['pd'] = $this->Car_resource_book->get_car_pbo_paymentdetail($idpbo);
         $this->load->view('header');
         $this->load->view('AmountReceive', $this->data);
         $this->load->view('footer');
     }
 
     function updateamount() {
-        $pbo = $this->input->post('PboNumber');
+        $pbo = $this->input->post('Idpbo');
         $update = $this->Car_pbo->UpdateAmount($pbo);
 //        echo 'aa';
         redirect(base_url() . "index.php/pbo_list/PartialAmount");

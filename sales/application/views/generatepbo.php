@@ -563,12 +563,98 @@ function convert_number_to_words($number) {
                                 </table>
                             </div>
                         </fieldset>
+
+                        <fieldset>
+                            <br>
+                            <legend>Payment Details</legend>
+                            <div class="feildwrap">
+                                <table class="" id="paymentdetail">
+                                    <tr>
+                                        <th>
+                                            Payment Type
+                                        </th>
+                                        <th>
+                                            Instrument Type
+                                        </th>
+                                        <th>
+                                            Number
+                                        </th>
+                                        <th>
+                                           Date
+                                        </th>
+                                        <th>
+                                            Bank
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                        <th>
+                                            <button type="button" class="btn add">+</button>
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <select  name="paymenttype[]">
+                                                <option value="Pay Order">Pay Order</option>
+                                                <option value="Demand Draft">Demand Draft</option>
+                                                <option value="Cheque">Cheque</option>
+
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select id="instrumenttype" name="instrumenttype[]">
+                                                <option>Full Payemnt with WHT</option>
+                                                <option>Full payment without WHT</option>
+                                                <option>Partial payment with WHT</option>
+                                                <option>Partial payment without WHT</option>
+                                            </select>
+                                        </td>
+
+                                        <td >
+                                            <input type="text" id="efPayOrder" name="number[]" placeholder="Number" style="width: 100px;"/>
+                                        </td>
+
+                                        <td>
+                                            <input type="text" class="date" name="date[]"  placeholder="Date" style="width: 90px;"/>
+                                        </td>
+
+                                        <td>
+                                            <input type="text" class="" name="bank[]" placeholder="Bank" style="width: 90px;"/>
+                                        </td>
+
+                                        <td>
+                                            <input type="number" class="amount" name="partialamount[]"  placeholder="Amount" style="width: 90px;"/>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn remove" onclick="remove(this)">X</button>
+                                        </td>
+                                    </tr>
+
+
+
+                                </table>
+                                <table style="
+    background: rgb(250,85,55);
+    float: right;
+    margin-right: 307px;
+    font-size: large;
+">
+                                    <tr>
+                                        <th colspan="4">Total : </th>
+                                        <th ><input type="text" readonly name="TotalPartialAmount" value="0" id="total" ></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
                         <fieldset>
                             <br>
                             <legend>Ex Factory Amount</legend>
                             <div class="feildwrap">
                                 <table class="form-tbl">
-                                    <tr>
+                                    <tr style="display: none">
                                         <td>
                                             <label>Type</label>
                                         </td>
@@ -587,16 +673,8 @@ function convert_number_to_words($number) {
                                             <input type="text" id="efPayOrder" name="payOrderNo" style="margin-left: 10px;"/>
                                         </td>
                                     </tr>
-<!--                                    <tr>
-                                        <td>
-                                            <label>Date</label>
-                                        </td>
-                                        <td colspan="3">
-                                            <input type="text" class="date" data-validation="required" style=" width:250px;"
-                                                   name="date" value="<?= date('Y-d-m') ?>"/>
-                                        </td>
-                                    </tr>-->
-                                    <tr>
+
+                                    <tr style="display: none">
                                         <td>
                                             <label>Bank Name</label>
                                         </td>
@@ -610,7 +688,7 @@ function convert_number_to_words($number) {
                                             <input type="text" id="efBankBranch" name="BankBranch"/>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="display: none">
                                         <td>
                                             <label>Bank City</label>
                                         </td>
@@ -636,7 +714,7 @@ function convert_number_to_words($number) {
                                 </table>
                             </div>
                         </fieldset>
-                        <fieldset>
+                        <fieldset  style="display: none">
                             <br>
                             <legend>WHT</legend>
                             <div class="feildwrap">
@@ -798,6 +876,75 @@ function convert_number_to_words($number) {
     </div>
 </div>
 <script>
+    var payment_dropdown =
+        "                                            <select name=\"instrumenttype[]\">\n" +
+        "                                                <option>Full Payemnt with WHT</option>\n" +
+        "                                                <option>Full payment without WHT</option>\n" +
+        "                                                <option>Partial payment without WHT</option>\n" +
+        "                                                <option>Partial payment without WHT</option>\n" +
+        "                                            </select>\n"
+    $(document).on('change', '.amount', function(){
+       calc()
+
+    });
+    function calc()
+    {
+        total = 0
+        $('.amount').each(function(){
+            total += (this.value  )*1
+        })
+        $("#total").val(total)
+
+    }
+
+
+
+
+    $('.add').click(function()
+    {
+        html = "    <tr>\n" +
+            "\n" +
+            "                                        <td>\n" +
+            "                                            <select  name=\"paymenttype[]\">\n" +
+            "                                                <option value=\"Pay Order\">Pay Order</option>\n" +
+            "                                                <option value=\"Demand Draft\">Demand Draft</option>\n" +
+            "                                                <option value=\"Cheque\">Cheque</option>\n" +
+            "\n" +
+            "                                            </select>\n" +
+            "                                        </td>\n" +
+            "                                        \n" +
+            "                                        <td>\n" + payment_dropdown +
+            "                                        </td>\n" +
+            "\n" +
+            "                                        <td >\n" +
+            "                                            <input type=\"text\" id=\"efPayOrder\" name=\"number[]\" placeholder=\"Number\" style=\"width: 100px;\"/>\n" +
+            "                                        </td>\n" +
+            "\n" +
+            "                                        <td>\n" +
+            "                                            <input type=\"date\"  name=\"date[]\"  placeholder=\"Date\" style=\"width: 90px;\"/>\n" +
+            "                                        </td>\n" +
+            "\n" +
+            "                                        <td>\n" +
+            "                                            <input type=\"text\" class=\"\" name=\"bank[]\" placeholder=\"Bank\" style=\"width: 90px;\"/>\n" +
+            "                                        </td>\n" +
+            "\n" +
+            "                                        <td>\n" +
+            "                                            <input type=\"number\" class=\"amount\" name=\"partialamount[]\"  placeholder=\"Amount\" style=\"width: 90px;\"/>\n" +
+            "                                        </td>\n" +
+            "                                        <td>\n" +
+            "                                            <button type=\"button\" class=\"btn remove\" onclick=\"remove(this)\">X</button>\n" +
+            "                                        </td>\n" +
+            "                                    </tr>";
+        $('#paymentdetail').append(html)
+
+    })
+    var a;
+    function remove(elem)
+    {
+        a=elem
+        $(elem).parent().parent().remove()
+        calc()
+    }
 
     var amount = $("#amount").val();
     var wordamount = $("#efAmountInWords").val();
@@ -931,7 +1078,9 @@ function convert_number_to_words($number) {
                     }
                 }
             });
-        } else if (OrderType == "Against Open Stock") {
+        }
+        else
+            if (OrderType == "Against Open Stock") {
             $('#efChasisNo').hide();
             $('#efEngineNo').hide();
             $('#comboChasisNo').show();
@@ -978,23 +1127,35 @@ function convert_number_to_words($number) {
 
         if (OrderType == 'Partial Payment')
         {
+            $('.instrumenttype').html('')
 
-            $("#rowone").show();
-            $("#rowtwo").show();
-            $("#rowthree").show();
-            //$("#amount").val("");
-            $("#efAmountInWords").val("");
-            $("#wht").show();
-            $("#Freightamount").val("0");
-            $("#bone").show();
-            $("#bnone").show();
-            $("#btwo").show();
-            $("#bntwo").show();
-            $("#bthree").show();
-            $("#bnthree").show();
+             payment_dropdown =
+                "                                            <select name=\"instrumenttype[]\">\n" +
+                "                                                <option>Partial Payemnt with WHT</option>\n" +
+                "                                                <option>Partial payment without WHT</option>\n" +
+                "                                            </select>\n"
+//            $("#rowone").show();
+//            $("#rowtwo").show();
+//            $("#rowthree").show();
+//            $("#efAmountInWords").val("");
+//            $("#wht").show();
+//            $("#Freightamount").val("0");
+//            $("#bone").show();
+//            $("#bnone").show();
+//            $("#btwo").show();
+//            $("#bntwo").show();
+//            $("#bthree").show();
+//            $("#bnthree").show();
         }
         else
         {
+
+            payment_dropdown =
+                "                                            <select name=\"instrumenttype[]\">\n" +
+                "                                                <option>Full Payemnt with WHT</option>\n" +
+                "                                                <option>Full payment without WHT</option>\n" +
+                "                                            </select>\n"
+
             $("#rowone").hide();
             $("#rowtwo").hide();
             $("#rowthree").hide();
