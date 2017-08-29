@@ -50,7 +50,23 @@ class Car_gatepass extends CI_Model {
 
         return $query->result_array();
     }
-
+    function get_data($iddispatch)
+    {
+        $query = "SELECT car_dispatch.idDispatch,car_dispatch.ChasisNo, car_dispatch.EngineNo,car_pbo.RegistrationNumber,
+                     car_pbo.PboNumber, car_dispatch.WarrantyBook, car_pbo.Id as pboid,
+                     car_variants.Variants, car_color.ColorName,car_pbo.ActualSalePerson,
+                     cc.*,car_invoice.idInvoice,car_invoice.InvoiceNumber,car_invoice.InvoiceDate
+                    FROM car_dispatch
+                    LEFT JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
+                    LEFT JOIN car_resource_book ON car_pbo.ResourcebookId = car_resource_book.IdResourceBook
+                    LEFT JOIN car_variants ON car_dispatch.VariantId = car_variants.IdVariants
+                    LEFT JOIN car_color ON car_dispatch.ColorId = car_color.IdColor
+                    LEFT JOIN car_customer cc ON cc.IdCustomer = car_resource_book.CustomerId
+                    LEFT JOIN car_invoice ON car_invoice.DispatchId = car_dispatch.idDispatch
+                    WHERE car_dispatch.idDispatch = $iddispatch
+                                    ";
+        return $this->db->query($query)->row();
+    }
 
     function allGatepass() {
         $variants = $this->db->select('*')->from('car_gatepass')->get();
@@ -103,6 +119,9 @@ class Car_gatepass extends CI_Model {
     }
 
     function insertGatepass($GatePassData, $PboId) {
+        $this->db->insert('car_gatepass', $GatePassData);
+        return $this->db->insert_id();
+
         if ($this->input->post('gatepassType') == 'PBO') {
             $this->db->insert('car_gatepass', $GatePassData);
             $GatePassId = $this->db->insert_id();

@@ -67,17 +67,19 @@ class Gatepass extends CI_Controller {
         $this->load->view('footer');
 
     }
-    public function index() {
+    public function index($idDispatch) {
         $Gatepass = new Car_gatepass();
         $Data = array();
         $Data['customertype'] = $this->Car_resource_book->fillCustomerTypeCombo();
 //        print_r($Data);
 //        $Data['message'] = $this->session->flashdata('message');
         $Data['GatePassNumber'] = $Gatepass->GatePassSerial();
+        $Data['dispatchdata'] = $Gatepass->get_data($idDispatch);
         $Data['DoNumber'] = $Gatepass->DOSerial();
         $Data['Response'] = $this->session->flashdata('Response');
         $this->load->view('header');
-        $this->load->view('gatepass', $Data);
+//        $this->load->view('gatepass', $Data);
+        $this->load->view('gatepass1', $Data);
         $this->load->view('footer');
     }
 
@@ -85,6 +87,26 @@ class Gatepass extends CI_Controller {
         $Gatepass = new Car_gatepass();
         $this->form_validation->set_rules('GatePassNumber', 'Gate Pass Number', 'required|xss_clean');
         if ($this->form_validation->run() == TRUE) {
+
+            $GatepassData = array(
+                'GatePassNumber' => $this->input->post('GatePassNumber'),
+                'GatePassDate' => $this->input->post('GatePassDate'),
+                'Through' => $this->input->post('Through'),
+                'Cnic' => $this->input->post('Cnic'),
+                'Company' => $this->input->post('CompanyName'),
+                'customerId' => $this->input->post('CustomerId'),
+                'dispatchId' => $this->input->post('DispatchId'),
+                'Description' => $this->input->post('Description'),
+                'SaleNoteId' => NULL
+            );
+
+            $PboId = $this->input->post('pboid');
+            $insertGatepass = $Gatepass->insertGatepass($GatepassData, $PboId);
+            $this->receipt($insertGatepass);
+            return;
+
+
+
             if ($this->input->post('gatepassType') == 'PBO') {
 
                 $GatepassData = array(
@@ -172,12 +194,12 @@ class Gatepass extends CI_Controller {
         echo json_encode($dataSearch);
     }
 
-    function receipt($idGatePass, $Response) {
+    function receipt($idGatePass) {
         $Gatepass = new Car_gatepass();
         $GatePassReceipt = $Gatepass->GatePassReceipt($idGatePass)[0];
 
         $Data['GatePassReceipt'] = $GatePassReceipt;
-        $Data['Response'] = $Response;
+        $Data['Response'] = '';
         $this->load->view('header');
         $this->load->view('gatepass_receipt', $Data);
         $this->load->view('footer');

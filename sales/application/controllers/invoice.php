@@ -231,7 +231,11 @@ class Invoice extends CI_Controller {
     function pds_list() {
 
 
-        $Data['pdsList'] = $this->db->order_by('id','desc')->get('car_pds')->result_array();
+        $Data['pdsList'] = $this->db
+            ->select('car_pds.*,deliveryorder.id as iddelivery')
+            ->from('car_pds')
+            ->join('deliveryorder','car_pds.idDispatch = deliveryorder.idDispatch','left')
+            ->order_by('id','desc')->get()->result_array();
         $this->load->view('header');
         $this->load->view('pdslist', $Data);
         $this->load->view('footer');

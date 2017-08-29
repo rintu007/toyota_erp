@@ -15,18 +15,18 @@
         <div class="right-pnel">
             <form class="form animated fadeIn">
                 <fieldset>
-                    <legend>PDS List</legend>
+                    <legend>Delivery Order List</legend>
                     <div class="btn-block-wrap datagrid">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead>
                                 <tr>
                                     <th style="vertical-align: middle;" width="7%">S No.</th>
+                                    <th width="">Delivery Id</th>
                                     <th width="">Dispatch Number</th>
-                                    <th width="">Type</th>
-                                    <th width="">Model</th>
-                                    <th width="">Line</th>
-                                    <th width="">Engine</th>
-                                    <th width="">IMC Date</th>
+                                    <th width="">driver</th>
+                                    <th width="">sold to</th>
+                                    <th width="">careof</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -43,23 +43,21 @@
                             <tbody id="finalResult">
                                 <?php
                                 $count = 1;
-                                foreach ($pdsList as $row) {
+                                foreach ($dorder as $row) {
 								
                                     ?>
                                     <tr id="rbRes">
                                         <td class="resId"><?= $count++ ?></td>
+                                        <td class="tbl-name"><?= $row['id'] ?></td>
                                         <td class="tbl-name"><?= $row['idDispatch'] ?></td>
-                                        <td class="tbl-name"><?= $row['type'] ?></td>
-                                        <td class="tbl-date"><?= $row['Model'] ?></td>
-                                        <td class="tbl-date"><?= $row['Line'] ?></td>
-                                        <td class="tbl-color"><?= $row['Engine'] ?></td>
-                                        <td class="tbl-phone"><?= $row['IMC'] ?></td>
+                                        <td class="tbl-name"><?= $row['driver'] ?></td>
+                                        <td class="tbl-date"><?= $row['soldto'] ?></td>
+                                        <td class="tbl-date"><?= $row['careof'] ?></td>
 
                                         <td>
-
-                                            <button class=""><a href="<?=site_url("index.php/invoice/pds_view/").'/'.$row['id']?>">PDS View</a></button>
-                                            <?php if(!$row['iddelivery']){ ?>
-                                                <button class=""><a href="<?=site_url("index.php/deliveryorder/generate_do/").'/'.$row['idDispatch']?>">Generate DO</a></button>
+                                            <button class=""><a href="<?=site_url("index.php/deliveryorder/do_view/").'/'.$row['id']?>">DO View</a></button>
+                                            <?php if(!$row['idGatePass']){ ?>
+                                                <button class=""><a href="<?=site_url("index.php/deliveryorder/generate_do/").'/'.$row['idDispatch']?>">Generate Gatepass</a></button>
                                         <?php }?>
                                         </td>
                                     </tr>
