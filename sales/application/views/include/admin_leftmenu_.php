@@ -34,29 +34,37 @@ $(document).ready(function(){
         <a href="<?= base_url() ?>index.php/dispatch/index">Dispatch</a>
         <a href="<?= base_url() ?>index.php/dispatch/lists">Dispatch List</a>
         <a href="<?= base_url() ?>index.php/dispatch/dispatchReceive_list">Receive List</a>
+     <!--   <a href="#">Recieving</a> -->
+       
         <a href="<?= base_url() ?>index.php/salenote/index">Sale Note</a>
-        <a href="<?= base_url() ?>index.php/salenote/getAllSaleNote">Sale Note List</a>
-        <a href="<?= base_url() ?>index.php/stockreport/index">Stock List</a>
-        <a href="<?= base_url() ?>index.php/stockreport/pdi_list">PDI List</a>
+         <a href="<?= base_url() ?>index.php/salenote/getAllSaleNote">Sale Note List</a>
+          <a href="<?= base_url() ?>index.php/stockreport/index">Stock List</a>
+         <a href="<?= base_url() ?>index.php/stockreport/pdi_list">PDI List</a>
         <a href="<?= base_url() ?>index.php/invoice/index">Invoice</a>
         <a href="<?= base_url() ?>index.php/invoice/lists">Invoice List</a>
         <a href="<?= base_url() ?>index.php/invoice/pds_requestlist">PDS Request List</a>
         <a href="<?= base_url() ?>index.php/invoice/pds_list">PDS List</a>
-        <a href="<?= base_url() ?>index.php/deliveryorder/index">Delivery Order List</a>
-<!--        <a href="--><?//= base_url() ?><!--index.php/gatepass/index">Gate Pass Number</a>-->
+        <a href="#">Car Accessories</a>
+      <!--  <a href="#">PDS</a>
+        <a href="#">DO</a> -->
+        <a href="#">Vehicle Registration</a>
+        <a href="<?= base_url() ?>index.php/gatepass/index">Gate Pass Number</a>
         <a href="<?= base_url() ?>index.php/gatepass/gatepass_list">Gate Pass List</a>
         <a href="<?= base_url() ?>index.php/ffs/index">FFS</a>
-        <a href="<?= base_url() ?>index.php/requestfordocument/view">Request For Document</a>
-        <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery Form</a>
-        <a href="<?= base_url() ?>index.php/Vehicle_registeration">Vehicle Registration</a>
-        <a href="<?= base_url() ?>index.php/documentreceive/index/">Document Receive From IMC</a>
-        <a href="<?= base_url() ?>index.php/documentrecievefromexcise/view">Document Recieving From Excise</a>
+    <!--   <a href="#">NUDC</a> -->
+        <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery FOrm</a>
+       <!-- <a href="#">FFS</a> -->
         <a href="<?= base_url() ?>index.php/testdrive/add">Add Test Drive</a>
-        <a href="<?= base_url() ?>index.php/testdrive/view">View Test Drive</a>
+		<a href="<?= base_url() ?>index.php/testdrive/view">View Test Drive</a>
+       <!-- <a href="#">Sale Person Target</a> -->
+        <a href="<?= base_url() ?>index.php/documentrecievefromexcise/add">Add Document Recieving From Excise</a>
+		  <a href="<?= base_url() ?>index.php/documentrecievefromexcise/view">View Document Recieving From Excise</a>
+        <a href="<?= base_url() ?>index.php/requestfordocument/add">Add Request For Document</a>
+		<a href="<?= base_url() ?>index.php/requestfordocument/view">View Request For Document</a>
         <a href="<?= base_url() ?>index.php/lostsale/index">Lost Sale</a>
         <a href="<?= base_url() ?>index.php/followup/index">Follow Up</a>    
         <a href="<?= base_url() ?>index.php/salereport/index">Sale Report</a>
-   <!--      <a href="<?= base_url() ?>index.php/finance/index">Payment</a> -->
+        <a href="<?= base_url() ?>index.php/finance/index">Payment</a>
         <a href="<?php echo str_replace('sales','',base_url())  ?>customerrelations/index.php/Inquiryreplyaction/sale">Inquiry from CR</a>
       </div>
       <a style="float: left;width:12.7%;" href="#"><h1 id="mastertoggle" style="background: #000;cursor: pointer;color: #fff;padding: 3px 15px;
