@@ -18,6 +18,9 @@ if ($cookieData["userid"] != "") {
             <script src="<?= base_url(); ?>assets/js/jquery.maskedinput.js"></script>
             <script src="<?= base_url(); ?>assets/js/enscroll-0.4.0.min.js"></script>
             <script src="<?= base_url(); ?>assets/js/validation.js"></script>
+            <script src="<?= base_url(); ?>assets/js/datatables.js"></script>
+            <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/css/jquery.dataTables.css">
+
 
             <script>
                 $(document).ready(function() {

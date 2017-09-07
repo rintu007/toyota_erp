@@ -46,12 +46,15 @@ $(document).ready(function(){
 <!--        <a href="--><?//= base_url() ?><!--index.php/gatepass/index">Gate Pass Number</a>-->
         <a href="<?= base_url() ?>index.php/gatepass/gatepass_list">Gate Pass List</a>
         <a href="<?= base_url() ?>index.php/ffs/index">FFS</a>
-        <a href="<?= base_url() ?>index.php/requestfordocument/view">Request For Document</a>
-        <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery Form</a>
+<!--        <a href="--><?//= base_url() ?><!--index.php/requestfordocument/view">Request For Document</a>-->
         <a href="<?= base_url() ?>index.php/Vehicle_registeration">Vehicle Registration</a>
         <a href="<?= base_url() ?>index.php/documentreceive/index/">Document Receive From IMC</a>
-        <a href="<?= base_url() ?>index.php/documentrecievefromexcise/view">Document Recieving From Excise</a>
-        <a href="<?= base_url() ?>index.php/testdrive/add">Add Test Drive</a>
+        <a href="<?= base_url() ?>index.php/documentreceive/from_sales/">Document Requests</a>
+        <a href="<?= base_url() ?>index.php/documentreceive/from_sales_reponse/Sales">Document Requests from Sales</a>
+<!--        <a href="--><?//= base_url() ?><!--index.php/documentrecievefromexcise/view">Document Recieving From Excise</a>-->
+          <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery Form</a>
+
+          <a href="<?= base_url() ?>index.php/testdrive/add">Add Test Drive</a>
         <a href="<?= base_url() ?>index.php/testdrive/view">View Test Drive</a>
         <a href="<?= base_url() ?>index.php/lostsale/index">Lost Sale</a>
         <a href="<?= base_url() ?>index.php/followup/index">Follow Up</a>    

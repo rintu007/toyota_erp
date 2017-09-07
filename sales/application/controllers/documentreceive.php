@@ -19,6 +19,7 @@ class Documentreceive extends CI_Controller
         parent::__construct();
         $this->load->model('Car_resource_book');
         $this->load->model('car_documentreceive');
+        $this->load->model('Car_documentdelivery');
         $this->load->model('Car_dispatch');
         $this->load->library("pagination");
         $this->load->library('form_validation');
@@ -27,14 +28,60 @@ class Documentreceive extends CI_Controller
 
     public function index()
     {
+        $config['total_rows'] = $this->doc->count_all_imc();
+        $config['per_page'] = 20;
+
+        $this->pagination->initialize($config);
+
+        $data['documentdelivery'] = $this->doc->get_all_imc();
+        $data['pagination']       = $this->pagination->create_links();
+        $this->load->view('header');
+        $this->load->view('document_delivery_view',$data);
+        $this->load->view('footer');
+    }
+    public function document_from_imc_add()
+    {
         $Data = array();
         $Data['docs'] = $this->doc->get_all_docs();
-        $Data['dispatch'] = $this->doc->get_all_dispatch();
+        $Data['dispatch'] = $this->doc->get_dist_dispatch();
 
         $this->load->view('header');
         $this->load->view('docucemntreceiveimc', $Data);
         $this->load->view('footer');
     }
+    public function from_sales_request()
+    {
+        $Data = array();
+        $Data['docs'] = $this->doc->get_all_docs();
+        $Data['dispatch'] = $this->doc->get_all_req_filtered_dispatch();
+        $this->load->view('header');
+        $this->load->view('docucemntfromsales_request', $Data);
+        $this->load->view('footer');
+    }
+
+    public function dispatch_request_view($idDispatch)
+    {
+        $Data = array();
+        $Data['docs'] = $a =$this->doc->get_document_receive_from_sales($idDispatch);
+        $Data['data'] = $this->doc->getRequestedDocument($Data['docs']->id);
+//        var_dump($Data['data']);die;
+//        $Data['dispatch'] = $this->Car_documentdelivery->get_dispatch_data($idDispatch);
+        $Data['idDispatch'] = $idDispatch;
+        $this->load->view('header');
+        $this->load->view('docucemntfromsales_view_dispatch_request', $Data);
+        $this->load->view('footer');
+    }
+
+    public function sales_request_update()
+    {
+//        var_dump($_POST);die;
+
+        $this->doc->doc_sales_request_update();
+        $this->session->set_flashdata('message', "Request Updated Successfully");
+        redirect(site_url('index.php/documentreceive/from_sales_reponse/Sales'));
+
+    }
+
 
     public function receive_from_imc()
     {
@@ -59,6 +106,75 @@ class Documentreceive extends CI_Controller
 
 
     }
+    public function getRequestedDocument()
+    {
+        $data = $this->doc->getRequestedDocument($_POST['idDispatch']);
+        echo json_encode($data);
+
+
+    }
+
+    public function from_sales()
+    {
+        $Data = array();
+        $Data['docs']       = $this->doc->get_all_docs();
+//        $Data['dispatch']   = $this->doc->get_all_dispatch();
+        $Data['documentRequests']   = $this->doc->get_all_doc_request();
+
+        $this->load->view('header');
+        $this->load->view('docucemntfromsales', $Data);
+        $this->load->view('footer');
+    }
+    public function from_sales_reponse($type)
+    {
+        $Data = array();
+        $Data['data'] = $this->doc->get_doc_sales_request($type);
+
+        $this->load->view('header');
+        $this->load->view('docucemntfromsales_reponse', $Data);
+        $this->load->view('footer');
+    }
+
+    function receive_dispatch($idDispatch)
+    {
+        $Data = array();
+        $Data['docs'] = $a =$this->doc->get_document_receive_from_sales($idDispatch);
+        $Data['data'] = $this->doc->getRequestedDocument($Data['docs']->id);
+        $Data['idDispatch'] = $idDispatch;
+        $this->load->view('header');
+        $this->load->view('docucemntfromsales_dispatch_receive', $Data);
+        $this->load->view('footer');
+
+    }
+
+    function receive_documents()
+    {
+        $this->doc->doc_receive_documents();
+        $this->session->set_flashdata('message', "Request Updated Successfully");
+        redirect(site_url('index.php/documentreceive/from_sales'));
+
+    }
+
+
+
+    public function sales_request_insert()
+    {
+        if($_POST)
+        {
+            $this->doc->doc_sales_request_insert();
+            $this->session->set_flashdata('message', "Request Inserted Successfully");
+            redirect(site_url('index.php/documentreceive/from_sales'));
+        }
+    }
+    public function sales_request_response($id,$action)
+    {
+
+            $this->doc->doc_sales_request_response($id,$action);
+            $this->session->set_flashdata('message', "Request Updated Successfully");
+            redirect(site_url('index.php/documentreceive/from_sales_reponse'));
+
+    }
+
 
 
 }

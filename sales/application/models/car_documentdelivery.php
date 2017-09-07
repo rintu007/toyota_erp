@@ -14,7 +14,21 @@ class Car_documentdelivery extends CI_Model {
     public function get_all() 
     {
 
-        $result = $this->db->get('car_documentdelivery');
+//        $result = $this->db->get('car_documentdelivery');
+        $result = $this->db->query("
+        SELECT cdd.iddocumentdelivery,cdd.entry_no,cdd.entry_date,cdd.idDispatch, car_dispatch.ChasisNo, car_dispatch.EngineNo,car_pbo.RegistrationNumber,cdd.delivered_to,
+ car_pbo.PboNumber, car_dispatch.WarrantyBook,
+ car_variants.Variants, car_color.ColorName,car_pbo.ActualSalePerson,
+ cc.*
+FROM car_documentdelivery cdd
+LEFT JOIN car_dispatch ON cdd.idDispatch = car_dispatch.idDispatch
+LEFT JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
+LEFT JOIN car_resource_book ON car_pbo.ResourcebookId = car_resource_book.IdResourceBook
+LEFT JOIN car_variants ON car_dispatch.VariantId = car_variants.IdVariants
+LEFT JOIN car_color ON car_dispatch.ColorId = car_color.IdColor
+LEFT JOIN car_customer cc ON cc.IdCustomer = car_resource_book.CustomerId
+order by cdd.iddocumentdelivery desc
+        ");
 
         if ($result->num_rows() > 0) 
         {
@@ -34,8 +48,21 @@ class Car_documentdelivery extends CI_Model {
 
  public function get_one($id) 
     {
-        $this->db->where('iddocumentdelivery', $id);
-        $result = $this->db->get('car_documentdelivery');
+        $result = $this->db->query("
+        SELECT cdd.iddocumentdelivery,cdd.entry_no,cdd.entry_date,cdd.transfer_date,cdd.idDispatch, car_dispatch.ChasisNo, car_dispatch.EngineNo,car_pbo.RegistrationNumber,cdd.delivered_to,
+ car_pbo.PboNumber, car_dispatch.WarrantyBook,
+ car_variants.Variants, car_color.ColorName,car_pbo.ActualSalePerson,
+ cc.*
+FROM car_documentdelivery cdd
+LEFT JOIN car_dispatch ON cdd.idDispatch = car_dispatch.idDispatch
+LEFT JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
+LEFT JOIN car_resource_book ON car_pbo.ResourcebookId = car_resource_book.IdResourceBook
+LEFT JOIN car_variants ON car_dispatch.VariantId = car_variants.IdVariants
+LEFT JOIN car_color ON car_dispatch.ColorId = car_color.IdColor
+LEFT JOIN car_customer cc ON cc.IdCustomer = car_resource_book.CustomerId where iddocumentdelivery = $id
+        ");
+//        $this->db->where('iddocumentdelivery', $id);
+//        $result = $this->db->get('car_documentdelivery');
 
         if ($result->num_rows() == 1) 
         {
@@ -91,6 +118,15 @@ class Car_documentdelivery extends CI_Model {
 
                 'warranty_book' => '',
 
+            'EngineNo'  =>  '',
+            'Variants'  =>  '',
+            'ColorName' =>  '',
+            'AddressDetails'    =>  '',
+            'Telephone' =>  '',
+            'Cellphone' =>  '',
+            'Email' =>  '',
+            'Cnic'  =>  '',
+
 
 
 
@@ -106,101 +142,64 @@ public function save()
         $data = array(
         
                 'entry_no' => $this->input->post('entry_no'),
-            
+
+                'idDispatch' => $this->input->post('idDispatch'),
+
                 'entry_date' => $this->input->post('entry_date'),
-            
-                'chasis_no' => $this->input->post('chasis_no'),
             
                 'transfer_date' => $this->input->post('transfer_date'),
             
-                'engine_no' => $this->input->post('engine_no'),
+                'delivered_to' => $this->input->post('delivered_to')
             
-                'IdVariants' => $this->input->post('IdVariants'),
-            
-                'IdColor' => $this->input->post('IdColor'),
-            
-                'idordertype' => $this->input->post('idordertype'),
-            
-                'delivered_to' => $this->input->post('delivered_to'),
-            
-                'current_address' => $this->input->post('current_address'),
-            
-                'city' => $this->input->post('city'),
-                
-                'telephone_no' => $this->input->post('telephone_no'),
 
-                'mobile' => $this->input->post('mobile'),
-
-                'email' => $this->input->post('email'),
-
-                'nic_no' => $this->input->post('nic_no'),
-
-                'sales_certificate' => $this->input->post('sales_certificate'),
-
-                'transfer_letter' => $this->input->post('transfer_letter'),
-
-                'sale_invoice' => $this->input->post('sale_invoice'),
-
-                'navigation_card' => $this->input->post('navigation_card'),
-
-                'warranty_book' => $this->input->post('warranty_book'),
         
         );
         
         
         $this->db->insert('car_documentdelivery', $data);
+
+        $id = $this->db->insert_id();
+        foreach ($_POST['iddocument'] as $row)
+        {
+            $data = array(
+              'iddocumentdelivery'  => $id,
+              'iddocument'          => $row
+            );
+            $this->db->insert('car_documentdelivery_detail',$data);
+        }
+
     }
 
 public function update($id)
     {
         $data = array(
-        
-                'entry_no' => $this->input->post('entry_no'),
-            
-                'entry_date' => $this->input->post('entry_date'),
-            
-                'chasis_no' => $this->input->post('chasis_no'),
-            
-                'transfer_date' => $this->input->post('transfer_date'),
-            
-                'engine_no' => $this->input->post('engine_no'),
-            
-                'IdVariants' => $this->input->post('IdVariants'),
-            
-                'IdColor' => $this->input->post('IdColor'),
-            
-                'idordertype' => $this->input->post('idordertype'),
-            
-                'delivered_to' => $this->input->post('delivered_to'),
-            
-                'current_address' => $this->input->post('current_address'),
-            
-                'city' => $this->input->post('city'),
-                
-                'telephone_no' => $this->input->post('telephone_no'),
 
-                'mobile' => $this->input->post('mobile'),
+            'entry_date' => $this->input->post('entry_date'),
 
-                'email' => $this->input->post('email'),
+            'transfer_date' => $this->input->post('transfer_date'),
 
-                'nic_no' => $this->input->post('nic_no'),
+            'delivered_to' => $this->input->post('delivered_to')
 
-                'sales_certificate' => $this->input->post('sales_certificate'),
-
-                'transfer_letter' => $this->input->post('transfer_letter'),
-
-                'sale_invoice' => $this->input->post('sale_invoice'),
-
-                'navigation_card' => $this->input->post('navigation_card'),
-
-                'warranty_book' => $this->input->post('warranty_book'),
-        
         );
-        
-        
+
+
         $this->db->where('iddocumentdelivery', $id);
         $this->db->update('car_documentdelivery', $data);
-    }    
+
+        $this->db->where('iddocumentdelivery', $id)
+            ->delete('car_documentdelivery_detail');
+
+        foreach ($_POST['iddocument'] as $row)
+        {
+            $data = array(
+                'iddocumentdelivery'  => $id,
+                'iddocument'          => $row
+            );
+            $this->db->insert('car_documentdelivery_detail',$data);
+        }
+
+
+    }
 
 public function getEntryNo()
 {
@@ -231,5 +230,56 @@ public function getOrderType()
 	$result =  $this->db->get('car_order_type')->result_array();
 	return $result;
 }
+
+    public function get_all_dispatch()
+    {
+        return $this->db
+            ->select('idDispatch,PboId,ChasisNo,EngineNo,RegistrationNumber')
+            ->where('isDelivered',0)
+            ->get('car_dispatch')
+            ->result_array();
+
+    }
+
+    public function get_all_doc()
+    {
+        return $this->db
+            ->get('document')
+            ->result_array();
+
+    }
+
+    public function get_doc_dev_detail($id)
+    {
+        $data =  $this->db
+            ->select('iddocument')
+            ->where('iddocumentdelivery',$id)
+            ->get('car_documentdelivery_detail')
+            ->result_array();
+        $res = array();
+        foreach ($data as $row)
+        {
+            array_push($res,$row['iddocument']);
+        }
+        return $res;
+
+    }
+    function get_dispatch_data($iddispatch)
+    {
+        $query = "SELECT car_dispatch.ChasisNo, car_dispatch.EngineNo,car_pbo.RegistrationNumber,
+ car_pbo.PboNumber, car_dispatch.WarrantyBook,
+ car_variants.Variants, car_color.ColorName,car_pbo.ActualSalePerson,
+ cc.*
+FROM car_dispatch
+LEFT JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
+LEFT JOIN car_resource_book ON car_pbo.ResourcebookId = car_resource_book.IdResourceBook
+LEFT JOIN car_variants ON car_dispatch.VariantId = car_variants.IdVariants
+LEFT JOIN car_color ON car_dispatch.ColorId = car_color.IdColor
+LEFT JOIN car_customer cc ON cc.IdCustomer = car_resource_book.CustomerId
+
+WHERE car_dispatch.idDispatch = $iddispatch
+                ";
+        return $this->db->query($query)->row();
+    }
 
 }

@@ -4,7 +4,15 @@
         $data = unserialize($_COOKIE['logindata']);
         
             include 'include/admin_leftmenu.php';
-        ?>
+
+        if($this->session->flashdata('message')){
+            ?>
+            <div>
+                <h1 class="fadeIn" style="background: green;text-align: center;font-size: xx-large;">
+                    <?= $this->session->flashdata('message')?>
+                </h1>
+            </div>
+        <?php } ?>
         <div class="right-pnel">
 
             <form name="myform" method="post"
@@ -24,7 +32,19 @@
                         </div>
                         <div>
                             <label>Chasis No</label>
-                            <input type="text" id="chasis_no" name="chasis_no" value="<?=$documentdelivery['chasis_no']?>"/>    
+<!--                            <input type="text" id="chasis_no" name="chasis_no" value="--><?//=$documentdelivery['chasis_no']?><!--"/>    -->
+
+                           <?php if(isset($documentdelivery['ChasisNo']))
+                           { ?>
+                               <input type="text" readonly value="<?=$documentdelivery['ChasisNo']?>">
+                           <?php }else {?>
+                            <select name="idDispatch" id="idDispatch" data-validation="required">
+                                <option value="">--Select--</option>
+                                <?php foreach ($dispatch as $row){?>
+                                    <option value="<?=$row['idDispatch']?>"><?=$row['ChasisNo']?></option>
+
+                                <?php }} ?>
+                            </select>
                         </div>
                         <div>
                             <label>Transfer Date</label>
@@ -32,60 +52,26 @@
                         </div>
                         <div>
                             <label>Engine No</label>
-                            <input type="text" name="engine_no" id="engine_no" value="<?=$documentdelivery['engine_no']?>">    
+                            <input type="text" name="" readonly id="engine_no" value="<?=$documentdelivery['EngineNo']?>"/>
                         </div>
                         <div>
                             <label>Vehichle</label>
-                            <select name="IdVariants" class="form-control" id="IdVariants">
-                    <?php
-                    if($documentdelivery['IdVariants'] != '')
-                    {
-                       foreach ($variant as $val) {  ?> 
-                     <option value="<?= $val['IdVariants'] ?>" <?=$val['IdVariants'] == $documentdelivery['IdVariants'] ? 'selected' : '' ?>><?= $val['Variants'] ?></option>  
-                    <?php } } else { 
-                        foreach ($variant as $val) {  ?> 
-                     <option value="<?= $val['IdVariants'] ?>"><?= $val['Variants'] ?></option>  
-                    <?php } }
-                    ?>
-                </select>     
+                            <input name="IdVariants"  readonly class="form-control" value="<?=$documentdelivery['Variants']?>" id="IdVariants"/>
+
                         </div>
                         <div>
                             <label>Color</label>
-                            <select name="IdColor" class="form-control" id="IdColor">
-                    <?php
-                    if($documentdelivery['IdColor'] != '')
-                    {
-                       foreach ($color as $val) {  ?> 
-                     <option value="<?= $val['IdColor'] ?>" <?=$val['IdColor'] == $documentdelivery['IdColor'] ? 'selected' : '' ?>><?= $val['ColorName'] ?></option>  
-                    <?php } } else { 
-                        foreach ($color as $val) {  ?> 
-                     <option value="<?= $val['IdColor'] ?>"><?= $val['ColorName'] ?></option>  
-                    <?php } }
-                    ?>
-                </select>     
+                            <input name="IdColor" readonly class="form-control" value="<?=$documentdelivery['ColorName']?>"  id="IdColor"/>
+
                         </div>
-                        <div>
-                            <label>Order Type</label>
-                            <select name="idordertype" class="form-control" id="idordertype">
-                    <?php
-                    if($documentdelivery['idordertype'] != '')
-                    {
-                       foreach ($ordertype as $val) {  ?> 
-                     <option value="<?= $val['id'] ?>" <?=$val['id'] == $documentdelivery['idordertype'] ? 'selected' : '' ?>><?= $val['OrderType'] ?></option>  
-                    <?php } } else { 
-                        foreach ($ordertype as $val) {  ?> 
-                     <option value="<?= $val['id'] ?>"><?= $val['OrderType'] ?></option>  
-                    <?php } }
-                    ?>
-                </select>     
-                        </div>
+
                         <div>
                             <label>Delivered To</label>
-                            <input type="text" name="delivered_to" id="delivered_to" value="<?=$documentdelivery['delivered_to']?>">    
+                            <input type="text" name="delivered_to"  id="delivered_to" value="<?=$documentdelivery['delivered_to']?>">
                         </div>  
                         <div>
                             <label>Current Address</label>
-                            <input type="text" name="current_address" id="current_address" value="<?=$documentdelivery['current_address']?>">    
+                            <input type="text" name="" readonly id="current_address" value="<?=$documentdelivery['AddressDetails']?>">
                         </div>  
                         <div>
                             <label>City</label>
@@ -95,43 +81,39 @@
                         </div> 
                         <div>
                             <label>Telephone No</label>
-                            <input type="text" name="telephone_no" id="telephone_no" value="<?=$documentdelivery['telephone_no']?>">    
+                            <input type="text" name="" readonly id="telephone_no" value="<?=$documentdelivery['Telephone']?>">
                         </div>  
                         <div>
                             <label>Mobile</label>
-                            <input type="text" name="mobile" id="mobile" value="<?=$documentdelivery['mobile']?>">    
+                            <input type="text" name="" readonly id="mobile" value="<?=$documentdelivery['Cellphone']?>">
                         </div> 
                         <div>
                             <label>Email</label>
-                            <input type="text" name="email" id="email" value="<?=$documentdelivery['email']?>">    
+                            <input type="text" name="" readonly id="email" value="<?=$documentdelivery['Email']?>">
                         </div> 
                         <div>
                             <label>NIC No</label>
-                            <input type="text" name="nic_no" id="nic_no" value="<?=$documentdelivery['nic_no']?>">    
+                            <input type="text" name="" readonly id="nic_no" value="<?=$documentdelivery['Cnic']?>">
                         </div>                   
                     </fieldset>  
                     <fieldset>
                         <legend>Documents Delivered</legend>
-                        <div>
-                            <label>Sales Certificate</label>
-                            <input style="margin: 10px 0 0 0;" type="checkbox" class="customer_ex" value="1" name="sales_certificate" <?=$documentdelivery['sales_certificate'] == 1 ? 'checked' : ''?>> 
-                        </div>
-                        <div>
-                            <label>Transfer Letter</label>
-                            <input style="margin: 10px 0 0 0;" type="checkbox" class="customer_ex"  value="1" name="transfer_letter" <?=$documentdelivery['transfer_letter'] == 1 ? 'checked' : ''?>> 
-                        </div>
-                        <div>
-                            <label>Sales Invoice</label>
-                            <input style="margin: 10px 0 0 0;" type="checkbox" class="customer_ex"  value="1" name="sale_invoice" <?=$documentdelivery['sale_invoice'] == 1 ? 'checked' : ''?>> 
-                        </div>
-                        <div>
-                            <label>Navigation Card</label>
-                            <input style="margin: 10px 0 0 0;" type="checkbox" class="customer_ex"  value="1" name="navigation_card" <?=$documentdelivery['navigation_card'] == 1 ? 'checked' : ''?>> 
-                        </div>
-                        <div>
-                            <label>Warranty Book</label>
-                            <input style="margin: 10px 0 0 0;" type="checkbox" class="customer_ex"  value="1" name="warranty_book" <?=$documentdelivery['warranty_book'] == 1 ? 'checked' : ''?>> 
-                        </div>
+
+                        <?php foreach ($docs as $row){
+                            ?>
+                            <div>
+                                <label for="<?=$row['iddocument']?>"><?=$row['documentname']?></label>
+                                <input type="checkbox" class="docs" name="iddocument[]" value="<?=$row['iddocument']?>" id="doc_<?=$row['iddocument']?>"
+                                <?php if(isset($doc_detail)) {
+                                    if(in_array($row['iddocument'],$doc_detail))
+                                        echo 'checked';
+                                } ?>
+                                />
+                            </div>
+
+                            <?php
+                        }?>
+
                     </fieldset>  
 
                     <input style="margin: 0px 0 0 40px;" class="btn" type="submit" name="submit" value="Submit">
@@ -145,5 +127,36 @@
 </div>
 
 <script>
+    var a;
+    $("#idDispatch").change(function () {
+        $('.docs').prop('checked',false)
+        var idDispatch = $("#idDispatch").val();
 
+        $.ajax({
+            url: "<?= base_url() ?>index.php/documentdelivery/get_dispatch_data",
+            type: "POST",
+            data: {
+                idDispatch: idDispatch
+            },
+            success: function (data) {
+//                console.log(data);
+                 a = JSON.parse(data);
+                console.log(a);
+
+                $('#IdVariants').val(a.IdVariants)
+                $('#engine_no').val(a.EngineNo)
+                $('#IdVariants').val(a.Variants)
+//                $('#engine_no').val(a.RegistrationNumber)
+                $('#IdColor').val(a.ColorName)
+                $('#delivered_to').val(a.CustomerName)
+                $('#current_address').val(a.AddressDetails)
+                $('#telephone_no').val(a.Telephone)
+                $('#mobile').val(a.Cellphone)
+                $('#email').val(a.Email)
+                $('#nic_no').val(a.Cnic)
+
+
+            }
+        });
+    });
 </script>
