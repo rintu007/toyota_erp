@@ -269,13 +269,15 @@ public function getOrderType()
         $query = "SELECT car_dispatch.ChasisNo, car_dispatch.EngineNo,car_pbo.RegistrationNumber,
  car_pbo.PboNumber, car_dispatch.WarrantyBook,
  car_variants.Variants, car_color.ColorName,car_pbo.ActualSalePerson,
- cc.*
+ cc.*,ci.InvoiceNumber,ci.InvoiceDate,car_pbo.PboNumber
 FROM car_dispatch
 LEFT JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
 LEFT JOIN car_resource_book ON car_pbo.ResourcebookId = car_resource_book.IdResourceBook
 LEFT JOIN car_variants ON car_dispatch.VariantId = car_variants.IdVariants
 LEFT JOIN car_color ON car_dispatch.ColorId = car_color.IdColor
 LEFT JOIN car_customer cc ON cc.IdCustomer = car_resource_book.CustomerId
+Left join car_invoice ci on ci.DispatchId=car_dispatch.idDispatch
+
 
 WHERE car_dispatch.idDispatch = $iddispatch
                 ";

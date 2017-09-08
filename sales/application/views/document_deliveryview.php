@@ -20,7 +20,7 @@
                  <div id="searchform" class="feildwrap">
                    
                         <div class="btn-block-wrap datagrid" id="shwcompat">
-                        <a href="<?=base_url()?>index.php/Documentreceive/document_from_imc_add"><button class="btn" type="button">Documents Receive From IMC Form</button></a>
+                        <a href="<?=base_url()?>index.php/Documentdelivery/add"><button class="btn" type="button">ADD Document Delivery</button></a>
                             <table id="allcomplaints" width="100%" border="0" cellpadding="1" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -42,7 +42,7 @@
                                             <td><?=$val['ChasisNo']?></td>
                                             <td><?=$val['EngineNo']?></td>
                                             <td><?=$val['RegistrationNumber']?></td>
-                                            <td onclick="getData('<?= $val['idDispatch']?>')"><a>View </a></td>
+                                            <td><a href="<?=site_url('index.php/documentdelivery/edit/'.$val['iddocumentdelivery'])?>">View/Edit</a></td>
                                         </tr>
                                     <?php } ?>   
                                 </tbody>

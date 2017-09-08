@@ -26,7 +26,7 @@
                 <div id="searchform" class="feildwrap">
 
                     <fieldset>
-                        <legend>Documents From Sales</legend>
+                        <legend>Create Documents Request</legend>
                         <div>
                             <button type="button" class="btn" onclick="showpopup('detail')">Select Chassis</button>
                         </div>
@@ -36,7 +36,7 @@
                             <input type="radio" id="salem"  required name="type" value="Sales">
                         </div>
                         <div>
-                            <label for="imc">For IMC</label>
+                            <label for="imc">For Excise</label>
                             <input type="radio" id="imc" required name="type" value="Excise">
 <!--                            <button type="button" class="btn" onclick="showpopup('detail')">Select Chassis</button>-->
                         </div>

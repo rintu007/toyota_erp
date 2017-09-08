@@ -36,8 +36,11 @@
                         <div>
                             <label>Chasis No</label>
                                 <input type="text" id="cahsisno" readonly value="">
+                        </div>
 
-
+                        <div>
+                            <label>Pbo Number</label>
+                                <input type="text" id="PboNumber" readonly value="">
                         </div>
 
                         <div>
@@ -56,7 +59,7 @@
                         </div>
 
                         <div>
-                            <label>Delivered To</label>
+                            <label>Customer Name</label>
                             <input type="text" name="delivered_to"  id="delivered_to">
                         </div>
                         <div>
@@ -85,6 +88,15 @@
                             <label>NIC No</label>
                             <input type="text" name="" readonly id="nic_no">
                         </div>
+                        <div>
+                            <label>Invoice Number</label>
+                            <input type="text" name="" readonly id="InvoiceNumber">
+                        </div>
+                        <div>
+                            <label>Invoice Date</label>
+                            <input type="text" name="" readonly id="InvoiceDate">
+                        </div>
+
                         <br>
                         <fieldset>
                             <legend>Documents</legend>
@@ -183,6 +195,9 @@
                 $('#email').val(a.Email)
                 $('#nic_no').val(a.Cnic)
                 $('#cahsisno').val(a.ChasisNo)
+                $('#InvoiceNumber').val(a.InvoiceNumber)
+                $('#InvoiceDate').val(a.InvoiceDate)
+                $('#PboNumber').val(a.PboNumber)
 
                 $('.popup-detail' ).bPopup().close()
 

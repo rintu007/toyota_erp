@@ -83,6 +83,7 @@ $(document).ready(function(){
         <a href="<?= base_url() ?>index.php/contacttype/index">Add Contact Type</a>
         <a href="<?= base_url() ?>index.php/paymentmode/index">Add Payment Mode</a>
         <a href="<?= base_url() ?>index.php/variants/index">Add Variant</a>
+        <a href="<?= base_url() ?>index.php/document/index">Add Document</a>
 		<a href="<?= base_url() ?>index.php/gatepasstype/index">Add Gate Pass Type</a>
 		<a href="<?= base_url() ?>index.php/head">Add Pds Headings</a>
 		<a href="<?= base_url() ?>index.php/head/pds">View Pds Headings</a>

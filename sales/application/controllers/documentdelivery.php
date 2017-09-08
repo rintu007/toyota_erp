@@ -26,7 +26,7 @@ class Documentdelivery extends CI_Controller {
         $data['documentdelivery'] = $this->car_documentdelivery->get_all();
         $data['pagination']       = $this->pagination->create_links();
         $this->load->view('header');
-        $this->load->view('document_delivery_view',$data);
+        $this->load->view('document_deliveryview',$data);
         $this->load->view('footer');
     }
 
