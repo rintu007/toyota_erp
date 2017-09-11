@@ -52,7 +52,7 @@ class Documentreceive extends CI_Controller
     public function from_sales_request()
     {
         $Data = array();
-        $Data['docs'] = $this->doc->get_all_docs();
+        $Data['docs'] = $this->doc->get_all_dist_docs();
         $Data['dispatch'] = $this->doc->get_all_req_filtered_dispatch();
         $this->load->view('header');
         $this->load->view('docucemntfromsales_request', $Data);
@@ -125,10 +125,10 @@ class Documentreceive extends CI_Controller
         $this->load->view('docucemntfromsales', $Data);
         $this->load->view('footer');
     }
-    public function from_sales_reponse($type)
+    public function from_sales_reponse($type='')
     {
         $Data = array();
-        $Data['data'] = $this->doc->get_doc_sales_request($type);
+        $Data['data'] = $this->doc->get_doc_sales_request();
 
         $this->load->view('header');
         $this->load->view('docucemntfromsales_reponse', $Data);
@@ -173,6 +173,43 @@ class Documentreceive extends CI_Controller
             $this->session->set_flashdata('message', "Request Updated Successfully");
             redirect(site_url('index.php/documentreceive/from_sales_reponse'));
 
+    }
+
+    public function excise_registration()
+    {
+        $Data = array();
+        $Data['data'] = $this->doc->get_doc_excise();
+
+        $this->load->view('header');
+        $this->load->view('document_excise_registration', $Data);
+        $this->load->view('footer');
+    }
+
+    public function excise_registration_view($idDispatch)
+    {
+        $Data = array();
+        $Data['docs'] = $a =$this->doc->get_document_receive_from_sales($idDispatch);
+        $Data['documents']=$this->doc->get_all_docs();
+        $Data['data'] = $this->doc->getRequestedDocument($Data['docs']->id);
+        $res = array();
+        foreach ( $Data['data'] as $row)
+        {
+            array_push($res,$row['iddocument']);
+        }
+        $Data['res'] = $res;
+//        var_dump($res);die;
+//        $Data['dispatch'] = $this->Car_documentdelivery->get_dispatch_data($idDispatch);
+        $Data['idDispatch'] = $idDispatch;
+        $this->load->view('header');
+        $this->load->view('docucemnt_excise_registration_view', $Data);
+        $this->load->view('footer');
+    }
+
+    public function excise_update()
+    {
+        $this->doc->update_excise();
+        $this->session->set_flashdata('message', "Excise Registered Successfully");
+        redirect(site_url('index.php/documentreceive/excise_registration'));
     }
 
 

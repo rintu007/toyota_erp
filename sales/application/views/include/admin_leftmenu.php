@@ -51,6 +51,7 @@ $(document).ready(function(){
         <a href="<?= base_url() ?>index.php/documentreceive/index/">Document Receive From IMC</a>
         <a href="<?= base_url() ?>index.php/documentreceive/from_sales/">Document Requests</a>
         <a href="<?= base_url() ?>index.php/documentreceive/from_sales_reponse/Sales">Document Requests from Sales</a>
+        <a href="<?= base_url() ?>index.php/documentreceive/excise_registration">Document Excise Registration</a>
 <!--        <a href="--><?//= base_url() ?><!--index.php/documentrecievefromexcise/view">Document Recieving From Excise</a>-->
           <a href="<?= base_url() ?>index.php/documentdelivery/index">Document Delivery Form</a>
 

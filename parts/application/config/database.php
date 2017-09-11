@@ -51,12 +51,13 @@ if (!defined('BASEPATH'))
 $active_group = 'default';
 $active_record = TRUE;
 
-//$db['default']['hostname'] = '110.93.203.204';
-//$db['default']['username'] = 'devRadium';
-//$db['default']['password'] = 'Diamonds1';
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+
+$db['default']['hostname'] = '175.107.202.44';
+$db['default']['username'] = 'hoss';
+$db['default']['password'] = 'Diamonds1';
+//$db['default']['hostname'] = 'localhost';
+//$db['default']['username'] = 'root';
+//$db['default']['password'] = '';
 $db['default']['database'] = 'dealer';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';

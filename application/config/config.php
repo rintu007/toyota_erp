@@ -17,7 +17,7 @@ if (!defined('BASEPATH'))
   | path to your installation.
   |
  */
-$config['base_url'] = 'http://localhost/toyota_git/toyota_erp/sales/';
+$config['base_url'] = 'http://localhost/toyota_git/toyota_erp/';
 //http://192.168.1.195/
 /*
   |--------------------------------------------------------------------------

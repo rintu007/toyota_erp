@@ -28,8 +28,9 @@
                             <th>ChasisNo</th>
                             <th>EngineNo</th>
                             <th>RegistrationNumber</th>
-                            <th>Received Documents</th>
+                            <th>Created Date</th>
                             <th>STATUS</th>
+                            <th></th>
                         </tr>
                         </thead>
 
@@ -44,10 +45,11 @@
                                 <td><?=$val['ChasisNo']?></td>
                                 <td><?=$val['EngineNo']?></td>
                                 <td><?=$val['RegistrationNumber']?></td>
+                                <td><?=$val['created_at']?></td>
                                 <td><?=$val['status']?></td>
                                 <td onclick="getData(<?=$val['id']?>)"><a>View </a>
                                 <?php
-                                if(($val['status']=='DISPATCHED' or $val['type']=='Excise') and $val['status']!='CLOSED')
+                                if(($val['status']=='DISPATCHED'))
                                 {?>
                                     <a href="<?=site_url('index.php/documentreceive/receive_dispatch/'.$val['idDispatch'])?>" class="btn">Receive</a>
                                <?php  } ?>
@@ -68,9 +70,13 @@
     <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 250px;">
         <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
         <div style="margin-left: 25px;width: 0px;">
-            <fieldset style="min-width: 250px;">
+            <fieldset style="min-width: 320px;">
                 <legend>Documents</legend>
                 <div class="feildwrap">
+                    <div class="row">
+                        <label style="text-align: left;" for="">Remarks</label>
+                        <input style="width: auto;" type="text" id="remarks" readonly>
+                    </div>
                     <table class="dataTable" >
                         <thead>
                         <tr>
@@ -126,7 +132,7 @@
                 $('#myTable').html(html)
 
 
-
+                $('#remarks').val(a[0].remarks)
                 showpopup()
 
 

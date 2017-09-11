@@ -38,13 +38,21 @@
                            { ?>
                                <input type="text" readonly value="<?=$documentdelivery['ChasisNo']?>">
                            <?php }else {?>
-                            <select name="idDispatch" id="idDispatch" data-validation="required">
-                                <option value="">--Select--</option>
-                                <?php foreach ($dispatch as $row){?>
-                                    <option value="<?=$row['idDispatch']?>"><?=$row['ChasisNo']?></option>
+                            <button type="button" class="btn" onclick="showpopup('detail')">Select Chassis</button>
 
-                                <?php }} ?>
-                            </select>
+
+                            <!--                            <select name="idDispatch" id="idDispatch" data-validation="required">-->
+<!--                                <option value="">--Select--</option>-->
+<!--                                --><?php //foreach ($dispatch as $row){?>
+<!--                                    <option value="--><?//=$row['idDispatch']?><!--">--><?//=$row['ChasisNo']?><!--</option>-->
+<!---->
+<!--                                --><?php //}} ?>
+<!--                            </select>-->
+                            <?php }?>
+                        </div>
+                        <div>
+                            <label>Pbo Number</label>
+                            <input type="text" id="PboNumb" readonly value="<?=$documentdelivery['PboNumber']?>">
                         </div>
                         <div>
                             <label>Transfer Date</label>
@@ -68,7 +76,12 @@
                         <div>
                             <label>Delivered To</label>
                             <input type="text" name="delivered_to"  id="delivered_to" value="<?=$documentdelivery['delivered_to']?>">
-                        </div>  
+                        </div>
+                        <br>
+                        <div>
+                            <label>Customer Name</label>
+                            <input type="text" name=""  id="cust" readonly value="<?=$documentdelivery['CustomerName']?>">
+                        </div>
                         <div>
                             <label>Current Address</label>
                             <input type="text" name="" readonly id="current_address" value="<?=$documentdelivery['AddressDetails']?>">
@@ -94,10 +107,21 @@
                         <div>
                             <label>NIC No</label>
                             <input type="text" name="" readonly id="nic_no" value="<?=$documentdelivery['Cnic']?>">
-                        </div>                   
+                        </div>
+
+                        <div>
+                            <label>Invoice Number</label>
+                            <input type="text" name="" readonly id="InvoiceNumber" value="<?=$documentdelivery['InvoiceNumber']?>">
+                        </div>
+                        <div>
+                            <label>Invoice Date</label>
+                            <input type="text" name="" readonly id="InvoiceDate" value="<?=$documentdelivery['InvoiceDate']?>">
+                        </div>
                     </fieldset>  
                     <fieldset>
                         <legend>Documents Delivered</legend>
+
+                        <div id="chk">
 
                         <?php foreach ($docs as $row){
                             ?>
@@ -113,6 +137,7 @@
 
                             <?php
                         }?>
+                        </div>
 
                     </fieldset>  
 
@@ -125,8 +150,129 @@
 </div>
 
 </div>
+<div style="width: 750px;" class="feildwrap  popup popup-detail">
+    <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 250px;">
+        <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
+        <div style="margin-left: 25px;width: 0px;">
+            <fieldset style="">
+                <legend>Select Chassis</legend>
+                <div class="feildwrap">
+                    <table id="myTable">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Chassis</th>
+                            <th>Engine</th>
+                        </tr>
+                        </thead>
+                        <?php
+                        $count = 1;
+                        foreach ($dispatch as $row){
+                            ?>
+                            <tr style="CURSOR: pointer;" onclick="filldata('<?= $row['idDispatch']?>')">
+                                <td><?=$count++?></td>
+                                <td ><?=$row['ChasisNo']?></td>
+                                <td><?=$row['EngineNo']?></td>
+                            </tr>
 
+                        <?php } ?>
+                    </table>
+                </div>
+            </fieldset>
+        </div><br>
+    </form>
+</div>
 <script>
+
+    function showpopup(div_id)
+    {
+        $('.popup-' + div_id).bPopup({
+            fadeSpeed: 'slow', //can be a string ('slow'/'fast') or int
+            followSpeed: 1500, //can be a string ('slow'/'fast') or int
+            modalColor: '#333',
+            closeClass: 'close-pop'
+        }, function() {
+        });
+    }
+    function filldata(idDispatch){
+        $('#idDispatch').val(idDispatch)
+        $('#chk').hide()
+        filldocs(idDispatch)
+        $.ajax({
+            url: "<?= base_url() ?>index.php/documentdelivery/get_dispatch_data",
+            type: "POST",
+            data: {
+                idDispatch: idDispatch
+            },
+            success: function (data) {
+//                console.log(data);
+                a = JSON.parse(data);
+                console.log(a);
+
+
+                $('#IdVariants').val(a.IdVariants)
+                $('#engine_no').val(a.EngineNo)
+                $('#IdVariants').val(a.Variants)
+//                $('#engine_no').val(a.RegistrationNumber)
+                $('#IdColor').val(a.ColorName)
+                $('#delivered_to').val(a.CustomerName)
+                $('#current_address').val(a.AddressDetails)
+                $('#telephone_no').val(a.Telephone)
+                $('#mobile').val(a.Cellphone)
+                $('#email').val(a.Email)
+                $('#nic_no').val(a.Cnic)
+                $('#cahsisno').val(a.ChasisNo)
+                $('#InvoiceNumber').val(a.InvoiceNumber)
+                $('#InvoiceDate').val(a.InvoiceDate)
+                $('#PboNumb').val(a.PboNumber)
+
+                $('.popup-detail' ).bPopup().close()
+
+
+            }
+        });
+    }
+
+    function filldocs(idDispatch)
+    {
+
+        $.ajax({
+            url: "<?= base_url() ?>index.php/documentdelivery/get_received_documents",
+            type: "POST",
+            data: {
+                idDispatch: idDispatch
+            },
+            success: function (data) {
+//                console.log(data);
+                a = JSON.parse(data);
+                console.log(a);
+                if ( a[0].type=='Excise' && (a[0].registered=='0') )
+                {
+                    alert('Documents Received but not yet Registered From Excise')
+
+                }
+                else{
+
+                    html=''
+                    $.each(a,function(i,v){
+                        html +='<div>\n' +
+                            '<label for="1">'+v.documentname+'</label>\n' +
+                            '<input type="checkbox" class="docs" name="iddocument[]" value="'+v.iddocument+'" id="doc_'+v.iddocument+'">\n' +
+                            '</div>'
+                    })
+
+                    $('#chk').html(html)
+                    $('#chk').show()
+
+
+                }
+
+            }
+        });
+    }
+
+    $('#myTable').DataTable();
+
     var a;
     $("#idDispatch").change(function () {
         $('.docs').prop('checked',false)
@@ -143,17 +289,6 @@
                  a = JSON.parse(data);
                 console.log(a);
 
-                $('#IdVariants').val(a.IdVariants)
-                $('#engine_no').val(a.EngineNo)
-                $('#IdVariants').val(a.Variants)
-//                $('#engine_no').val(a.RegistrationNumber)
-                $('#IdColor').val(a.ColorName)
-                $('#delivered_to').val(a.CustomerName)
-                $('#current_address').val(a.AddressDetails)
-                $('#telephone_no').val(a.Telephone)
-                $('#mobile').val(a.Cellphone)
-                $('#email').val(a.Email)
-                $('#nic_no').val(a.Cnic)
 
 
             }

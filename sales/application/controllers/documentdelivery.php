@@ -50,8 +50,9 @@ class Documentdelivery extends CI_Controller {
 
             $data['documentdelivery']   = $this->car_documentdelivery->get_one($id);
             $data['action']             = 'documentdelivery/save/' . $id;
-            $data['docs']               = $this->car_documentdelivery->get_all_doc();
+            $data['docs']               = $this->car_documentdelivery->getReceivedDocument($data['documentdelivery']['idDispatch']);
             $data['doc_detail']         = $this->car_documentdelivery->get_doc_dev_detail($id);
+
             $this->load->view('header');
             $this->load->view('document_delivery',$data);
             $this->load->view('footer');
@@ -103,8 +104,12 @@ class Documentdelivery extends CI_Controller {
     {
         $data = $this->car_documentdelivery->get_dispatch_data($_POST['idDispatch']);
         echo json_encode($data);
+    }
 
-
+    public function get_received_documents()
+    {
+        $data = $this->car_documentdelivery->get_received_documents($_POST['idDispatch']);
+        echo json_encode($data);
     }
 
 

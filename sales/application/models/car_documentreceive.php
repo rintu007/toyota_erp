@@ -47,6 +47,16 @@ class car_documentreceive extends CI_Model
         return $this->db->get('document')->result_array();
     }
 
+    public function get_all_dist_docs()
+    {
+        return $this->db->query('
+select cd.idDispatch,PboId,ChasisNo,EngineNo,RegistrationNumber 
+from car_dispatch cd
+                left join document_receive dr
+                on cd.idDispatch =dr.idDispatch
+                where dr.id is null')->result_array();
+    }
+
     public function get_all_docs_req($idDispatch)
     {
         return $this->db->query("
@@ -102,10 +112,10 @@ WHERE dr.id IS NULL")
 
     public function get_all_doc_request()
     {
-       return $this->db->query('SELECT drfs.*,cd.ChasisNo,cd.EngineNo,cd.RegistrationNumber
+       return $this->db->query('SELECT drfs.*,cd.ChasisNo,cd.EngineNo,cd.RegistrationNumber,drfs.created_at
                             FROM document_receive_from_sales drfs
                             JOIN car_dispatch cd ON cd.idDispatch = drfs.idDispatch
-                            ORDER BY drfs.created_at')->result_array();
+                            ORDER BY drfs.created_at desc')->result_array();
 
     }
 
@@ -148,10 +158,11 @@ WHERE dr.id IS NULL")
     function getRequestedDocument($id)
     {
         return $this->db->
-        select('document_request_detail.idDocument,document_request_detail.status,document.iddocument,document.documentname')
+        select('document_request_detail.idDocument,document_request_detail.status,document.iddocument,document.documentname,document_receive_from_sales.remarks')
             ->from('document_request_detail')
             ->where('idRequest', $id)
-            ->join('document', 'document.iddocument = document_request_detail.idDocument')->get()
+            ->join('document', 'document.iddocument = document_request_detail.idDocument')
+            ->join('document_receive_from_sales', 'document_receive_from_sales.id = document_request_detail.idRequest')->get()
             ->result_array();
 
     }
@@ -182,7 +193,8 @@ WHERE dr.id IS NULL")
         $data = array(
             'userid'    =>  $UserId,
             'idDispatch'=>  $_POST['idDispatch'],
-            'type'=>  $_POST['type']
+            'type'=>  $_POST['type'],
+            'remarks' =>$_POST['remarks']
         );
         $this->db->insert('document_receive_from_sales',$data);
 
@@ -191,7 +203,7 @@ WHERE dr.id IS NULL")
         {
             $data = array(
               'idRequest'       =>  $id,
-              'idDocument'      =>  $row,
+              'idDocument'      =>  $row
             );
             $this->db->insert('document_request_detail',$data);
         }
@@ -282,14 +294,26 @@ WHERE dr.id IS NULL")
 
     }
 
-    function get_doc_sales_request($type)
+    function get_doc_sales_request()
     {
         return $this->db->query("
-                    SELECT drfs.*,cd.ChasisNo,cd.EngineNo,cd.RegistrationNumber
+                    SELECT drfs.*,cd.ChasisNo,cd.EngineNo,cd.RegistrationNumber,drfs.created_at
                     FROM document_receive_from_sales drfs
                     JOIN car_dispatch cd ON cd.idDispatch = drfs.idDispatch
-                    where drfs.`type`='$type'
-                    ORDER BY drfs.created_at
+                
+                    ORDER BY drfs.created_at desc
+        ")->result_array();
+    }
+
+    function get_doc_excise()
+    {
+        return $this->db->query("
+                    SELECT drfs.*,cd.ChasisNo,cd.EngineNo,cd.RegistrationNumber,drfs.created_at
+                    FROM document_receive_from_sales drfs
+                    JOIN car_dispatch cd ON cd.idDispatch = drfs.idDispatch
+                    where drfs.type = 'Excise' and status = 'CLOSED'
+                
+                    ORDER BY drfs.created_at desc
         ")->result_array();
     }
 
@@ -325,6 +349,27 @@ WHERE dr.id IS NULL")
   function  get_document_receive_from_sales($idDispatch)
   {
       return $this->db->where('idDispatch',$idDispatch)->get('document_receive_from_sales')->row();
+  }
+
+  function update_excise()
+  {
+
+          foreach ($_POST['iddcoument'] as $row)
+          {
+
+                  $data = array(
+                      'idDocument'  => $row,
+                      'idRequest'   => $_POST['id'],
+                      'status'      => 'RECEIVED'
+
+                  );
+                  $this->db->insert('document_request_detail', $data);
+          }
+
+          $this->db->where('idDispatch', $_POST['idDispatch'])->update('document_receive_from_sales',array('registered'=>1));
+          return true;
+
+
   }
 
 

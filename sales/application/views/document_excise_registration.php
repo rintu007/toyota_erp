@@ -25,7 +25,7 @@
                 <form action="" class="form validate-form animated fadeIn has-validation-callback">
                     <fieldset>
                         <legend>
-                            Documents Requests
+                            Documents Registration - EXCISE
                         </legend>
                         <div class="btn-block-wrap datagrid" id="shwcompat">
 
@@ -40,6 +40,7 @@
                                     <th>RegistrationNumber</th>
                                     <th>Created Date</th>
                                     <th>STATUS</th>
+<!--                                    <th></th>-->
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -49,20 +50,21 @@
                                 <?php
                                 $count = 1;
                                 foreach ($data as $val) { ?>
-                                    <tr>
+                                    <tr >
                                         <td><?= $count++; ?></td>
                                         <td><?= $val['type'] ?></td>
                                         <td><?= $val['ChasisNo'] ?></td>
                                         <td><?= $val['EngineNo'] ?></td>
                                         <td><?= $val['RegistrationNumber'] ?></td>
                                         <td><?= $val['created_at'] ?></td>
-                                        <td><?= $val['status'] ?></td>
-                                        <td onclick="getData(<?= $val['id'] ?>)"><a>View</a></td>
+                                        <td><?= $val['registered']?'REGISTERED':'PENDING' ?></td>
+<!--                                        <td onclick="getData(--><?//= $val['id'] ?><!--">-->
+<!--                                            <a>View</a></td>-->
                                         <th>
-                                            <?php if($val['status']!='CLOSED')
-                                            {?>
-                                            <a href="<?=site_url('index.php/documentreceive/dispatch_request_view/'.$val['idDispatch'])?>" class="btn">Dispatch</a>
-                                            <?php }?>
+<!--                                            --><?php //if($val['status']!='CLOSED')
+//                                            {?>
+                                            <a href="<?=site_url('index.php/documentreceive/excise_registration_view/'.$val['idDispatch'])?>" class="btn">Register</a>
+<!--                                            --><?php //}?>
                                         </th>
                                     </tr>
                                 <?php } ?>

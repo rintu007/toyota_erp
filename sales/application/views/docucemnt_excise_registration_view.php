@@ -22,25 +22,24 @@
         <div class="right-pnel">
 
             <form name="myform" onSubmit="return validationform()" method="post"
-                  action="<?= base_url() ?>index.php/documentreceive/receive_from_imc" class="form validate-form animated fadeIn">
+                  action="<?= base_url() ?>index.php/documentreceive/excise_update" class="form validate-form animated fadeIn">
                 <div id="searchform" class="feildwrap">
 
                     <fieldset>
-                        <legend>Documents Receive From IMC</legend>
-                        <div>
-                            <button type="button" class="btn" onclick="showpopup('detail')">Select Chassis</button>
-                        </div>
+                        <legend>Excise Registration</legend>
+
                         <br>
-                        <input type="hidden" required name="idDispatch" id="idDispatch" value="">
+                        <input type="hidden" required name="status" id="status" value="DISPATCHED">
+                        <input type="hidden" required name="id" value="<?=$docs->id?>">
+                        <input type="hidden" required name="idDispatch" id="idDispatch" value="<?=$idDispatch?>">
 
                         <div>
                             <label>Chasis No</label>
-                                <input type="text" id="cahsisno" readonly value="">
+                            <input type="text" id="cahsisno" readonly value="">
                         </div>
-
                         <div>
                             <label>Pbo Number</label>
-                                <input type="text" id="PboNumb" readonly value="">
+                            <input type="text" id="PboNumb" readonly value="">
                         </div>
 
                         <div>
@@ -88,6 +87,7 @@
                             <label>NIC No</label>
                             <input type="text" name="" readonly id="nic_no">
                         </div>
+
                         <div>
                             <label>Invoice Number</label>
                             <input type="text" name="" readonly id="InvoiceNumber">
@@ -96,24 +96,38 @@
                             <label>Invoice Date</label>
                             <input type="text" name="" readonly id="InvoiceDate">
                         </div>
-
+                        <div>
+                            <label>Remarks</label>
+                            <input type="text" name="remarks" value="<?=$docs->remarks?>"  id="remarks">
+                        </div>
                         <br>
                         <fieldset>
                             <legend>Documents</legend>
-                        <?php foreach ($docs as $row){
-                            ?>
-                            <div>
-                                <label for="<?=$row['iddocument']?>"><?=$row['documentname']?></label>
-                                <input type="checkbox" class="docs" name="iddocument[]" value="<?=$row['iddocument']?>" id="doc_<?=$row['iddocument']?>" />
-                            </div>
+                            <?php foreach ($documents as $row){
+//                            if($row['status']=='RECEIVED') {
+                                ?>
+                                <div>
+                                    <label for="<?=$row['iddocument']?>"><?=$row['documentname']?></label>
+                                    <input type="checkbox"  value="<?=$row['iddocument']?>" id="doc_<?=$row['iddocument']?>"
+                                    <?php if(isset($res)) {
+                                        if(in_array($row['iddocument'],$res))
+                                            echo 'checked';
+                                        else{
+                                            echo ' name="iddcoument[]"';
+                                        }
+                                    } ?>
+                                          />
+                                </div>
 
-                        <?php
-                        }?>
+                                <?php
+//                            }
+                            }?>
                         </fieldset>
                         <br>
                         <div >
-                            <input type="submit" value="Receive" class="btn" >
+                            <input type="submit" value="Receive Registered" class="btn" >
                         </div>
+
                     </fieldset>
                 </div>
 
@@ -124,40 +138,36 @@
     </div>
 </div>
 
-<div style="width: 750px;" class="feildwrap  popup popup-detail">
-    <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 250px;">
-        <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
-        <div style="margin-left: 25px;width: 0px;">
-            <fieldset style="">
-                <legend>Select Chassis</legend>
-                <div class="feildwrap">
-                    <table id="myTable">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Chassis</th>
-                            <th>Engine</th>
-                        </tr>
-                        </thead>
-                        <?php
-                        $count = 1;
-                        foreach ($dispatch as $row){
-                            ?>
-                            <tr onclick="filldata('<?= $row['idDispatch']?>')">
-                                <td><?=$count++?></td>
-                                <td ><?=$row['ChasisNo']?></td>
-                                <td><?=$row['EngineNo']?></td>
-                            </tr>
-
-                        <?php } ?>
-                    </table>
-                </div>
-            </fieldset>
-        </div><br>
-    </form>
-</div>
 
 <script>
+    var a;
+    function requestdoc(elem,iddcoc) {
+        a = elem
+        console.log(a)
+
+//        $(a).removeClass('btn')
+        $('.docs').prop('checked',false)
+        var idDispatch = $("#idDispatch").val();
+
+        $.ajax({
+            url: "<?= base_url() ?>/index.php/Documentreceive/sales_request_insert",
+            type: "POST",
+            data: {
+                idDispatch: idDispatch,
+                iddocument: iddcoc
+            },
+            success: function (data) {
+                $(a).html('Request sent')
+                $(a).prop('disabled',true)
+
+            }
+        });
+    };
+</script>
+
+<script>
+
+
 
     function showpopup(div_id)
     {
@@ -199,7 +209,7 @@
                 $('#InvoiceDate').val(a.InvoiceDate)
                 $('#PboNumb').val(a.PboNumber)
 
-                $('.popup-detail' ).bPopup().close()
+//                $('.popup-detail' ).bPopup().close()
 
 
             }
@@ -208,30 +218,7 @@
 
     $('#myTable').DataTable();
 
-    $("#idDispatchs").change(function () {
-        $('.docs').prop('checked',false)
-        var idDispatch = $("#idDispatch").val();
+    filldata(<?= $idDispatch?>)
 
-        $.ajax({
-            url: "<?= base_url() ?>index.php/Documentreceive/getDocumentreceive",
-            type: "POST",
-            data: {
-                idDispatch: idDispatch
-            },
-            success: function (data) {
-                console.log(data);
-                var a = JSON.parse(data);
-                console.log(a);
-                if (a.length > 0) {
-                    $.each(a, function (i, val) {
-
-                        $('#doc_'+val.iddocument).prop('checked',true)
-//                        items += "<option value='" + val.idvisitplan + "'>" + val.idvisitplan + "</option>";
-                    });
-
-                }
-            }
-        });
-    });
 
 </script>

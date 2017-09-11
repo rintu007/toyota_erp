@@ -18,7 +18,8 @@ if (!defined('BASEPATH')) {
   | path to your installation.
   |
  */
-$config['base_url'] = 'http://175.107.202.44:81/toyota_erp/parts/';
+//$config['base_url'] = 'http://175.107.202.44:81/toyota_erp/parts/';
+$config['base_url'] = 'http://localhost/toyota_git/toyota_erp/parts';
 //$config['base_url'] = 'http://192.168.1.195/parts/';
 
 /*

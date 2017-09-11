@@ -40,6 +40,10 @@
 
 
                         </div>
+                        <div>
+                            <label>Pbo Number</label>
+                            <input type="text" id="PboNumb" readonly value="">
+                        </div>
 
                         <div>
                             <label>Engine No</label>
@@ -57,7 +61,7 @@
                         </div>
 
                         <div>
-                            <label>Delivered To</label>
+                            <label>Customer Name</label>
                             <input type="text" name="delivered_to"  id="delivered_to">
                         </div>
                         <div>
@@ -86,11 +90,24 @@
                             <label>NIC No</label>
                             <input type="text" name="" readonly id="nic_no">
                         </div>
+                        <div>
+                            <label>Remarks</label>
+                            <input type="text" name="remarks" value="<?=$docs->remarks?>"  id="remarks">
+                        </div>
+
+                        <div>
+                            <label>Invoice Number</label>
+                            <input type="text" name="" readonly id="InvoiceNumber">
+                        </div>
+                        <div>
+                            <label>Invoice Date</label>
+                            <input type="text" name="" readonly id="InvoiceDate">
+                        </div>
                         <br>
                         <fieldset>
                             <legend>Documents</legend>
                             <?php foreach ($data as $row){
-                                if($row['status']=='DISPATCHED' or $docs->type =='Excise') {
+                                if($row['status']=='DISPATCHED') {
                                     ?>
                                     <div>
                                         <label for="<?= $row['iddocument'] ?>"><?= $row['documentname'] ?></label>
@@ -187,6 +204,9 @@
                 $('#email').val(a.Email)
                 $('#nic_no').val(a.Cnic)
                 $('#cahsisno').val(a.ChasisNo)
+                $('#InvoiceNumber').val(a.InvoiceNumber)
+                $('#InvoiceDate').val(a.InvoiceDate)
+                $('#PboNumb').val(a.PboNumber)
 
 //                $('.popup-detail' ).bPopup().close()
 
