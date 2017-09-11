@@ -119,7 +119,7 @@
                         </div>
                     </fieldset>  
                     <fieldset>
-                        <legend>Documents Delivered</legend>
+                        <legend>Documents</legend>
 
                         <div id="chk">
 

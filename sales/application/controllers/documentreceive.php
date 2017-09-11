@@ -52,7 +52,7 @@ class Documentreceive extends CI_Controller
     public function from_sales_request()
     {
         $Data = array();
-        $Data['docs'] = $this->doc->get_all_dist_docs();
+        $Data['docs'] = $this->doc->get_all_docs();
         $Data['dispatch'] = $this->doc->get_all_req_filtered_dispatch();
         $this->load->view('header');
         $this->load->view('docucemntfromsales_request', $Data);

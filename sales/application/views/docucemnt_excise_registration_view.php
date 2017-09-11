@@ -111,7 +111,7 @@
                                     <input type="checkbox"  value="<?=$row['iddocument']?>" id="doc_<?=$row['iddocument']?>"
                                     <?php if(isset($res)) {
                                         if(in_array($row['iddocument'],$res))
-                                            echo 'checked';
+                                            echo 'checked disabled';
                                         else{
                                             echo ' name="iddcoument[]"';
                                         }
