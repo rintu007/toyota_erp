@@ -32,7 +32,7 @@
                         </div>
                         <br>
                         <div>
-                            <label for="salem">For Sale Manager</label>
+                            <label for="salem">For Sales</label>
                             <input type="radio" id="salem"  required name="type" value="Sales">
                         </div>
                         <div>

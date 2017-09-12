@@ -25,20 +25,24 @@
                             <input type="text"  readonly value="<?=$i['CustomerName']?>"
                                    />    
                         </div>
+
+                        <div>
+                            <label>PboNumber</label>
+                            <input type="text"  readonly value="<?=$i['PboNumber']?>"
+                                   />
+                        </div>
                         <div>
                             <label>ODOMETER</label>
                             <input type="text" name="Odometer" value="<?=$inp['Odometer']?>" id="searchnow"
                                    />    
                         </div>
                         <div>
-                            <label>Local
-                            <input type="radio" name="type" value="<?=$inp['type']?>" value="local" checked
-                                   />    
+                            <label>Local </label>
+                            <input type="radio" name="type" value="<?=$inp['type']?>" value="local" checked/>
                         </div>
                         <div>
                             <label>Imported</label>
-                            <input type="radio" name="type" value="<?=$inp['type']?>" value="imported"
-                                   />  
+                            <input type="radio" name="type" value="<?=$inp['type']?>" value="imported"/>
                         </div>
                        <div>
                             <label>Model Code</label>

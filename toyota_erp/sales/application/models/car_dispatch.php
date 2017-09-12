@@ -208,6 +208,10 @@ class Car_dispatch extends CI_Model {
 
     function get_dispatchReceive_list( $perpage = '', $limit = '')
     {
+        $this->db->select('car_receive.*,car_pbo.PboNumber')->from('car_receive');
+        $this->db->join('car_dispatch','car_dispatch.idDispatch = car_receive.idDispatch');
+        $this->db->join('car_pbo','car_pbo.Id = car_dispatch.PboId');
+
         if(isset($_POST['entrydate']) && $_POST['entrydate']!='')
         {
             $this->db->where('entrydate', $_POST['entrydate']);
@@ -218,7 +222,11 @@ class Car_dispatch extends CI_Model {
         }
         if(isset($_POST['idDispatch']) && $_POST['idDispatch']!='')
         {
-            $this->db->where('idDispatch', $_POST['idDispatch']);
+            $this->db->where('car_dispatch.idDispatch', $_POST['idDispatch']);
+        }
+        if(isset($_POST['PboNumber']) && $_POST['PboNumber']!='')
+        {
+            $this->db->where('car_pbo.PboNumber', $_POST['PboNumber']);
         }
         if(isset($_POST['remarks']) && $_POST['remarks']!='')
         {
@@ -226,8 +234,8 @@ class Car_dispatch extends CI_Model {
         }
 
         $this->db->limit($perpage, $limit);
-        $this->db->order_by("id",'desc');
-        $query =  $this->db->get("car_receive");
+        $this->db->order_by("car_receive.id",'desc');
+        $query =  $this->db->get();
 
 
 
@@ -296,6 +304,7 @@ class Car_dispatch extends CI_Model {
 
         $query = $this->db->query("
         SELECT count(*)  count       FROM car_dispatch 
+         JOIN car_pbo ON car_dispatch.PboId = car_pbo.Id
         where car_dispatch.isDelivered = 0 and car_dispatch.pdi=0 $where");
 //        var_dump($query->row('count'));die;
         return $query->row('count');

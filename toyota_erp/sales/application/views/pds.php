@@ -14,13 +14,19 @@
                             <input type="text"  readonly value="<?=$inp->CustomerName?>"
                                    />    
                         </div>
+
+                        <div>
+                            <label>PboNumber</label>
+                            <input type="text"  readonly value="<?=$inp->PboNumber?>"
+                                   />
+                        </div>
                         <div>
                             <label>ODOMETER</label>
                             <input type="text" name="Odometer" id="searchnow"
                                    />    
                         </div>
                         <div>
-                            <label>Local
+                            <label>Local </label>
                             <input type="radio" name="type" value="local" checked
                                    />    
                         </div>

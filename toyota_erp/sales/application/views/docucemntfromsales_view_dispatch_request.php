@@ -26,7 +26,7 @@
                 <div id="searchform" class="feildwrap">
 
                     <fieldset>
-                        <legend>Documents From Sales</legend>
+                        <legend>Document Request</legend>
 
                         <br>
                         <input type="hidden" required name="status" id="status" value="DISPATCHED">

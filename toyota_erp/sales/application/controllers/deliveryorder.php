@@ -19,6 +19,7 @@ class Deliveryorder extends CI_Controller {
     function generate_do($idDispatch) {
 
         $this->data['dispatchdata'] = $this->do->get_data($idDispatch);
+//        var_dump($this->data['dispatchdata'] );die;
         $this->data['sub_account'] = $this->do->get_sub_account();
         $this->data['id'] = $this->do->get_max_do_id();
 

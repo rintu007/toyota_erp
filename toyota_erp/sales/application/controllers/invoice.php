@@ -175,9 +175,9 @@ class Invoice extends CI_Controller {
         }
         $data = array();
         $data['inp'] = $this->db->query("
-                    select cc.IdCustomer,cc.CustomerName,cv.Variants,cv.ModelCode,cd.EngineNo,cd.idDispatch
+                    select cc.IdCustomer,cc.CustomerName,cv.Variants,cv.ModelCode,cd.EngineNo,cd.idDispatch,car_pbo.PboNumber
                     from car_dispatch cd
-                    
+                     left  JOIN car_pbo ON car_pbo.Id = cd.`PboId`
                     left join car_variants cv
                     on cv.IdVariants = cd.VariantId
                     
@@ -261,8 +261,10 @@ class Invoice extends CI_Controller {
 
 
         $data['i'] = $this->db->query("
-                    select cc.IdCustomer,cc.CustomerName,cv.Variants,cv.ModelCode,cd.EngineNo,cd.idDispatch
+                    select cc.IdCustomer,cc.CustomerName,cv.Variants,cv.ModelCode,cd.EngineNo,cd.idDispatch,car_pbo.PboNumber
                     from car_dispatch cd
+                    
+                  left  JOIN car_pbo ON car_pbo.Id = cd.`PboId`
                     
                     left join car_variants cv
                     on cv.IdVariants = cd.VariantId

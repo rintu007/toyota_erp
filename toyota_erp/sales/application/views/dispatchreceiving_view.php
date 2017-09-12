@@ -33,8 +33,8 @@
                             <input type="text" class="date" name="arrivaldate" value="<?= $dispatchdata->arrivaldate?>" readonly data-validation="required">
                         </div>
                         <div>
-                            <label>Order Form No</label>
-                            <input type="text" name="question" id="searchnow">
+                            <label>PBO Number</label>
+                            <input type="text" name="PboNumber" value="<?= $dispatchdata->PboNumber?>" readonly>
                         </div>
                         <div>
                             <label>Dispatch No</label>

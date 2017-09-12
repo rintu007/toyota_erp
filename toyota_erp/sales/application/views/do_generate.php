@@ -246,8 +246,31 @@
                             </label>
                             <label for="">
                                 Resale
-                                <input type="checkbox" name="resale">
+                                <input type="checkbox" name="resale" id="resale">
                             </label>
+
+                            <fieldset id="resalediv" style="display: none">
+                                <legend>Resale</legend>
+                                <div>
+                                    <label>Resale Customer</label>
+
+                                    <select name="resaleCust" id="resaleCust">
+
+                                        <?php
+                                        foreach ($customers as $row) {
+                                            if (($row['IdCustomer'] != $dispatchdata->IdCustomer)) {
+
+
+                                                ?>
+                                                <option value="<?= $row['IdCustomer'] ?>"><?= $row['CustomerName'] ?></option>
+                                            <?php }
+                                        }
+                                        ?>
+
+                                    </select>
+                                </div>
+
+                            </fieldset>
 
                         </div>
                         <div>
@@ -279,6 +302,18 @@
 <script>
     //    $('#searchform').hide();
     $('#CustomerCombo').show();
+
+    $("#resale").click(function()
+    {
+        if($(this).prop('checked'))
+        {
+            $("#resalediv").show()
+        }
+        else{
+            $("#resalediv").hide()
+
+        }
+    })
 
     $("#cusId").change(function () {
         var Customer = $('#cusId').val();

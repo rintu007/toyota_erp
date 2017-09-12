@@ -25,6 +25,12 @@
                                    placeholder="Search By id Dispatch">
                         </div>
                         <div class="">
+                            <label>PboNumber</label>
+                            <input type="text" data-validation="" name="PboNumber"
+                                   value="<?= isset($_POST['PboNumber']) ? $_POST['PboNumber'] : '' ?>"
+                                   placeholder="Search By PboNumber">
+                        </div>
+                        <div class="">
                             <label>Entry Date</label>
                             <input type="text" data-validation="" name="entrydate" class="date"
                                    value="<?= isset($_POST['entrydate']) ? $_POST['entrydate'] : '' ?>"
@@ -53,6 +59,7 @@
                                 <tr>
                                     <th style="vertical-align: middle;" width="7%">S No.</th>
                                     <th width="15%">Dispatch Number</th>
+                                    <th width="15%">PBO Number</th>
                                     <th width="15%">Arrival Date</th>
                                     <th width="17%">Parking Date</th>
                                     <th width="10%">Entry Date</th>
@@ -71,6 +78,7 @@
                                     <tr id="rbRes">
                                         <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $row['idDispatch'] ?></td>
+                                        <td class="tbl-variants"><?= $row['PboNumber'] ?></td>
                                         <td class="tbl-variants"><?= $row['arrivaldate'] ?></td>
                                         <td class="tbl-name"><?= $row['entrydate'] ?></td>
                                         <td class="tbl-date"><?= $row['swappeddate'] ?></td>

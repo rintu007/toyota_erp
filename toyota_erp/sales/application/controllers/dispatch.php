@@ -244,6 +244,7 @@ class Dispatch extends CI_Controller {
         $config['num_links'] = 1;
         $config["base_url"] = base_url() . "index.php/dispatch/lists/";
         $config["total_rows"] = $Dispatch->dispatchList_count($idUser );
+//        $config["total_rows"] = $Dispatch->dispatchList_count($idUser );
         $config["per_page"] = 20;
         $config["uri_segment"] = 3;
 
