@@ -14,11 +14,13 @@ class S_jobprogresscontrolboard extends CI_Model {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('s_bays');
+
     }
 
     function ScheduleAppointment() {
-        $this->db->trans_start();
-
+        $this->db->trans_start(true);
+//        $this->db->trans_begin();
         $CustomerData = array(
             'CompanyName' => $_POST['CompanyName'],
             'CompanyContact' => $_POST['CompanyContact'],
@@ -70,88 +72,89 @@ class S_jobprogresscontrolboard extends CI_Model {
             'EstimateAmount' => $_POST['EstimateAmount'],
             'PartsAmount' => $_POST['Parts'],
             'GrandTotal' => $_POST['GrandTotal'],
-            'isWarranty' => $_POST['isWarranty'],
-            'isPm' => $_POST['isPeriodicMaintenance'],
-            'isGr' => $_POST['isGeneralRepair'],
-            'isInternal' => $_POST['isInternal'],
-            'ReceptionDate' => date("Y-m-d", strtotime($_POST['PreferredDate'])),
-            'ReceptionTime' => $_POST['PreferredTime'],
-            'idPreferredStaff' => $_POST['PreferredStaff'],
-            'ConfirmationDate' => date("Y-m-d", strtotime($_POST['ConfirmDate'])),
-            'ConfirmationTime' => $_POST['ConfirmTime'],
-            'idConfirmationStaff' => $_POST['ConfirmStaff'],
-            'PartsOrderedDate' => date("Y-m-d", strtotime($_POST['PartsOrderedDate'])),
-            'PartsOrderedTime' => $_POST['PartsOrderedTime'],
-            'idPartsOrderedStaff' => $_POST['PartsOrderedStaff'],
-            'PartsArrivedDate' => date("Y-m-d", strtotime($_POST['PartsArrivedDate'])),
-            'PartsArrivedTime' => $_POST['PartsArrivedTime'],
-            'idPartsArrivedStaff' => $_POST['PartsArrivedStaff'],
-            'PreferredDeliveryDate' => date("Y-m-d", strtotime($_POST['PreferredDeliveryDate'])),
-            'PreferredDeliveryTime' => $_POST['PreferredDeliveryTime'],
-            'isCustomerBringIn' => ($_POST['isCDIn'] == '1') ? '1' : '0',
-            'isDealerPickup' => ($_POST['isCDIn'] == '0') ? '1' : '0',
-            'isCustomerComeIn' => ($_POST['isCDOut'] == '1') ? '1' : '0',
-            'isDealerDeliver' => ($_POST['isCDOut'] == '0') ? '1' : '0'
+            'isWarranty' => isset($_POST['isWarranty']),
+            'isPm' =>       isset($_POST['isPeriodicMaintenance']),
+            'isGr' =>       isset($_POST['isGeneralRepair']),
+            'isInternal' => isset($_POST['isInternal']),
+//            'ReceptionDate' => date("Y-m-d", strtotime($_POST['PreferredDate'])),
+//            'ReceptionTime' => $_POST['PreferredTime'],
+//            'idPreferredStaff' => $_POST['PreferredStaff'],
+//            'ConfirmationDate' => date("Y-m-d", strtotime($_POST['ConfirmDate'])),
+//            'ConfirmationTime' => $_POST['ConfirmTime'],
+//            'idConfirmationStaff' => $_POST['ConfirmStaff'],
+//            'PartsOrderedDate' => date("Y-m-d", strtotime($_POST['PartsOrderedDate'])),
+//            'PartsOrderedTime' => $_POST['PartsOrderedTime'],
+//            'idPartsOrderedStaff' => $_POST['PartsOrderedStaff'],
+//            'PartsArrivedDate' => date("Y-m-d", strtotime($_POST['PartsArrivedDate'])),
+//            'PartsArrivedTime' => $_POST['PartsArrivedTime'],
+//            'idPartsArrivedStaff' => $_POST['PartsArrivedStaff'],
+//            'PreferredDeliveryDate' => date("Y-m-d", strtotime($_POST['PreferredDeliveryDate'])),
+//            'PreferredDeliveryTime' => $_POST['PreferredDeliveryTime'],
+//            'isCustomerBringIn' => ($_POST['isCDIn'] == '1') ? '1' : '0',
+//            'isDealerPickup' => ($_POST['isCDIn'] == '0') ? '1' : '0',
+//            'isCustomerComeIn' => ($_POST['isCDOut'] == '1') ? '1' : '0',
+//            'isDealerDeliver' => ($_POST['isCDOut'] == '0') ? '1' : '0'
         );
 
         $this->db->insert('s_appointment', $AppointmentData);
         $idApointment = $this->db->insert_id();
 
-        $AppointmentJobs = "";
-        for ($i = 0; $i < count($_POST['Jobs']); $i++) {
+        $AppointmentJobs = array();
+        for ($i = 0; $i < count($_POST['MechJob']); $i++) {
             $AppointmentJobs[] = array(
                 'idAppointment' => $idApointment,
-                'idJobs' => $_POST['Jobs'][$i]
+                'idJobs' => $_POST['MechJob'][$i]
             );
         }
 
         $this->db->insert_batch('s_appointment_jobs', $AppointmentJobs);
 
-        $ConditionData = "";
-        $ConditionData[] = array(
-            'idAppointment' => $idApointment,
-            'idCondition' => $_POST['ConditionDetail0']
-        );
-        $ConditionData[] = array(
-            'idAppointment' => $idApointment,
-            'idCondition' => $_POST['ConditionDetail1']
-        );
-        $ConditionData[] = array(
-            'idAppointment' => $idApointment,
-            'idCondition' => $_POST['ConditionDetail2']
-        );
-        $ConditionData[] = array(
-            'idAppointment' => $idApointment,
-            'idCondition' => $_POST['ConditionDetail3']
-        );
-        $ConditionData[] = array(
-            'idAppointment' => $idApointment,
-            'idCondition' => $_POST['ConditionDetail4']
-        );
-
-        $this->db->insert_batch('s_appointment_condition', $ConditionData);
+//        $ConditionData = "";
+//        $ConditionData[] = array(
+//            'idAppointment' => $idApointment,
+//            'idCondition' => $_POST['ConditionDetail0']
+//        );
+//        $ConditionData[] = array(
+//            'idAppointment' => $idApointment,
+//            'idCondition' => $_POST['ConditionDetail1']
+//        );
+//        $ConditionData[] = array(
+//            'idAppointment' => $idApointment,
+//            'idCondition' => $_POST['ConditionDetail2']
+//        );
+//        $ConditionData[] = array(
+//            'idAppointment' => $idApointment,
+//            'idCondition' => $_POST['ConditionDetail3']
+//        );
+//        $ConditionData[] = array(
+//            'idAppointment' => $idApointment,
+//            'idCondition' => $_POST['ConditionDetail4']
+//        );
+//
+//        $this->db->insert_batch('s_appointment_condition', $ConditionData);
 
         if (isset($_POST['PartNumber'])) {
-            $PartsData[] = "";
+            $PartsData = array();
             for ($i = 0; $i < count($_POST['PartNumber']); $i++) {
-                $PartsData = array(
+                $PartsData[] = array(
                     'idAppointment' => $idApointment,
                     'idPart' => $_POST['PartNumber'][$i],
                     'Quantity' => $_POST['PartsQuantity'][$i],
-                    'isStock' => ($_POST['isStock'][$i] == "Out of Stock") ? '1' : '0',
-                    'ETA' => $_POST['ETA'][$i],
-                    'ConfirmationDate' => date("Y-m-d", strtotime($_POST['PartsConfirmDate'])),
-                    'ConfirmationTime' => $_POST['PartsConfirmTime'],
-                    'idStaff' => $_POST['PartsConfirmStaff']
+//                    'isStock' => ($_POST['isStock'][$i] == "Out of Stock") ? '1' : '0',
+                    'ETA' => $_POST['PartsETA'][$i],
+//                    'ConfirmationDate' => date("Y-m-d", strtotime($_POST['PartsConfirmDate'])),
+//                    'ConfirmationTime' => $_POST['PartsConfirmTime'],
+//                    'idStaff' => $_POST['PartsConfirmStaff']
                 );
             }
             $this->db->insert_batch('s_appointment_parts', $PartsData);
         }
 
-
+//        $this->db->trans_rollback();die;
         $trans_complete = $this->db->trans_complete();
 
         return $trans_complete;
+//        return true;
     }
 
     function AllJPCB() {
@@ -384,26 +387,22 @@ class S_jobprogresscontrolboard extends CI_Model {
             $result = $Appointments->result_array();
         }
 
-//        $data = array();
-        $data['Bay 1'] = array();
-        $data['Bay 2'] = array();
-        $data['Bay 3'] = array();
-        $data['Bay 4'] = array();
-        $data['Bay 5'] = array();
-        foreach ($result as $GetAll) {
-            if ($GetAll['BayName'] == "Bay 1") {
-                array_push($data["Bay 1"], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
-            } else if ($GetAll['BayName'] == "Bay 2") {
-                array_push($data["Bay 2"], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
-            } else if ($GetAll['BayName'] == "Bay 3") {
-                array_push($data["Bay 3"], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
-            } else if ($GetAll['BayName'] == "Bay 4") {
-                array_push($data["Bay 4"], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
-            } else if ($GetAll['BayName'] == "Bay 5") {
-                array_push($data["Bay 5"], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
-            }
+        $data = array();
+
+        $this->db->select('*');
+        $this->db->from('s_bay');
+        $this->db->where('isActive', 1);
+        $BaysList = $this->db->get()->result_array();
+
+        foreach ($BaysList as $Bay) {
+            $data[$Bay['BayName']] = array();
         }
-//        print_r($data);
+
+        foreach ($result as $GetAll)
+        {
+            array_push($data[$GetAll['BayName']], ["idAppointment" => $GetAll['idAppointment'], "Name" => $GetAll['CustomerName'], "startTime" => $GetAll['StartTime'], "endTime" => $GetAll['EndTime'], "extendedTime" => '00:00', "addtionalTime" => "00:00"]);
+        }
+
         return $data;
     }
 
@@ -481,6 +480,46 @@ class S_jobprogresscontrolboard extends CI_Model {
         } else {
             return "Out of Stock";
         }
+    }
+
+    function get_appointment_list( $perpage = '', $limit = '')
+    {
+        $this->db->select('*')->from('viewappointments');
+//        $this->db->join('car_dispatch','car_dispatch.idDispatch = car_receive.idDispatch');
+//        $this->db->join('car_pbo','car_pbo.Id = car_dispatch.PboId');
+
+
+        if(isset($_POST['RegistrationNumber']) && $_POST['RegistrationNumber']!='')
+        {
+            $this->db->where('RegistrationNumber', $_POST['RegistrationNumber']);
+        }
+        if(isset($_POST['AppointmentDate']) && $_POST['AppointmentDate']!='')
+        {
+            $this->db->where('AppointmentDate', $_POST['AppointmentDate']);
+        }
+        if(isset($_POST['idBay']) && $_POST['idBay']!='')
+        {
+            $this->db->where('idBay', $_POST['idBay']);
+        }
+        if(isset($_POST['CustomerName']) && $_POST['CustomerName']!='')
+        {
+            $this->db->like('CustomerName', $_POST['CustomerName']);
+        }
+
+        $this->db->limit($perpage, $limit);
+        $this->db->order_by("idAppointment",'desc');
+        $query =  $this->db->get();
+
+
+
+
+        return $query->result_array();
+
+
+    }
+    function get_appointments_count()
+    {
+        return $this->db->count_all_results('s_appointment');
     }
 
 }

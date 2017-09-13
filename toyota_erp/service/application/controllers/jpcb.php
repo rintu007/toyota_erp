@@ -94,12 +94,21 @@ class Jpcb extends CI_Controller {
     }
 
     function asb($date = NULL) {
-//        $Bays = new S_bays();
+        $Bays = new S_bays();
+        $AllBays = $Bays->AllBays();
+        $bay = array();
+        foreach ($AllBays as $row)
+        {
+            array_push($bay,$row['label']);
+        }
+        $Data['Bays'] = json_encode($bay);
+
+
 //        $JobRefManual = new S_jobreferencemanual();
 //        $Jpcb = new S_jobprogresscontrolboard();
-//        $AllBays = $Bays->AllBays();
-//        $AllJobRef = $JobRefManual->AllJobRef();
-//        $Data['Bays'] = json_encode($AllBays);
+//        var_dump($AllBays);die;
+
+////        $AllJobRef = $JobRefManual->AllJobRef();
 //        $Data['JobRef'] = json_encode($AllJobRef);
 //        $Data['AllJpcb'] = json_encode($Jpcb->AllJPCB());
         if ($date == NULL) {

@@ -35,7 +35,8 @@ if ($data['userid'] != "") {
                 $(document).ready(function () {
                     console.log("before initialization ", $("#waiting"));
                     var config = {
-                        fields: ["Bay 1", "Bay 2", "Bay 3", "Bay 4", "Bay 5"],
+                        fields: <?= $Bays; ?>,
+//                        fields: ["BAY 1", "BAY 2", "BAY 3", "BAY 4", "BAY 5", "BAY 6", "BAY 7", "BAY 8", "BAY 9"],
                         beforeFields: [],
                         afterFields: [],
                         timeSpan: 1,
@@ -45,9 +46,10 @@ if ($data['userid'] != "") {
                         timeUnit: 60,
                         startTime: "08:00",
                         table: "#table",
-                        dataURL: "http://192.168.1.195/service/index.php/jpcb/AllAsb/<?= $date ?>",
-                        formURL: "http://192.168.1.195/service/index.php/jpcb/form",
-                        RoadWashURL: "http://192.168.1.195/service/index.php/jpcb/roadwash"
+
+                        dataURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/AllAsb/<?= $date ?>",
+                        formURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/form",
+                        RoadWashURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/roadwash"
                     }
                     window.obj = new Scheduler(config);
                     $(".form-error").hide();
@@ -74,13 +76,7 @@ if ($data['userid'] != "") {
                 </div>
                 <div id="wrapper">
                     <div id="content">
-                        <?php
-                        if ($data['username'] == "admin") {
-//                            include 'include/admin_leftmenu.php';
-                        } else {
-                            
-                        }
-                        ?>
+
 
                         <div class="full-panel">
                             <span style="float: left;"><h4><?= $date ?></h4></span>
@@ -100,7 +96,7 @@ if ($data['userid'] != "") {
                 <div class="push"></div>
             </div>
             <div id="footer">
-                <div id="footer-content">Powered by: <a href="#">Interactivecells.com</a></div>
+                <div id="footer-content">Powered by: <a href="#">SYANGE GLOBAL</a></div>
             </div>
 
             <script>

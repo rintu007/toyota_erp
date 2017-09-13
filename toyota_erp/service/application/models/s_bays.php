@@ -30,6 +30,15 @@ class S_bays extends CI_Model {
         return $finalDropDown;
     }
 
+    function getAll() {
+        $this->db->select('*');
+        $this->db->from('s_bay');
+        $this->db->where('isActive', 1);
+        $BaysList = $this->db->get()->result_array();
+        return $BaysList;
+
+    }
+
     function InsertBay($bayData) {
 
         $this->db->insert('s_bay', $bayData);

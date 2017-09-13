@@ -1,3 +1,5 @@
+sty
+
 <div id="wrapper">
     <div id="content">
         <?php
@@ -45,7 +47,7 @@
                                                 <option value="15:30">15:30</option>
                                             </select>
                                         </div>
-                                        <div style="margin-left: -116px;">
+                                        <div style="">
                                             <label>End Time</label>
                                             <!--<input style="width: 130px" id="StartEnd" type="text" name="EndTime" data-time-format="H:i:s" placeholder="End Time" data-validation = "required">-->
                                             <select name="EndTime">
@@ -87,55 +89,55 @@
                             </fieldset>
                         </div>                       
                     </fieldset>    
-                    <fieldset>
-                        <legend onclick="DoToggle('#PreferredReception')">Preferred Reception</legend>
-                        <div id="PreferredReception" class="feildwrap">
-                            <fieldset style="margin-left: 5px;width: 25px;">
-                                <div class="feildwrap" style="">
-                                    <div>                              
-                                        <div style="margin-left: -150px;">
-                                            <label>Date</label>
-                                            <input style="width: 130px" id="PreferredDate" type="text" name="PreferredDate" class='date' placeholder="Book in Date"  required>
-                                        </div>
-                                        <div style="margin-left: -150px;">
-                                            <label>Time</label>
-                                            <input style="width: 130px" Class="Time" id="PreferredTime" type="text" name="PreferredTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                                        </div>
-                                    </div><br>
-                                    <div style="margin-left: 0px;">
-                                        <span style="margin-left: 50px;">Customer Bring-In</span>
-                                        <input id="Yes" type="radio" name="isCDIn" value="1">
-                                        <span style="margin-left: 15px;">Dealer-Pick-up(Counresy Car#)</span>&nbsp;
-                                        <input id="No" type="radio" name="isCDIn" value="1">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset style="margin-left: 704px;margin-top: -130px;width: 160px;min-width: 100px;">
-                                <div style=" margin-top: 0px; margin-left: 5px; display: block !important; ">
-                                    <div style="">
-                                        <div>
-                                            <label style="margin-left: -108px;">Staff Name</label>
-                                            <!--<input id="PreferredStaff" type="text" name="PreferredStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
-                                            <select name="PreferredStaff" id="PreferredStaff" style=" width: 152px; ">
-                                                <option>Select Staff</option>
-                                                <?php
-                                                foreach ($staff as $AllStaff) {
-                                                    ?>
-                                                    <option value="<?= $AllStaff['idStaff'] ?>"><?= $AllStaff['Name'] ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>                                
-                                        <div>
-                                            <label style="margin-left: -135px;">Dated</label>
-                                            <input style="width: 130px" id="PreferredStaffDate" type="text" name="PreferredStaffDate" class='date' placeholder="Book in Date"  required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>                       
-                    </fieldset>                    
+<!--                    <fieldset>-->
+<!--                        <legend onclick="DoToggle('#PreferredReception')">Preferred Reception</legend>-->
+<!--                        <div id="PreferredReception" class="feildwrap">-->
+<!--                            <fieldset style="margin-left: 5px;width: 25px;">-->
+<!--                                <div class="feildwrap" style="">-->
+<!--                                    <div>                              -->
+<!--                                        <div style="margin-left: -150px;">-->
+<!--                                            <label>Date</label>-->
+<!--                                            <input style="width: 130px" id="PreferredDate" type="text" name="PreferredDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                        </div>-->
+<!--                                        <div style="margin-left: -150px;">-->
+<!--                                            <label>Time</label>-->
+<!--                                            <input style="width: 130px" Class="Time" id="PreferredTime" type="text" name="PreferredTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                                        </div>-->
+<!--                                    </div><br>-->
+<!--                                    <div style="margin-left: 0px;">-->
+<!--                                        <span style="margin-left: 50px;">Customer Bring-In</span>-->
+<!--                                        <input id="Yes" type="radio" name="isCDIn" value="1">-->
+<!--                                        <span style="margin-left: 15px;">Dealer-Pick-up(Counresy Car#)</span>&nbsp;-->
+<!--                                        <input id="No" type="radio" name="isCDIn" value="1">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </fieldset>-->
+<!--                            <fieldset style="margin-left: 704px;margin-top: -130px;width: 160px;min-width: 100px;">-->
+<!--                                <div style=" margin-top: 0px; margin-left: 5px; display: block !important; ">-->
+<!--                                    <div style="">-->
+<!--                                        <div>-->
+<!--                                            <label style="margin-left: -108px;">Staff Name</label>-->
+<!--                                            <!--<input id="PreferredStaff" type="text" name="PreferredStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
+<!--                                            <select name="PreferredStaff" id="PreferredStaff" style=" width: 152px; ">-->
+<!--                                                <option>Select Staff</option>-->
+<!--                                                --><?php
+//                                                foreach ($staff as $AllStaff) {
+//                                                    ?>
+<!--                                                    <option value="--><?//= $AllStaff['idStaff'] ?><!--">--><?//= $AllStaff['Name'] ?><!--</option>-->
+<!--                                                    --><?php
+//                                                }
+//                                                ?>
+<!--                                            </select>-->
+<!--                                        </div>                                -->
+<!--                                        <div>-->
+<!--                                            <label style="margin-left: -135px;">Dated</label>-->
+<!--                                            <input style="width: 130px" id="PreferredStaffDate" type="text" name="PreferredStaffDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </fieldset>-->
+<!--                        </div>                       -->
+<!--                    </fieldset>                    -->
                     <fieldset>
                         <legend onclick="DoToggle('#CustomerInfoDiv')">Customer Information</legend>
                         <br><div id="CustomerInfoDiv" class="feildwrap">
@@ -174,103 +176,103 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend onclick="DoToggle('#ConfirmDiv')">Confirmation</legend>
-                        <div id="ConfirmDiv" class="feildwrap" style="">
-                            <div>  
-                                <label>Confirmation</label>
-                                <div style="margin-left: -150px;">
-                                    <label>Date</label>
-                                    <input style="width: 130px" id="ConfirmDate" type="text" name="ConfirmDate" class='date' placeholder="Book in Date"  required>
-                                </div>
-                                <div style="margin-left: -150px;">
-                                    <label>Time</label>
-                                    <input style="width: 130px" Class="Timepicker" id="ConfirmTime" type="text" name="ConfirmTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                                </div>
-                                <div>
-                                    <label style="margin-left: -108px;">Staff Name</label>
-                                    <!--<input id="ConfirmStaff" type="text" name="ConfirmStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
-                                    <select name="ConfirmStaff" id="ConfirmStaff" style=" width: 152px; ">
-                                        <option>Select Staff</option>
-                                        <?php
-                                        foreach ($staff as $AllStaff) {
-                                            ?>
-                                            <option value="<?= $AllStaff['idStaff'] ?>"><?= $AllStaff['Name'] ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>  
-                            </div><br>
-                            <div>  
-                                <label>Parts Ordered</label>
-                                <div style="margin-left: -150px;">
-                                    <label>Date</label>
-                                    <input style="width: 130px" id="PartsOrderedDate" type="text" name="PartsOrderedDate" class='date' placeholder="Book in Date"  required>
-                                </div>
-                                <div style="margin-left: -150px;">
-                                    <label>Time</label>
-                                    <input style="width: 130px" Class="Timepicker" id="PartsOrderedTime" type="text" name="PartsOrderedTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                                </div>
-                                <div>
-                                    <label style="margin-left: -108px;">Staff Name</label>
-                                    <!--<input id="PartsOrderedStaff" type="text" name="PartsOrderedStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
-                                    <select name="PartsOrderedStaff" id="PartsOrderedStaff" style=" width: 152px; ">
-                                        <option>Select Staff</option>
-                                        <?php
-                                        foreach ($staff as $AllStaff) {
-                                            ?>
-                                            <option value="<?= $AllStaff['idStaff'] ?>"><?= $AllStaff['Name'] ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>  
-                            </div><br>
-                            <div>  
-                                <label>Parts Arrived</label>
-                                <div style="margin-left: -150px;">
-                                    <label>Date</label>
-                                    <input style="width: 130px" id="PartsArrivedDate" type="text" name="PartsArrivedDate" class='date' placeholder="Book in Date"  required>
-                                </div>
-                                <div style="margin-left: -150px;">
-                                    <label>Time</label>
-                                    <input style="width: 130px" Class="Timepicker" id="PartsArrivedTime" type="text" name="PartsArrivedTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                                </div>
-                                <div>
-                                    <label style="margin-left: -108px;">Staff Name</label>
-                                    <!--<input id="PartsArrivedStaff" type="text" name="PartsArrivedStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
-                                    <select name="PartsArrivedStaff" id="PartsArrivedStaff" style=" width: 152px; ">
-                                        <option>Select Staff</option>
-                                        <?php
-                                        foreach ($staff as $AllStaff) {
-                                            ?>
-                                            <option value="<?= $AllStaff['idStaff'] ?>"><?= $AllStaff['Name'] ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>  
-                            </div><br>
-                            <div>  
-                                <label>Preferred Delivery</label>
-                                <div style="margin-left: -150px;">
-                                    <label>Date</label>
-                                    <input style="width: 130px" id="PreferredDeliveryDate" type="text" name="PreferredDeliveryDate" class='date' placeholder="Book in Date"  required>
-                                </div>
-                                <div style="margin-left: -150px;">
-                                    <label>Time</label>
-                                    <input style="width: 130px" Class="Timepicker" id="PreferredDeliveryTime" type="text" name="PreferredDeliveryTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                                </div><br>
-                                <div style="margin-left: 250px;">
-                                    <span style="margin-left: 50px;">Customer Come-In</span>
-                                    <input id="Yes" type="radio" name="isCDOut" value="1">
-                                    <span style="margin-left: 15px;">Dealer-Delivery</span>&nbsp;
-                                    <input id="No" type="radio" name="isCDOut" value="1">
-                                </div> 
-                            </div><br>
-                        </div>
-                    </fieldset>
+<!--                    <fieldset>-->
+<!--                        <legend onclick="DoToggle('#ConfirmDiv')">Confirmation</legend>-->
+<!--                        <div id="ConfirmDiv" class="feildwrap" style="">-->
+<!--                            <div>  -->
+<!--                                <label>Confirmation</label>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Date</label>-->
+<!--                                    <input style="width: 130px" id="ConfirmDate" type="text" name="ConfirmDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                </div>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Time</label>-->
+<!--                                    <input style="width: 130px" Class="Timepicker" id="ConfirmTime" type="text" name="ConfirmTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <label style="margin-left: -108px;">Staff Name</label>-->
+<!--                                    <!--<input id="ConfirmStaff" type="text" name="ConfirmStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
+<!--                                    <select name="ConfirmStaff" id="ConfirmStaff" style=" width: 152px; ">-->
+<!--                                        <option>Select Staff</option>-->
+<!--                                        --><?php
+//                                        foreach ($staff as $AllStaff) {
+//                                            ?>
+<!--                                            <option value="--><?//= $AllStaff['idStaff'] ?><!--">--><?//= $AllStaff['Name'] ?><!--</option>-->
+<!--                                            --><?php
+//                                        }
+//                                        ?>
+<!--                                    </select>-->
+<!--                                </div>  -->
+<!--                            </div><br>-->
+<!--                            <div>  -->
+<!--                                <label>Parts Ordered</label>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Date</label>-->
+<!--                                    <input style="width: 130px" id="PartsOrderedDate" type="text" name="PartsOrderedDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                </div>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Time</label>-->
+<!--                                    <input style="width: 130px" Class="Timepicker" id="PartsOrderedTime" type="text" name="PartsOrderedTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <label style="margin-left: -108px;">Staff Name</label>-->
+<!--                                    <!--<input id="PartsOrderedStaff" type="text" name="PartsOrderedStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
+<!--                                    <select name="PartsOrderedStaff" id="PartsOrderedStaff" style=" width: 152px; ">-->
+<!--                                        <option>Select Staff</option>-->
+<!--                                        --><?php
+//                                        foreach ($staff as $AllStaff) {
+//                                            ?>
+<!--                                            <option value="--><?//= $AllStaff['idStaff'] ?><!--">--><?//= $AllStaff['Name'] ?><!--</option>-->
+<!--                                            --><?php
+//                                        }
+//                                        ?>
+<!--                                    </select>-->
+<!--                                </div>  -->
+<!--                            </div><br>-->
+<!--                            <div>  -->
+<!--                                <label>Parts Arrived</label>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Date</label>-->
+<!--                                    <input style="width: 130px" id="PartsArrivedDate" type="text" name="PartsArrivedDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                </div>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Time</label>-->
+<!--                                    <input style="width: 130px" Class="Timepicker" id="PartsArrivedTime" type="text" name="PartsArrivedTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <label style="margin-left: -108px;">Staff Name</label>-->
+<!--                                    <!--<input id="PartsArrivedStaff" type="text" name="PartsArrivedStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
+<!--                                    <select name="PartsArrivedStaff" id="PartsArrivedStaff" style=" width: 152px; ">-->
+<!--                                        <option>Select Staff</option>-->
+<!--                                        --><?php
+//                                        foreach ($staff as $AllStaff) {
+//                                            ?>
+<!--                                            <option value="--><?//= $AllStaff['idStaff'] ?><!--">--><?//= $AllStaff['Name'] ?><!--</option>-->
+<!--                                            --><?php
+//                                        }
+//                                        ?>
+<!--                                    </select>-->
+<!--                                </div>  -->
+<!--                            </div><br>-->
+<!--                            <div>  -->
+<!--                                <label>Preferred Delivery</label>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Date</label>-->
+<!--                                    <input style="width: 130px" id="PreferredDeliveryDate" type="text" name="PreferredDeliveryDate" class='date' placeholder="Book in Date"  required>-->
+<!--                                </div>-->
+<!--                                <div style="margin-left: -150px;">-->
+<!--                                    <label>Time</label>-->
+<!--                                    <input style="width: 130px" Class="Timepicker" id="PreferredDeliveryTime" type="text" name="PreferredDeliveryTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                                </div><br>-->
+<!--                                <div style="margin-left: 250px;">-->
+<!--                                    <span style="margin-left: 50px;">Customer Come-In</span>-->
+<!--                                    <input id="Yes" type="radio" name="isCDOut" value="1">-->
+<!--                                    <span style="margin-left: 15px;">Dealer-Delivery</span>&nbsp;-->
+<!--                                    <input id="No" type="radio" name="isCDOut" value="1">-->
+<!--                                </div> -->
+<!--                            </div><br>-->
+<!--                        </div>-->
+<!--                    </fieldset>-->
                     <fieldset>
                         <legend onclick="DoToggle('#VehicleInfoDiv')">Vehicle Information</legend>
                         <div id="VehicleInfoDiv" class="feildwrap">
@@ -338,6 +340,53 @@
                             </div>
                         </div>                    
                     </fieldset>
+
+                    <fieldset>
+                        <legend onclick="DoToggle('#JobInfoDiv')">Jobs Requested</legend>
+                        <div id="JobInfoDiv" class="feildwrap">
+                            <div id="MechanicalRepairDiv" class="feildwrap">
+                                <?php
+                                $jobCounter = 0;
+                                foreach ($mechanicalJobs as $key) {
+                                    $jobCounter = $jobCounter + 1;
+                                    if ($jobCounter % 4 === 0) {
+                                        ?>
+                                        <br><br>
+                                    <?php }
+                                    ?>
+                                    <input class="Jobs" name="Jobs[]" type="checkbox" value="<?= $key['idJobRef'] ?>"  data-validation = ""><?= $key['JobTask'] ?><br>
+                                <?php }
+                                ?>
+                            </div><br><br>
+                            <div id="otherJobDiv" style=" width:100%;height: auto;">
+                                <span>Select Other GR Jobs</span>&nbsp;&nbsp;&nbsp;<input name="Jobs[]" onclick="addOtherJobs(this)" style=" width:15px;height:25px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodâ€¦EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " value="+" readonly><br><br><br>
+                            </div>
+                        </div>                             
+                    </fieldset>
+
+                    <fieldset>
+                        <legend onclick="DoToggle('#WorkPerformDiv')">Parts Stock Confirmation</legend>
+                        <div id="WorkPerformDiv" class="feildwrap">
+                            <div class="btn-block-wrap datagrid" style="margin-top: 05px;">
+                                <table id="WorkTable" width="100%" border="0" cellpadding="1" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Part Number</th>
+                                            <th>Part Desc</th>
+                                            <th>Qty</th>
+                                            <th>Stock</th>
+                                            <th>ETA</th>
+                                            <th>X</th>
+                                        </tr>
+                                    </thead>                               
+                                    <input name="newRow" style=" width:15px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " id="newRow" value="+" readonly>
+                                    <tbody id="tblParts">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
                     <fieldset style="">
                         <legend onclick="DoToggle('#EstimateDiv')">Estimate</legend>
                         <div id="EstimateDiv" class="feildwrap">
@@ -362,105 +411,44 @@
                             <label>Customer Request</label>
                             <div style="margin-left: 15px;">
                                 <span style="margin-left: 50px;">Warranty</span>
-                                <input id="Yes" type="radio" name="isWarranty" value="1">
+                                <input id="Yes" type="checkbox" name="isWarranty" value="1">
                                 <span style="margin-left: 15px;">Periodic Maintenance</span>&nbsp;
-                                <input id="No" type="radio" name="isPeriodicMaintenance" value="1">
+                                <input id="No" type="checkbox" name="isPeriodicMaintenance" value="1">
                                 <span style="margin-left: 15px;">General Repair</span>&nbsp;
-                                <input id="No" type="radio" name="isGeneralRepair" value="1">
+                                <input id="No" type="checkbox" name="isGeneralRepair" value="1">
                                 <span style="margin-left: 15px;">Internal</span>&nbsp;
-                                <input id="No" type="radio" name="isInternal" value="1">
-                            </div> 
-                        </div>
-                    </fieldset>    
-                    <fieldset>
-                        <legend onclick="DoToggle('#JobInfoDiv')">Jobs Requested</legend>
-                        <div id="JobInfoDiv" class="feildwrap">
-                            <div id="MechanicalRepairDiv" class="feildwrap">
-                                <?php
-                                $jobCounter = 0;
-                                foreach ($mechanicalJobs as $key) {
-                                    $jobCounter = $jobCounter + 1;
-                                    if ($jobCounter % 4 === 0) {
-                                        ?>
-                                        <br><br>
-                                    <?php }
-                                    ?>
-                                    <input class="Jobs" name="Jobs[]" type="checkbox" value="<?= $key['idJobRef'] ?>"  data-validation = ""><?= $key['JobTask'] ?><br>
-                                <?php }
-                                ?>
-                            </div><br><br>
-                            <div id="otherJobDiv" style=" width:100%;height: auto;">
-                                <span>Select Other GR Jobs</span>&nbsp;&nbsp;&nbsp;<input name="Jobs[]" onclick="addOtherJobs(this)" style=" width:15px;height:25px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodâ€¦EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " value="+" readonly><br><br><br>
-                            </div>
-                        </div>                             
-                    </fieldset>
-                    <fieldset>
-                        <legend onclick="DoToggle('#ConditionDiv')">5W1H</legend>
-                        <div id="ConditionDiv" class="feildwrap" style="width: 95%;"> 
-                            <?php
-                            $i = 0;
-                            foreach ($condConfirm as $key) {
-                                ?>
-                                <br><div style="margin-left: -90px;"><label><b><?= $key['Name'] ?></b></label></div>
-                                <?php foreach ($key['ConditionDetail'] as $val) { ?>
-                                    <input id="ConditionDetail" name="ConditionDetail<?php echo $i; ?>" type="radio" value="<?= $val['idConditionDetail'] ?>"><?= $val['ConditionDetail'] ?>
-                                    <?php
-                                }
-                                $i = $i + 1;
-                            }
-                            ?>
-                        </div>                           
-                    </fieldset>                   
-                    <fieldset>
-                        <legend onclick="DoToggle('#WorkPerformDiv')">Parts Stock Confirmation</legend>
-                        <div id="WorkPerformDiv" class="feildwrap">
-                            <div class="btn-block-wrap datagrid" style="margin-top: 05px;">
-                                <table id="WorkTable" width="100%" border="0" cellpadding="1" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Part Number</th>
-                                            <th>Part Desc</th>
-                                            <th>Qty</th>
-                                            <th>Stock</th>
-                                            <th>ETA</th>
-                                            <th>X</th>
-                                        </tr>
-                                    </thead>                               
-                                    <input name="newRow" style=" width:15px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " id="newRow" value="+" readonly>
-                                    <tbody id="tblParts">
-                                    </tbody>
-                                </table>
+                                <input id="No" type="checkbox" name="isInternal" value="1">
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend onclick="DoToggle('#ConfirmationDiv')">Confirmation</legend>
-                        <div id="ConfirmationDiv" class="feildwrap" style="">
-                            <!--<label>Confirmation</label>-->
-                            <div style="margin-left: -150px;">
-                                <label>Date</label>
-                                <input style="width: 130px" id="PartsConfirmDate" type="text" name="PartsConfirmDate" class='date' placeholder="Book in Date"  required>
-                            </div>
-                            <div style="margin-left: -150px;">
-                                <label>Time</label>
-                                <input style="width: 130px" Class="Timepicker" id="PartsConfirmTime" type="text" name="PartsConfirmTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">
-                            </div>
-                            <div>
-                                <label style="margin-left: -108px;">Staff Name</label>
-                                <!--<input id="PartsConfirmStaff" type="text" name="PartsConfirmStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
-                                <select name="PartsConfirmStaff" id="PartsConfirmStaff">
-                                    <option>Select Staff</option>
-                                    <?php
-                                    foreach ($staff as $AllStaff) {
-                                        ?>
-                                        <option value="<?= $AllStaff['idStaff'] ?>"><?= $AllStaff['Name'] ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                    </fieldset>
+                    <!--                    <fieldset>-->
+<!--                        <legend onclick="DoToggle('#ConfirmationDiv')">Confirmation</legend>-->
+<!--                        <div id="ConfirmationDiv" class="feildwrap" style="">-->
+<!--                            <!--<label>Confirmation</label>-->
+<!--                            <div style="margin-left: -150px;">-->
+<!--                                <label>Date</label>-->
+<!--                                <input style="width: 130px" id="PartsConfirmDate" type="text" name="PartsConfirmDate" class='date' placeholder="Book in Date"  required>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: -150px;">-->
+<!--                                <label>Time</label>-->
+<!--                                <input style="width: 130px" Class="Timepicker" id="PartsConfirmTime" type="text" name="PartsConfirmTime" data-time-format="H:i:s" placeholder="Book in Time" data-validation = "required">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label style="margin-left: -108px;">Staff Name</label>-->
+<!--                                <!--<input id="PartsConfirmStaff" type="text" name="PartsConfirmStaff" placeholder="Staff Name" style="width: 125px;" data-validation = "">-->
+<!--                                <select name="PartsConfirmStaff" id="PartsConfirmStaff">-->
+<!--                                    <option>Select Staff</option>-->
+<!--                                    --><?php
+//                                    foreach ($staff as $AllStaff) {
+//                                        ?>
+<!--                                        <option value="--><?//= $AllStaff['idStaff'] ?><!--">--><?//= $AllStaff['Name'] ?><!--</option>-->
+<!--                                        --><?php
+//                                    }
+//                                    ?>
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </fieldset>-->
                     <!--                    <fieldset>
                                             <legend onclick="DoToggle('#LastServiceDiv')">Last Service</legend>
                                             <div id="LastServiceDiv" class="feildwrap" style="">
