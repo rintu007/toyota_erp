@@ -19,7 +19,7 @@ if ($data['userid'] != "") {
             <script src="<?= base_url(); ?>assets/js/jquery.ui.datepicker.js"></script>
             <script src="<?= base_url(); ?>assets/js/jquery.bpopup.js"></script>
             <script src="<?= base_url(); ?>assets/js/jquery.maskedinput.js"></script>
-            <script src="<?= base_url(); ?>assets/js/ens	roll-0.4.0.min.js"></script>
+            <script src="<?= base_url(); ?>assets/js/enscroll-0.4.0.min.js"></script>
             <script src="<?= base_url(); ?>assets/js/validation.js"></script>
             <script src="<?= base_url(); ?>assets/js/chosen.jquery.js"></script>
             <!-- Scheduler Assets -->
@@ -36,20 +36,20 @@ if ($data['userid'] != "") {
                     console.log("before initialization ", $("#waiting"));
                     var config = {
                         fields: <?= $Bays; ?>,
-//                        fields: ["BAY 1", "BAY 2", "BAY 3", "BAY 4", "BAY 5", "BAY 6", "BAY 7", "BAY 8", "BAY 9"],
                         beforeFields: [],
                         afterFields: [],
                         timeSpan: 1,
-                        headerSpan: 30,
-                        headSpan: 30,
-                        totalTime: 8,
+                        headerSpan: 60,
+                        headSpan: 60,
+                        totalTime: 11,
                         timeUnit: 60,
                         startTime: "08:00",
+//                        endTime: "00:00",
                         table: "#table",
 
-                        dataURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/AllAsb/<?= $date ?>",
-                        formURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/form",
-                        RoadWashURL: "http://localhost/toyota_git/toyota_erp/service/index.php/jpcb/roadwash"
+                        dataURL: "<?=base_url()?>/index.php/jpcb/AllAsb/<?= $date ?>",
+                        formURL: "<?=base_url()?>/index.php/jpcb/form",
+                        RoadWashURL: "<?=base_url()?>/index.php/jpcb/roadwash"
                     }
                     window.obj = new Scheduler(config);
                     $(".form-error").hide();

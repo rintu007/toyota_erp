@@ -23,28 +23,28 @@
                                 <input type="text" class="form-control" id="RegistrationName" value="<?= $Appointment['RegistrationNumber'] ?>">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4">Select Bay</label>
-                            <div class="col-md-8">
-                                <select class="form-control" name="idBay" id="idBay">
-                                    <option>Select Bay</option>
-
-                                    <?php
-                                    foreach ($AllBays as $Bays) {
-                                        if ($Appointment['idBay'] == $Bays['idBay']) {
-                                            ?>
-                                            <option value="<?= $Bays['idBay'] ?>" selected="selected"><?= $Bays['BayName'] ?></option>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <option value="<?= $Bays['idBay'] ?>"><?= $Bays['BayName'] ?></option>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label class="col-md-4">Select Bay</label>-->
+<!--                            <div class="col-md-8">-->
+<!--                                <select class="form-control" name="idBay" id="idBay">-->
+<!--                                    <option>Select Bay</option>-->
+<!---->
+<!--                                    --><?php
+//                                    foreach ($AllBays as $Bays) {
+//                                        if ($Appointment['idBay'] == $Bays['idBay']) {
+//                                            ?>
+<!--                                            <option value="--><?//= $Bays['idBay'] ?><!--" selected="selected">--><?//= $Bays['BayName'] ?><!--</option>-->
+<!--                                            --><?php
+//                                        } else {
+//                                            ?>
+<!--                                            <option value="--><?//= $Bays['idBay'] ?><!--">--><?//= $Bays['BayName'] ?><!--</option>-->
+<!--                                            --><?php
+//                                        }
+//                                    }
+//                                    ?>
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -330,7 +330,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="button" class="btn btn-success" id="SaveAppointment" value="Save">
+<!--                            <input type="button" class="btn btn-success" id="SaveAppointment" value="Save">-->
                         </div>
                     </div>
 

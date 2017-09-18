@@ -66,11 +66,12 @@ class S_jobreferencemanual extends CI_Model {
 
     function getMechanicalJobs() {
 
-        $ofMechanical = "isDefault = 1 AND isActive != 0";
+//        $ofMechanical = " isActive != 0";
 
         $this->db->select('*');
         $this->db->from('s_jobreferencemanual');
-        $this->db->where($ofMechanical);
+        $this->db->where('isActive',1);
+        $this->db->order_by('JobTask');
         $mechanicalJobs = $this->db->get();
         return $mechanicalJobs->result_array();
     }

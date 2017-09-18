@@ -57,6 +57,7 @@ class S_jobprogresscontrolboard extends CI_Model {
 
         $AppointmentData = array(
             'AppointmentDate' => date("Y-m-d", strtotime($_POST['AppointmentDate'])),
+            'color' => $_POST['color'],
             'StartTime' => $_POST['StartTime'],
             'EndTime' => $_POST['EndTime'],
             'RegistrationNumber' => $_POST['RegNumber'],
@@ -68,14 +69,15 @@ class S_jobprogresscontrolboard extends CI_Model {
             'isRoadTest' => 0,
             'isWash' => 0,
             'ExtendTime' => '00:00',
-            'LabourAmount' => $_POST['LabourAmount'],
+//            'LabourAmount' => $_POST['LabourAmount'],
             'EstimateAmount' => $_POST['EstimateAmount'],
-            'PartsAmount' => $_POST['Parts'],
-            'GrandTotal' => $_POST['GrandTotal'],
-            'isWarranty' => isset($_POST['isWarranty']),
-            'isPm' =>       isset($_POST['isPeriodicMaintenance']),
-            'isGr' =>       isset($_POST['isGeneralRepair']),
-            'isInternal' => isset($_POST['isInternal']),
+            'additoinalInformation' => $_POST['additoinalInformation'],
+//            'PartsAmount' => $_POST['Parts'],
+//            'GrandTotal' => $_POST['GrandTotal'],
+//            'isWarranty' => isset($_POST['isWarranty']),
+//            'isPm' =>       isset($_POST['isPeriodicMaintenance']),
+//            'isGr' =>       isset($_POST['isGeneralRepair']),
+//            'isInternal' => isset($_POST['isInternal']),
 //            'ReceptionDate' => date("Y-m-d", strtotime($_POST['PreferredDate'])),
 //            'ReceptionTime' => $_POST['PreferredTime'],
 //            'idPreferredStaff' => $_POST['PreferredStaff'],
@@ -100,10 +102,12 @@ class S_jobprogresscontrolboard extends CI_Model {
         $idApointment = $this->db->insert_id();
 
         $AppointmentJobs = array();
-        for ($i = 0; $i < count($_POST['MechJob']); $i++) {
+        for ($i = 0; $i < count($_POST['Jobs']); $i++) {
             $AppointmentJobs[] = array(
                 'idAppointment' => $idApointment,
-                'idJobs' => $_POST['MechJob'][$i]
+                'idJobs' => $_POST['Jobs'][$i],
+                'customerVoice' => $_POST['customerVoice'][$i],
+                'laborCost' => $_POST['laborCost'][$i]
             );
         }
 
@@ -370,22 +374,21 @@ class S_jobprogresscontrolboard extends CI_Model {
         return $data;
     }
 
-    function AllAsb($date = NULL) {
-        if ($date == NULL) {
+    function AllAsb() {
+
+        $start = $_GET['start'];
+        $end   = $_GET['end'];
+
             $this->db->select('*');
             $this->db->from('ViewAppointments');
-            $this->db->where('AppointmentDate', date('Y-m-d'));
+            $this->db->where('date(`AppointmentDate`) >= ', $start);
+            $this->db->where('date(`AppointmentDate`) <', $end);
             $this->db->where('isCompleted', '0');
             $Appointments = $this->db->get();
             $result = $Appointments->result_array();
-        } else {
-            $this->db->select('*');
-            $this->db->from('ViewAppointments');
-            $this->db->where('AppointmentDate', $date);
-            $this->db->where('isCompleted', '0');
-            $Appointments = $this->db->get();
-            $result = $Appointments->result_array();
-        }
+
+
+        return $result;
 
         $data = array();
 

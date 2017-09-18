@@ -62,6 +62,7 @@ class Jpcb extends CI_Controller {
         $dataArray['checkList'] = $checkListModel->getAllRoCheckList();
         $dataArray['financeInfoList'] = $financeModel->getFinanceInfo();
         $dataArray['mechanicalJobs'] = $jobRefManual->getMechanicalJobs();
+//        var_dump($dataArray['mechanicalJobs']);die;
         $dataArray['bodyPaintJobs'] = $jobRefManual->getBodyPaintJobs();
         $dataArray['fuelVolume'] = $fuelManagment->getFuelInfo();
         $dataArray['gasVolume'] = $repairOrderModel->getGasInfo();
@@ -96,12 +97,26 @@ class Jpcb extends CI_Controller {
     function asb($date = NULL) {
         $Bays = new S_bays();
         $AllBays = $Bays->AllBays();
+
+
         $bay = array();
         foreach ($AllBays as $row)
         {
             array_push($bay,$row['label']);
         }
+
         $Data['Bays'] = json_encode($bay);
+
+        $res = $Bays->getAll();
+        $Data['resource'] = json_encode($res,false);
+
+//        $JPCB = new S_jobprogresscontrolboard();
+//        $Data['allAppointments']= json_encode($JPCB->AllAsb('2017-09-13'));
+
+//        var_dump($Data['allAppointments']);die;
+
+//        var_dump($res);die;
+
 
 
 //        $JobRefManual = new S_jobreferencemanual();
@@ -117,7 +132,7 @@ class Jpcb extends CI_Controller {
             $Data['date'] = $date;
         }
 //        $this->load->view('jobprogresscontrolboard', $Data);
-        $this->load->view('asb', $Data);
+        $this->load->view('asb1', $Data);
     }
 
     function Add() {
@@ -297,13 +312,12 @@ class Jpcb extends CI_Controller {
         echo json_encode($allAppointments);
     }
 
-    function AllAsb($date = NULL) {
+    function AllAsb() {
+        $date = $_GET['start'];
         $JPCB = new S_jobprogresscontrolboard();
-        if ($date == NULL) {
+
             $allAppointments = $JPCB->AllAsb();
-        } else {
-            $allAppointments = $JPCB->AllAsb($date);
-        }
+
         echo json_encode($allAppointments);
     }
 

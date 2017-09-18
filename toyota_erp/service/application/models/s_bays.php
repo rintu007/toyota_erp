@@ -31,7 +31,7 @@ class S_bays extends CI_Model {
     }
 
     function getAll() {
-        $this->db->select('*');
+        $this->db->select('idBay as id,s_bay.*');
         $this->db->from('s_bay');
         $this->db->where('isActive', 1);
         $BaysList = $this->db->get()->result_array();

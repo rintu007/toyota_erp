@@ -1,4 +1,3 @@
-sty
 
 <div id="wrapper">
     <div id="content">
@@ -12,83 +11,8 @@ sty
             <form id="appointmentform" action="<?= base_url() ?>index.php/appointment/add" onSubmit="return validationform();" method="post" class="form validate-form animated fadeIn">
                 <?= $Response ?>
                 <fieldset>
-                    <legend>Appointment Sheet</legend>
-                    <fieldset>
-                        <legend onclick="DoToggle('#AppointmentSheetDiv')">Appointment Time</legend>
-                        <div id="AppointmentSheetDiv" class="feildwrap">
-                            <fieldset style="margin-left: 5px;width: 25px;">
-                                <div class="feildwrap" style="">
-                                    <div>                              
-                                        <div style="margin-left: -150px;">
-                                            <label>Date</label>
-                                            <input style="width: 130px;margin-left: 31px;" id="AppointmentDate" type="text" name="AppointmentDate" class='date' placeholder="Appointment Date"  required>
-                                        </div>
-                                        <br>
-                                        <div style="margin-left: -119px;">
-                                            <label>Start Time</label>
-                                            <!--<input style="width: 130px" id="StartTime" type="text" name="StartTime" data-time-format="H:i:s" placeholder="Start Time" data-validation = "required">-->
-                                            <select name="StartTime">
-                                                <option>Select Start Time</option>
-                                                <option value="08:00">08:00</option>
-                                                <option value="08:30">08:30</option>
-                                                <option value="09:00">09:00</option>
-                                                <option value="09:30">09:30</option>
-                                                <option value="10:00">10:00</option>
-                                                <option value="10:30">10:30</option>
-                                                <option value="11:00">11:00</option>
-                                                <option value="11:30">11:30</option>
-                                                <option value="12:00">12:00</option>
-                                                <option value="12:30">12:30</option>
-                                                <option value="13:00">13:00</option>
-                                                <option value="13:30">13:30</option>
-                                                <option value="14:00">14:00</option>
-                                                <option value="14:30">14:30</option>
-                                                <option value="15:00">15:00</option>
-                                                <option value="15:30">15:30</option>
-                                            </select>
-                                        </div>
-                                        <div style="">
-                                            <label>End Time</label>
-                                            <!--<input style="width: 130px" id="StartEnd" type="text" name="EndTime" data-time-format="H:i:s" placeholder="End Time" data-validation = "required">-->
-                                            <select name="EndTime">
-                                                <option>Select End Time</option>
-                                                <option value="08:00">08:00</option>
-                                                <option value="08:30">08:30</option>
-                                                <option value="09:00">09:00</option>
-                                                <option value="09:30">09:30</option>
-                                                <option value="10:00">10:00</option>
-                                                <option value="10:30">10:30</option>
-                                                <option value="11:00">11:00</option>
-                                                <option value="11:30">11:30</option>
-                                                <option value="12:00">12:00</option>
-                                                <option value="12:30">12:30</option>
-                                                <option value="13:00">13:00</option>
-                                                <option value="13:30">13:30</option>
-                                                <option value="14:00">14:00</option>
-                                                <option value="14:30">14:30</option>
-                                                <option value="15:00">15:00</option>
-                                                <option value="15:30">15:30</option>
-                                            </select>
-                                        </div>
-                                        <div style="margin-left: -119px;">
-                                            <label>Bay</label>
-                                            <!--<input style="width: 130px" id="StartTime" type="text" name="StartTime" data-time-format="H:i:s" placeholder="Start Time" data-validation = "required">-->
-                                            <select name="idBay">
-                                                <option>Select Bay</option>
-                                                <?php
-                                                foreach ($bay as $AllBays) {
-                                                    ?>
-                                                    <option value="<?= $AllBays['key'] ?>"><?= $AllBays['label'] ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>                       
-                    </fieldset>    
+                    <legend>Appointment Input</legend>
+
 <!--                    <fieldset>-->
 <!--                        <legend onclick="DoToggle('#PreferredReception')">Preferred Reception</legend>-->
 <!--                        <div id="PreferredReception" class="feildwrap">-->
@@ -138,14 +62,28 @@ sty
 <!--                            </fieldset>-->
 <!--                        </div>                       -->
 <!--                    </fieldset>                    -->
+
+                    <div class="feildwrap" style="margin-left: 150px;">
+                        <div>
+                            <label>Follow Up Card</label>
+                            <input id="FollowUpCard" type="text" name="FollowUpCard" placeholder="Enter FollowUp Card"
+                                   data-validation="">
+                        </div>
+                        <div>
+                            <label>Estimated Ref</label>
+                            <input id="EstimatedRef" type="text" name="EstimatedRef"
+                                   placeholder="Enter EstimatedRef" data-validation="">
+                        </div>
+
+                    </div><br>
                     <fieldset>
                         <legend onclick="DoToggle('#CustomerInfoDiv')">Customer Information</legend>
-                        <br><div id="CustomerInfoDiv" class="feildwrap">
+                        <div id="CustomerInfoDiv" class="feildwrap">
                             <div class="feildwrap" style="margin-left: 150px;display: none">
                                 <label>Existing Customer</label>
                                 <input type="text" name="searchbyreg" id="searchbyreg" placeholder="Search by Vehicle Register Number">
                                 <span id="regresult" name="RegResult" style="margin-left:05px;">New Customer</span>
-                            </div><br><br>
+                            </div>
                             <div>
                                 <label>Company Name</label>
                                 <input id="CompanyName" type="text" name="CompanyName" placeholder="Enter Company Name"  data-validation = "" >
@@ -173,6 +111,20 @@ sty
                             <div>
                                 <label>Address</label>
                                 <textarea id="CustomerAddress" name="CustomerAddress" placeholder="Enter Address" style="margin: 0px; width: 724px; height: 100px;"></textarea>
+                            </div>
+                            <div>
+
+                                <label>Customer Waiting</label>
+                                <select name="" id="" class="chosen-select">
+                                    <option value="">No</option>
+                                    <option value="">Yes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Fir</label>
+                                <select name="" id="" class="chosen-select">
+                                    <option value="">Select</option>
+                                </select>
                             </div>
                         </div>
                     </fieldset>
@@ -278,7 +230,7 @@ sty
                         <div id="VehicleInfoDiv" class="feildwrap">
                             <div id="SelectBrandDiv">
                                 <label>Select Brand</label>
-                                <select id="SelectBrand" name="SelectBrand" onchange="getModels(this)">
+                                <select id="SelectBrand" name="SelectBrand" onchange="getModels(this)" style="width: 120px">
                                     <option>Select Brand</option>
                                     <?php
                                     foreach ($brandsList as $key) {
@@ -292,13 +244,13 @@ sty
                             </div>
                             <div id="SelectModelDiv">
                                 <label>Select Model</label>
-                                <select id="SelectModel" name="SelectModel" onclick="getAllVehicles(this)">
+                                <select id="SelectModel" name="SelectModel" onclick="getAllVehicles(this)" style="width: 120px">
                                     <option>Select Model</option>                            
                                 </select>
                             </div>
                             <div id="SelectMakeDiv">
                                 <label>Select Make</label>
-                                <select id="SelectMake" name="Make">
+                                <select id="SelectMake" name="Make" style="width: 120px">
                                     <option>Select Make</option>
                                 </select>
                             </div>
@@ -338,6 +290,16 @@ sty
                                 <label>Year</label>
                                 <input id="Year" type="text" name="Year" placeholder="Enter Year"  data-validation = "" >
                             </div>
+                            <br>
+                            <div>
+                                <label>Previous Concern</label>
+                                <input id="oreviousConcern" type="text" name="previousConcern" readonly  data-validation = "" >
+                            </div>
+                            <div>
+                                <label>Additoinal Information</label>
+                                <textarea id="AdditoinalInformation" name="additoinalInformation" placeholder="Enter Additoinal Information" style="margin: 0px; width: 724px; height: 100px;"></textarea>
+
+                            </div>
                         </div>                    
                     </fieldset>
 
@@ -345,22 +307,42 @@ sty
                         <legend onclick="DoToggle('#JobInfoDiv')">Jobs Requested</legend>
                         <div id="JobInfoDiv" class="feildwrap">
                             <div id="MechanicalRepairDiv" class="feildwrap">
+                                <select name="" id="job_sel" class="chosen-select" style="width: 450px">
+                                    <option value="">Select Job</option>
                                 <?php
                                 $jobCounter = 0;
                                 foreach ($mechanicalJobs as $key) {
-                                    $jobCounter = $jobCounter + 1;
-                                    if ($jobCounter % 4 === 0) {
                                         ?>
-                                        <br><br>
-                                    <?php }
-                                    ?>
-                                    <input class="Jobs" name="Jobs[]" type="checkbox" value="<?= $key['idJobRef'] ?>"  data-validation = ""><?= $key['JobTask'] ?><br>
+                                    <option value="<?= $jobCounter++ ?>">
+                                        <?= $key['JobTask'] ?>
+                                    </option>
                                 <?php }
                                 ?>
-                            </div><br><br>
-                            <div id="otherJobDiv" style=" width:100%;height: auto;">
-                                <span>Select Other GR Jobs</span>&nbsp;&nbsp;&nbsp;<input name="Jobs[]" onclick="addOtherJobs(this)" style=" width:15px;height:25px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodâ€¦EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " value="+" readonly><br><br><br>
+                                </select> <button type="button" onclick="addJob()" class="btn">+</button>
+                            </div><br>
+
+                            <table id="JobTable" width="100%" border="0" cellpadding="1" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Job Task</th>
+                                    <th>Voice of Customer</th>
+                                    <th>Est Time</th>
+                                    <th>Labor Cost</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblJobs">
+                                </tbody>
+                            </table>
+                            <div id="estimateDiv" style="display: none;" class="popup">
+                                <label for="">EstimateAmount</label>
+                                <input type="text" name="EstimateAmount" id="EstimateAmount" style=" width: 50px;" value="0" readonly><span>&nbsp;Rs</span>
                             </div>
+
+<!--                            <br>-->
+<!--                            <div id="otherJobDiv" style=" width:100%;height: auto;">-->
+<!--                                <span>Select Other GR Jobs</span>&nbsp;&nbsp;&nbsp;<input name="Jobs[]" onclick="addOtherJobs(this)" style=" width:15px;height:25px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodâ€¦EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer " value="+" readonly><br><br><br>-->
+<!--                            </div>-->
                         </div>                             
                     </fieldset>
 
@@ -387,40 +369,62 @@ sty
                         </div>
                     </fieldset>
 
-                    <fieldset style="">
-                        <legend onclick="DoToggle('#EstimateDiv')">Estimate</legend>
-                        <div id="EstimateDiv" class="feildwrap">
-                            <div>
-                                <label>Estimate</label>
-                                <input id="Labour" type="text" name="EstimateAmount" onchange="calculateNetTotal()" placeholder="Labour Amount" value="0.0"><span>&nbsp;Rs</span>
-                            </div><br>
-                            <div>
-                                <label>Parts</label>
-                                <input id="Parts" type="text" name="Parts" onchange="calculateNetTotal()" placeholder="Parts Amount" value=0.0><span>&nbsp;Rs</span>
-                            </div><br>
-                            <div>
-                                <label>Labour</label>
-                                <input id="Labour" type="text" name="LabourAmount" onchange="calculateNetTotal()" placeholder="Labour Amount" value="0.0"><span>&nbsp;Rs</span>
-                            </div><br>
-                            <div>
-                                <label>Total</label>
-                                <input id="GrandTotal" type="text" name="GrandTotal" placeholder="Grand Total" value=0.0 readonly><span>&nbsp;Rs</span>
-                            </div>
-                        </div>
-                        <div class="feildwrap">
-                            <label>Customer Request</label>
-                            <div style="margin-left: 15px;">
-                                <span style="margin-left: 50px;">Warranty</span>
-                                <input id="Yes" type="checkbox" name="isWarranty" value="1">
-                                <span style="margin-left: 15px;">Periodic Maintenance</span>&nbsp;
-                                <input id="No" type="checkbox" name="isPeriodicMaintenance" value="1">
-                                <span style="margin-left: 15px;">General Repair</span>&nbsp;
-                                <input id="No" type="checkbox" name="isGeneralRepair" value="1">
-                                <span style="margin-left: 15px;">Internal</span>&nbsp;
-                                <input id="No" type="checkbox" name="isInternal" value="1">
-                            </div>
+<!--                    <fieldset style="">-->
+<!--                        <legend onclick="DoToggle('#EstimateDiv')">Estimate</legend>-->
+<!--                        <div id="EstimateDiv" class="feildwrap">-->
+<!--                            <div>-->
+<!--                                <label>Estimate</label>-->
+<!--                                <input id="Labour" type="text" name="EstimateAmount" onchange="calculateNetTotal()" placeholder="Labour Amount" value="0.0"><span>&nbsp;Rs</span>-->
+<!--                            </div><br>-->
+<!--                            <div>-->
+<!--                                <label>Parts</label>-->
+<!--                                <input id="Parts" type="text" name="Parts" onchange="calculateNetTotal()" placeholder="Parts Amount" value=0.0><span>&nbsp;Rs</span>-->
+<!--                            </div><br>-->
+<!--                            <div>-->
+<!--                                <label>Labour</label>-->
+<!--                                <input id="Labour" type="text" name="LabourAmount" onchange="calculateNetTotal()" placeholder="Labour Amount" value="0.0"><span>&nbsp;Rs</span>-->
+<!--                            </div><br>-->
+<!--                            <div>-->
+<!--                                <label>Total</label>-->
+<!--                                <input id="GrandTotal" type="text" name="GrandTotal" placeholder="Grand Total" value=0.0 readonly><span>&nbsp;Rs</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="feildwrap">-->
+<!--                            <label>Customer Request</label>-->
+<!--                            <div style="margin-left: 15px;">-->
+<!--                                <span style="margin-left: 50px;">Warranty</span>-->
+<!--                                <input id="Yes" type="checkbox" name="isWarranty" value="1">-->
+<!--                                <span style="margin-left: 15px;">Periodic Maintenance</span>&nbsp;-->
+<!--                                <input id="No" type="checkbox" name="isPeriodicMaintenance" value="1">-->
+<!--                                <span style="margin-left: 15px;">General Repair</span>&nbsp;-->
+<!--                                <input id="No" type="checkbox" name="isGeneralRepair" value="1">-->
+<!--                                <span style="margin-left: 15px;">Internal</span>&nbsp;-->
+<!--                                <input id="No" type="checkbox" name="isInternal" value="1">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </fieldset>-->
+                    <fieldset>
+                        <legend onclick="DoToggle('#ConditionDiv')">5W1H</legend>
+                        <div id="ConditionDiv" class="feildwrap" style="width: 95%;">
+                            <?php
+                            $i = 0;
+                            foreach ($condConfirm as $key) {
+                                ?>
+<!--                                <br>-->
+<!--                                <div style="margin-left: -90px;">-->
+
+                                    <label for="ConditionDetail<?php echo $i; ?>"><?= $key['Name'] ?></label>
+<!--                                </div>-->
+                                <?php foreach ($key['ConditionDetail'] as $val) { ?>
+                                    <input id="ConditionDetail<?php echo $i; ?>" name="ConditionDetail<?php echo $i; ?>" type="radio" value="<?= $val['idConditionDetail'] ?>"><?= $val['ConditionDetail'] ?>
+                                    <?php
+                                }
+                                $i = $i + 1;
+                            }
+                            ?>
                         </div>
                     </fieldset>
+
                     <!--                    <fieldset>-->
 <!--                        <legend onclick="DoToggle('#ConfirmationDiv')">Confirmation</legend>-->
 <!--                        <div id="ConfirmationDiv" class="feildwrap" style="">-->
@@ -478,6 +482,83 @@ sty
                                                 </div>
                                             </div>
                                         </fieldset>-->
+                    <fieldset>
+                        <legend onclick="DoToggle('#AppointmentSheetDiv')">Appointment Time</legend>
+                        <div id="AppointmentSheetDiv" class="feildwrap">
+                            <div>
+                                <div style="margin-left: -150px;">
+                                    <label>Date</label>
+                                    <input style="width: 130px;margin-left: 31px;" id="AppointmentDate" type="text" name="AppointmentDate" class='date' placeholder="Appointment Date"  required>
+                                </div>
+                                <div >
+                                    <label>Color</label>
+                                    <input style="width: 130px;margin-left: 31px;" id="color" type="color" value="#2424ff" name="color" class=''  required>
+                                </div>
+                                <br>
+                                <div style="margin-left: -119px;">
+                                    <label>Start Time</label>
+                                    <!--<input style="width: 130px" id="StartTime" type="text" name="StartTime" data-time-format="H:i:s" placeholder="Start Time" data-validation = "required">-->
+                                    <select name="StartTime">
+                                        <option>Select Start Time</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                    </select>
+                                </div>
+                                <div style="">
+                                    <label>End Time</label>
+                                    <!--<input style="width: 130px" id="StartEnd" type="text" name="EndTime" data-time-format="H:i:s" placeholder="End Time" data-validation = "required">-->
+                                    <select name="EndTime">
+                                        <option>Select End Time</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: -119px;">
+                                    <label>Bay</label>
+                                    <!--<input style="width: 130px" id="StartTime" type="text" name="StartTime" data-time-format="H:i:s" placeholder="Start Time" data-validation = "required">-->
+                                    <select name="idBay">
+                                        <option>Select Bay</option>
+                                        <?php
+                                        foreach ($bay as $AllBays) {
+                                            ?>
+                                            <option value="<?= $AllBays['key'] ?>"><?= $AllBays['label'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
                     <input type="submit" style="margin-left: 450px;" class="btn" >
                 </fieldset> 
             </form>
@@ -1019,4 +1100,44 @@ sty
 //            }
 //        }
 //    }
+
+    var Jobs = <?= json_encode($mechanicalJobs,true);?>;
+    function addJob()
+    {
+        console.log($('#job_sel').val())
+        index = $('#job_sel').val()
+        if(index=='')
+        {
+            alert('Please Select Job')
+            return
+        }
+
+        $('#estimateDiv').show()
+
+        $('#job_sel option:selected').removeAttr('selected');
+        $('#job_sel').trigger('chosen:updated');
+
+        var items = "";
+        items +='<tr>' +
+            '<td>'+Jobs[index].JobTask+' <input type="hidden" name="Jobs[]" value="'+Jobs[index].idJobRef+'"></td>' +
+            '<td><input type="text" placeholder="Enter Customer Voice" name="customerVoice[]"></td>' +
+            '<td>'+Jobs[index].TimeTaken+'</td>' +
+            '<td><input type="number" min="0" class="laborCost" name="laborCost[]" onchange="calculateEstimate()" value="'+Jobs[index].RangeOneAmount+'"></td>'+
+            '<td><input type="button" class="btn" value="X" onclick="$(this).parent().parent().remove();calculateEstimate()" ></td>'+
+            '</tr>'
+            $('#tblJobs').append(items);
+        calculateEstimate();
+
+
+    }
+
+    function calculateEstimate()
+    {
+        var total = 0
+        $('.laborCost').each(function(i,v){
+            total += (v.value * 1)
+        })
+        $("#EstimateAmount").val(total)
+
+    }
 </script>

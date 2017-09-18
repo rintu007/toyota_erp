@@ -43,6 +43,24 @@
                                    value="<?= isset($_POST['AppointmentDate']) ? $_POST['AppointmentDate'] : '' ?>"
                                    placeholder="Search By AppointmentDate">
                         </div>
+                        <div class="">
+                            <label>Mobile Number</label>
+                            <input type="text" data-validation="" name="MobileNumber"
+                                   value="<?= isset($_POST['MobileNumber']) ? $_POST['MobileNumber'] : '' ?>"
+                                   placeholder="Search By Mobile Number">
+                        </div>
+                        <div class="">
+                            <label>Registration Number</label>
+                            <input type="text" data-validation="" name="RegistrationNumber"
+                                   value="<?= isset($_POST['RegistrationNumber']) ? $_POST['RegistrationNumber'] : '' ?>"
+                                   placeholder="Search By Registration Number">
+                        </div>
+                        <div class="">
+                            <label>Chassis Number</label>
+                            <input type="text" data-validation="" name="ChassisNumber"
+                                   value="<?= isset($_POST['ChassisNumber']) ? $_POST['ChassisNumber'] : '' ?>"
+                                   placeholder="Search By Reg Number">
+                        </div>
                         <div>
                             <label>Bay</label>
                             <select name="idBay">
@@ -92,8 +110,8 @@
                                         <td class="resId"><?= $page++ ?></td>
                                         <td class="tbl-variants"><?= $row['CustomerName'] ?></td>
                                         <td class="tbl-variants"><?= $row['BayName'] ?></td>
-                                        <td class="tbl-variants"><?= $row['StartTime'] ?></td>
-                                        <td class="tbl-name"><?= $row['EndTime'] ?></td>
+                                        <td class="tbl-variants"><?= date_format(date_create($row['start']),"H:i:s")  ?></td>
+                                        <td class="tbl-name"><?=  date_format(date_create($row['end']),"H:i:s") ?></td>
                                         <td class="tbl-date"><?= $row['AppointmentDate'] ?></td>
                                         <td class="tbl-color"><?= $row['RegistrationNumber'] ?></td>
                                         <td class="tbl-phone"><?= ($row['ExtendTime']) ?></td>

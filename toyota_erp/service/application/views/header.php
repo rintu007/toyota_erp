@@ -92,25 +92,10 @@ if ($data['userid'] == NULL) {
                     <span class="logo"><img
                                 src="<?= base_url(); ?>assets/images/logof.png" alt=""></span>
                                 
-                        <!--<div class="icon-cont">
-                       <a href="#" title="Home"><img src="<?= base_url(); ?>assets/images/icon-home.png" alt=""></a>
-                       <a href="#" title="Logout"><img src="<?= base_url(); ?>assets/images/icon-logout.png" alt=""></a>
-                    </div>-->
+
                     <div class="logo-nav"><span>Dealer Management System</span>
                     </div>
                     
-                    <!--<div class="btns-nav"><span class="tital">Sales Division</span>
 
-                        <div class="menu">
-                            <a href="<?= base_url() ?>index.php/pbo/index"><img
-                                    src="<?= base_url(); ?>assets/images/icons/search_icon.png" alt="">Search</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/print.png" alt="">Print</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/add.png" alt="">Add</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/edit.png" alt="">Edit</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/delete.png" alt="">Delete</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/save.png" alt="">Save</a>
-                            <a href=""><img src="<?= base_url(); ?>assets/images/icons/undo.png" height="35" width="35" alt="">Undo</a>
-                        </div>
-                    </div>-->
                     
                 </div>

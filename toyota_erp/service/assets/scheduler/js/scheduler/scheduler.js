@@ -13,6 +13,7 @@
             totalTime: 8,
             timeUnit: 60,
             startTime: "08:00",
+            endTime: "18:00",
             table: "#table",
             dataURL: "http://192.168.1.195/service/index.php/jpcb/AllAppointments",
             formURL: "http://192.168.1.195/service/index.php/jpcb/form",
