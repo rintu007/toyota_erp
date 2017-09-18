@@ -6,6 +6,8 @@
     <a href="<?= base_url() ?>index.php/jpcb/asb">ASB</a>
     <a href="<?= base_url() ?>index.php/jpcb/index">Appointment Input</a>
     <a href="<?= base_url() ?>index.php/Appointment/index">Appointment List</a>
+    <a href="<?= base_url() ?>index.php/token/index">Token</a>
+    <a href="<?= base_url() ?>index.php/token/form">Token Form</a>
     <a href="<?= base_url() ?>index.php/repairorder/index">Open RO</a>
     <a href="<?= base_url() ?>index.php/estimatemechanical/index">Create Estimate</a>
     <a href="<?= base_url() ?>index.php/partsinfo/index">Parts Requisition</a>   

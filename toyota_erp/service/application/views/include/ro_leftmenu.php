@@ -10,9 +10,11 @@
         <a href="<?= base_url() ?>index.php/jpcb/plan">JPCB</a>
         <a href="<?= base_url() ?>index.php/jpcb/asb">ASB</a>
 		<a href="<?= base_url() ?>index.php/repairorder/mrs">MRS</a>
-        <a href="<?= base_url() ?>index.php/jpcb/index">ScheduleAppointment</a>
-		<a href="<?= base_url() ?>index.php/repairorder/index">Open RO</a>       
-        <a href="<?= base_url() ?>index.php/jobprogresssheet/index">Job Progress Sheet</a>         
+        <a href="<?= base_url() ?>index.php/jpcb/index">Appointment Input</a>
+        <a href="<?= base_url() ?>index.php/token/index">Token</a>
+        <a href="<?= base_url() ?>index.php/token/form">Token Form</a>
+		<a href="<?= base_url() ?>index.php/repairorder/index">Open RO</a>
+        <a href="<?= base_url() ?>index.php/jobprogresssheet/index">Job Progress Sheet</a>
         <a href="<?= base_url() ?>index.php/rodetail/index">RO-Detail</a>
         <a href = "<?= base_url() ?>index.php/rofinance/index">Receive Payment</a>
         <a href = "<?= base_url() ?>index.php/rogatepass/index">Generate Gate Pass</a>       

@@ -11,7 +11,6 @@ $data = unserialize($_COOKIE['logindata']);
     <!--            <link rel="stylesheet" type="text/css" href="--><? //= base_url(); ?><!--assets/css/style.css">-->
 
 
-
     <link href='<?= base_url(); ?>assets/scheduler-1.7.1/fullcalendar.min.css' rel='stylesheet'/>
     <link href='<?= base_url(); ?>assets/scheduler-1.7.1/fullcalendar.print.min.css' rel='stylesheet' media='print'/>
     <link href='<?= base_url(); ?>assets/scheduler-1.7.1/scheduler.css' rel='stylesheet'/>
@@ -21,10 +20,13 @@ $data = unserialize($_COOKIE['logindata']);
     <script src='<?= base_url(); ?>assets/scheduler-1.7.1/scheduler.js'></script>
 
 
-    <link href="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/js/bootstrap.js" type="text/javascript"></script>
+    <link href="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/css/bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/js/bootstrap.js"
+            type="text/javascript"></script>
     <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootbox/bootbox.js" type="text/javascript"></script>
-    <script src="<?= base_url(); ?>assets/scheduler/js/libs/chosen/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="<?= base_url(); ?>assets/scheduler/js/libs/chosen/chosen.jquery.min.js"
+            type="text/javascript"></script>
 
 
     <script>
@@ -70,14 +72,14 @@ $data = unserialize($_COOKIE['logindata']);
                         $('#script-warning').show();
                     }
                 },
-                eventClick: function(calEvent, jsEvent, view) {
+                eventClick: function (calEvent, jsEvent, view) {
 //                    alert('Event: ' + calEvent.title);
 //                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 //                    alert('View: ' + view.name);
-                    $.get('<?=base_url()?>/index.php/jpcb/form/'+calEvent.idAppointment, function (res) {
+                    $.get('<?=base_url()?>/index.php/jpcb/form/' + calEvent.idAppointment, function (res) {
                         bootbox.dialog({
                             message: res,
-                            title: calEvent.BayName+' Reg# '+calEvent.RegistrationNumber
+                            title: calEvent.BayName + ' Reg# ' + calEvent.RegistrationNumber
                         });
                     });
 //                    $(this).css('border-color', 'red');
@@ -109,9 +111,6 @@ $data = unserialize($_COOKIE['logindata']);
 <body>
 <div class="container" id="main-container">
     <div class="header" style=" background: #ef0505;">
-        <!--                <div class="logo-nav">-->
-        <!--                </div>-->
-        <!--                <div class="btns-nav"><span class="tital">Service Division</span>-->
         <div class="menu">
 
             <a href="<?= base_url(); ?>index.php/jpcb"><img

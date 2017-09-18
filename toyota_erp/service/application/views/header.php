@@ -26,6 +26,9 @@ if ($data['userid'] == NULL) {
         <script src="<?= base_url(); ?>assets/js/chosen.jquery.js"></script>
         <script src="<?= base_url(); ?>assets/js/jquery.timepicker.min.js"></script>
         <script src="<?= base_url(); ?>assets/js/rating.js"></script>
+
+        <script src="<?= base_url(); ?>assets/js/datatables.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/css/jquery.dataTables.css">
         <!--<script src="<?= base_url(); ?>assets/js/updaterate.js"></script>-->
 
         <script>

@@ -79,7 +79,7 @@
                     <fieldset>
                         <legend onclick="DoToggle('#CustomerInfoDiv')">Customer Information</legend>
                         <div id="CustomerInfoDiv" class="feildwrap">
-                            <div class="feildwrap" style="margin-left: 150px;display: none">
+                            <div class="feildwrap" style="margin-left: 150px;">
                                 <label>Existing Customer</label>
                                 <input type="text" name="searchbyreg" id="searchbyreg" placeholder="Search by Vehicle Register Number">
                                 <span id="regresult" name="RegResult" style="margin-left:05px;">New Customer</span>
