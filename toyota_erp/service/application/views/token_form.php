@@ -54,13 +54,13 @@
                         <div>
                             <label>Appointment</label>
                             <input id="idAppointment" type="text" name="idAppointment" placeholder="Enter Appointment">
-                            <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>
+<!--                            <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>-->
 
                         </div>
                         <div>
                             <label>Estimate</label>
                             <input id="idEstimate" type="text" name="idEstimate" placeholder="Enter Estimate">
-                            <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>
+                            <button type="button" class="btn" onclick="showpopup('estimatelist')">List</button>
                         </div>
                         <br>
 
@@ -131,7 +131,48 @@
         </div>
     </div>
 </div>
+<div style="width: 900px;" class="feildwrap  popup popup-estimatelist">
+    <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 950px;">
+        <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
+        <div style="margin-left: 25px;width: 0px;">
+            <fieldset style="">
+                <legend>Select Chassis</legend>
+                <div class="feildwrap">
+                    <table id="myTable" class="myTable">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>estimateNumber</th>
+                            <th>RegistrationNumber</th>
+                            <th>EngineNumber</th>
+                            <th>ChassisNumber</th>
+                            <th>CustomerName</th>
+                            <th>Cellphone</th>
 
+                        </tr>
+                        </thead>
+                        <?php
+                        $count = 0;
+                        foreach ($estimate_list as $row){
+                            ?>
+                            <tr onclick="fillestdata(<?=$count++?>)">
+                                <td><?=$count+1?></td>
+
+                                <td><?=$row['estimateNumber']?></td>
+                                <td><?=$row['RegistrationNumber']?></td>
+                                <td><?=$row['EngineNumber']?></td>
+                                <td><?=$row['ChassisNumber']?></td>
+                                <td><?=$row['CustomerName']?></td>
+                                <td><?=$row['Cellphone']?></td>
+                            </tr>
+
+                        <?php } ?>
+                    </table>
+                </div>
+            </fieldset>
+        </div><br>
+    </form>
+</div>
 <div style="width: 750px;" class="feildwrap  popup popup-customerlist">
     <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 250px;">
         <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
@@ -139,7 +180,7 @@
             <fieldset style="">
                 <legend>Select Chassis</legend>
                 <div class="feildwrap">
-                    <table id="myTable">
+                    <table id="myTable" class="myTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -177,6 +218,7 @@
     $(".chosen-select").chosen()
 
     var cust_list = <?= json_encode($customer_list,false); ?>;
+    var est_list = <?= json_encode($estimate_list,false); ?>;
     function showpopup(div_id)
     {
         $('.popup-' + div_id).bPopup({
@@ -188,7 +230,6 @@
         });
     }
     function filldata(i){
-        $('#idDispatch').val(i)
 
         console.log(cust_list[i]);
 
@@ -196,29 +237,27 @@
            $('#'+j).val(v)
         })
         $(".chosen-select").trigger("chosen:updated");
-//
-//                $('#IdVariants').val(a.IdVariants)
-//                $('#engine_no').val(a.EngineNo)
-//                $('#IdVariants').val(a.Variants)
-////                $('#engine_no').val(a.RegistrationNumber)
-//                $('#IdColor').val(a.ColorName)
-//                $('#delivered_to').val(a.CustomerName)
-//                $('#current_address').val(a.AddressDetails)
-//                $('#telephone_no').val(a.Telephone)
-//                $('#mobile').val(a.Cellphone)
-//                $('#email').val(a.Email)
-//                $('#nic_no').val(a.Cnic)
-//                $('#cahsisno').val(a.ChasisNo)
-//                $('#InvoiceNumber').val(a.InvoiceNumber)
-//                $('#InvoiceDate').val(a.InvoiceDate)
-//                $('#PboNumb').val(a.PboNumber)
 
-
+                $('.popup' ).bPopup().close()
                 $('.popup' ).bPopup().close()
 
 
     }
 
-    $('#myTable').DataTable();
+    function fillestdata(i){
+        console.log(est_list[i]);
+
+        $.each((est_list[i]),function(j,v){
+           $('#'+j).val(v)
+        })
+        $(".chosen-select").trigger("chosen:updated");
+
+                $('.popup' ).bPopup().close()
+                $('.popup' ).bPopup().close()
+
+
+    }
+
+    $('.myTable').DataTable();
 </script>
 

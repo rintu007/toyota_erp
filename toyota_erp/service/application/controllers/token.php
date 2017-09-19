@@ -62,6 +62,8 @@ class Token extends CI_Controller
     {
         $dataArray = array();
         $dataArray['customer_list'] = $this->token->customer_list();
+        $dataArray['estimate_list'] = $this->token->estimate_list();
+//        var_dump( $dataArray['estimate_list']);die;
         $dataArray['variants'] = $this->token->get_variants();
         $dataArray['s_category'] = $this->token->get_s_category();
         $dataArray['tokenNumber'] = $this->token->get_tokenNumber();
@@ -81,6 +83,25 @@ class Token extends CI_Controller
         $this->session->set_flashdata('message', $Response);
         redirect(base_url() . "index.php/token/form");
 
+    }
+    public function token_modal($id)
+    {
+        $data = array();
+        $data['token'] = $this->token->selectOnetoken($id);
+        $this->load->view('token_modal',$data);
+
+    }
+
+    public function updateTokenStatus()
+    {
+        $idToken = $this->input->post('idToken');
+        $Data = array(
+            'status'    => $this->input->post('status')
+        );
+        $editAppointment =$this->token->Updatetoken($idToken, $Data);
+        if ($editAppointment) {
+            echo "Updated";
+        }
     }
 
 

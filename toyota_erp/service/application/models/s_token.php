@@ -19,12 +19,12 @@ class S_token extends CI_Model {
             ->join('s_cutomerdetail c','c.idCustomer = token.idCustomer')
             ->join('car_variants cv','cv.IdVariants = token.make')
             ->join('car_model m','m.IdModel = cv.ModelId')
-            ->join('s_category','s_category.idCategory = token.idCategory');
-
-        $this->db->where('date(token.created_at)', 'CURDATE()', FALSE);
+            ->join('s_category','s_category.idCategory = token.idCategory')
+            ->where('date(token.created_at)', 'CURDATE()', FALSE);
 //        $this->db->where('DATE(created_at)',now());
         $this->db->order_by('idToken','desc');
-       return $this->db->get()->result_array();
+        return $this->db->get()->result_array();
+//        echo $this->db->last_query();die;
     }
 
 
@@ -32,7 +32,7 @@ class S_token extends CI_Model {
 
         $this->db->where('idToken', $idToken);
         $this->db->update('token', $tokenData);
-        return "Successfully Update";
+        return true;
     }
 
     function Deletetoken($idToken) {
@@ -43,18 +43,15 @@ class S_token extends CI_Model {
         return "Successfully Deleted";
     }
 
-    function selectOnetoken() {
-
-        $this->db->select('idToken');
-        $this->db->from('token');
-        $this->db->order_by("CreatedDate", "desc");
-        $this->db->limit(1);
-        $idToken = $this->db->get();
-        if ($idToken->num_rows() > 0) {
-            $row = $idToken->row();
-            $idToken = $row->idToken;
-            return $idToken;
-        }
+    function selectOnetoken($idToken) {
+//       return $this->db->where('idToken',$idToken)->get('token')->row();
+        return $this->db->select('token.*,c.CustomerName,cv.Variants,m.Model,s_category.Name as category')
+            ->from('token')
+            ->join('s_cutomerdetail c','c.idCustomer = token.idCustomer')
+            ->join('car_variants cv','cv.IdVariants = token.make')
+            ->join('car_model m','m.IdModel = cv.ModelId')
+            ->join('s_category','s_category.idCategory = token.idCategory')
+            ->where('token.idToken',$idToken)->get()->row();
     }
 
     function selectAlltokens($ContactNumber) {
@@ -128,6 +125,21 @@ class S_token extends CI_Model {
         cv.Variants
         ')
             ->from('s_vehicle v')
+            ->join('s_cutomerdetail c','c.idCustomer = v.idCustomer')
+            ->join('car_variants cv','cv.IdVariants = v.idVariant');
+           // ->where('v.RegistrationNumber',$reg);
+
+        return $data = $this->db->get()->result_array();
+    }
+
+    function estimate_list()
+    {
+        $this->db->select('est.idEstimate,est.SerialNumber as estimateNumber,v.idVehicle,v.idVariant,v.idCustomer,v.RegistrationNumber,v.EngineNumber,v.ChassisNumber,
+        c.CustomerName,c.AddressDetails,c.Cellphone,c.CompanyContact,c.CustomerEmail,
+        cv.Variants
+        ')
+            ->from('s_estimate est')
+            ->join('s_vehicle v','est.idVehicle = v.idVehicle')
             ->join('s_cutomerdetail c','c.idCustomer = v.idCustomer')
             ->join('car_variants cv','cv.IdVariants = v.idVariant');
            // ->where('v.RegistrationNumber',$reg);

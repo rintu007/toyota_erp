@@ -10,13 +10,12 @@ $data = unserialize($_COOKIE['logindata']);
 
 
     <script src='<?= base_url(); ?>assets/js/jquery.min.js'></script>
-    <link href="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/css/bootstrap.css" rel="stylesheet"
-          type="text/css"/>
-    <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/js/bootstrap.js"
-            type="text/javascript"></script>
+    <link href="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/css/bootstrap.css" rel="stylesheet"type="text/css"/>
+    <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootstrap3.3.1/js/bootstrap.js" type="text/javascript"></script>
     <script src="<?= base_url(); ?>assets/scheduler/js/libs/bootbox/bootbox.js" type="text/javascript"></script>
-    <script src="<?= base_url(); ?>assets/scheduler/js/libs/chosen/chosen.jquery.min.js"
-            type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/css/chosen.css">
+
+    <script src="<?= base_url(); ?>assets/scheduler/js/libs/chosen/chosen.jquery.min.js"  type="text/javascript"></script>
 
 
     <style>
@@ -100,7 +99,7 @@ $data = unserialize($_COOKIE['logindata']);
                 ?>
 
 
-                <div class="col-sm-2 token">
+                <div class="col-sm-2 token" onclick="get_token(<?= $item['idToken']?>)">
                     <div class="col-sm-5 token_id">
                         <h2><?= sprintf('%03d', $item['tokenNumber']); ?></h2>
                     </div>
@@ -117,18 +116,35 @@ $data = unserialize($_COOKIE['logindata']);
 
             <?php } ?>
         </div>
+
+
     </div>
 
-    <!--    <div class="row">-->
-    <!--        <div class="col-sm-2 token" >-->
-    <!--            <h3>Column 1</h3>-->
-    <!--            <p>Lorem ipsum dolor..</p>-->
-    <!--            <p>Ut enim ad..</p>-->
-    <!--        </div>-->
-    <!---->
-    <!--    </div>-->
+
 
 
 </div>
+
+<script>
+
+    function get_token(idToken)
+    {
+        var dialog =  bootbox.dialog({
+            message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>',
+            size: 'small',
+            backdrop: true
+        });
+
+        dialog.init(function() {
+
+            $.get('<?=base_url()?>/index.php/token/token_modal/' + idToken, function (res) {
+                dialog.find('.bootbox-body').html(res);
+                $(".chosen-select").chosen({width: "50%"})
+            })
+        })
+
+
+    }
+</script>
 
 
