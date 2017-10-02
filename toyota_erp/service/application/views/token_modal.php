@@ -44,6 +44,12 @@
                 <input type="text" class="form-control" readonly id="" value="<?= $token->category ?>">
             </div>
         </div>
+        <div class="form-group">
+            <label for="Remarks" class="col-md-4">Remarks</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="remarks" value="<?= $token->remarks ?>">
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="Csname" class="col-md-4">Status</label>
@@ -58,6 +64,7 @@
             </div>
 
         </div>
+
         <!--                        <button type="button" id="update" class="btn btn-success">Update</button>-->
 
     </div>
@@ -88,7 +95,7 @@
             $.ajax({
                 url: "<?= base_url() ?>index.php/token/updateTokenStatus",
                 type: "POST",
-                data: {idToken: $("#idToken").val(), status: $("#status").val()},
+                data: {idToken: $("#idToken").val(), status: $("#status").val(), remarks: $("#remarks").val()},
                 success: function (data) {
                     if (data == "Updated") {
                         window.location = "<?= base_url() ?>index.php/token/";

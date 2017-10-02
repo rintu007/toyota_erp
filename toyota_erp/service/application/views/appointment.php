@@ -328,6 +328,10 @@
                                     <th>Voice of Customer</th>
                                     <th>Est Time</th>
                                     <th>Labor Cost</th>
+                                  <?php  foreach ($condConfirm as $key) {?>
+                                      <th><?= $key['Name'] ?></th>
+                                 <?php }
+                                    ?>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -403,27 +407,27 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </fieldset>-->
-                    <fieldset>
-                        <legend onclick="DoToggle('#ConditionDiv')">5W1H</legend>
-                        <div id="ConditionDiv" class="feildwrap" style="width: 95%;">
-                            <?php
-                            $i = 0;
-                            foreach ($condConfirm as $key) {
-                                ?>
-<!--                                <br>-->
-<!--                                <div style="margin-left: -90px;">-->
-
-                                    <label for="ConditionDetail<?php echo $i; ?>"><?= $key['Name'] ?></label>
-<!--                                </div>-->
-                                <?php foreach ($key['ConditionDetail'] as $val) { ?>
-                                    <input id="ConditionDetail<?php echo $i; ?>" name="ConditionDetail<?php echo $i; ?>" type="radio" value="<?= $val['idConditionDetail'] ?>"><?= $val['ConditionDetail'] ?>
-                                    <?php
-                                }
-                                $i = $i + 1;
-                            }
-                            ?>
-                        </div>
-                    </fieldset>
+<!--                    <fieldset>-->
+<!--                        <legend onclick="DoToggle('#ConditionDiv')">5W1H</legend>-->
+<!--                        <div id="ConditionDiv" class="feildwrap" style="width: 95%;">-->
+<!--                            --><?php
+//                            $i = 0;
+//                            foreach ($condConfirm as $key) {
+//                                ?>
+<!--<!--                                <br>-->
+<!--<!--                                <div style="margin-left: -90px;">-->
+<!---->
+<!--                                    <label for="ConditionDetail--><?php //echo $i; ?><!--">--><?//= $key['Name'] ?><!--</label>-->
+<!--<!--                                </div>-->
+<!--                                --><?php //foreach ($key['ConditionDetail'] as $val) { ?>
+<!--                                    <input id="ConditionDetail--><?php //echo $i; ?><!--" name="ConditionDetail--><?php //echo $i; ?><!--" type="radio" value="--><?//= $val['idConditionDetail'] ?><!--">--><?//= $val['ConditionDetail'] ?>
+<!--                                    --><?php
+//                                }
+//                                $i = $i + 1;
+//                            }
+//                            ?>
+<!--                        </div>-->
+<!--                    </fieldset>-->
 
                     <!--                    <fieldset>-->
 <!--                        <legend onclick="DoToggle('#ConfirmationDiv')">Confirmation</legend>-->
@@ -491,6 +495,19 @@
                                     <input style="width: 130px;margin-left: 31px;" id="AppointmentDate" type="text" name="AppointmentDate" class='date' placeholder="Appointment Date"  required>
                                 </div>
                                 <div >
+                                    <label>Category</label>
+                                    <select name="idCategory">
+                                        <?php
+                                        foreach ($category as $row) {
+                                            ?>
+                                            <option value=" ">--SELECT--</option>
+                                            <option value="<?= $row['idCategory'] ?>"><?= $row['Name'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div >
                                     <label>Color</label>
                                     <input style="width: 130px;margin-left: 31px;" id="color" type="color" value="#2424ff" name="color" class=''  required>
                                 </div>
@@ -541,15 +558,15 @@
                                         <option value="15:30">15:30</option>
                                     </select>
                                 </div>
-                                <div style="margin-left: -119px;">
+                                <div style="">
                                     <label>Bay</label>
                                     <!--<input style="width: 130px" id="StartTime" type="text" name="StartTime" data-time-format="H:i:s" placeholder="Start Time" data-validation = "required">-->
                                     <select name="idBay">
                                         <option>Select Bay</option>
                                         <?php
-                                        foreach ($bay as $AllBays) {
+                                        foreach ($bay as $row) {
                                             ?>
-                                            <option value="<?= $AllBays['key'] ?>"><?= $AllBays['label'] ?></option>
+                                            <option value="<?= $row['key'] ?>"><?= $row['label'] ?></option>
                                             <?php
                                         }
                                         ?>
@@ -1042,11 +1059,11 @@
 
     function validationform() {
 
-        var conditions = [];
-        $('#ConditionDiv').find(':radio:checked').each(function () {
-            conditions.push($(this).val());
-        });
-        $('#ConditionDiv').append("<input type='text' name='ConditionDetail' value='" + JSON.stringify(conditions) + "'>");
+//        var conditions = [];
+//        $('#ConditionDiv').find(':radio:checked').each(function () {
+//            conditions.push($(this).val());
+//        });
+//        $('#ConditionDiv').append("<input type='text' name='ConditionDetail' value='" + JSON.stringify(conditions) + "'>");
 
         var staffSlct = $('#idStaff').val();
         if (staffSlct === "Select Service Advisor")
@@ -1102,6 +1119,18 @@
 //    }
 
     var Jobs = <?= json_encode($mechanicalJobs,true);?>;
+
+    var cond = '';
+
+    <?php foreach ($condConfirm as $key) {?>
+        cond += '<td> <select name="ConditionDetail[]">'
+    <?php foreach ($key['ConditionDetail'] as $val) { ?>
+        cond += '<option value="<?=$val['idConditionDetail']?>"><?=$val['ConditionDetail']?></option>'
+    <?php
+    } ?>
+    cond += '</select></td>'
+    <?php }
+    ?>
     function addJob()
     {
         console.log($('#job_sel').val())
@@ -1123,6 +1152,7 @@
             '<td><input type="text" placeholder="Enter Customer Voice" name="customerVoice[]"></td>' +
             '<td>'+Jobs[index].TimeTaken+'</td>' +
             '<td><input type="number" min="0" class="laborCost" name="laborCost[]" onchange="calculateEstimate()" value="'+Jobs[index].RangeOneAmount+'"></td>'+
+            cond +
             '<td><input type="button" class="btn" value="X" onclick="$(this).parent().parent().remove();calculateEstimate()" ></td>'+
             '</tr>'
             $('#tblJobs').append(items);

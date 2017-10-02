@@ -101,20 +101,23 @@
                                         <td class='tbl-count'>" + parseInt(a + 1) + "</td>\n\
                                         <td class='tbl-ro-number'><input readonly type='text' name='ronumber[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'></td>\n\
                                         <td class='tbl-part-number' style='display:none'><input readonly type='text' name='idpartsrec[]'></td>\n\
-                                        <td class='tbl-part-number'><input readonly type='text' name='partsreqinfo[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'></td>\n\
+                                        <td class='tbl-part-number'><input readonly type='text' name='partnumber[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'></td>\n\
                                         <td class='tbl-od'><input readonly type='text' name='partsreqinfo[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Description' placeholder='Description'/></td>\n\
                                         <td class='tbl-req-qty'><input readonly type='text' name='requestquantity[]' style='width: 69%;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Quantity' placeholder='Quantity'/>\n\
-                                        <td class='tbl-req-qty'><input readonly type='text' name='requestquantity[]' style='width: 69%;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Quantity' placeholder='Quantity'/></td>");
+                                        <td class='tbl-req-qty'><input readonly type='text' name='requestquantity[]' style='width: 69%;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Quantity' placeholder='Quantity'/></td> \
+                                        <td class='tbl-part-number' style='display:none'><input readonly type='text' name='idPartsReqInfo[]'></td>")
+
                         }
                     }
                     for (var each in receiveData) {
                         $('#recData tr:eq(' + each + ') td:eq(' + 1 + ') input').val(receiveData[each]['RONumber']);
-                        $('#recData tr:eq(' + each + ') td:eq(' + 2 + ') input').val(receiveData[each]['idPartsRec']);
+                        $('#recData tr:eq(' + each + ') td:eq(' + 2 + ') input').val(receiveData[each]['idPartsRequisition']);
                         $('#recData tr:eq(' + each + ') td:eq(' + 3 + ') input').val(receiveData[each]['PartNumber']);
                         $('#recData tr:eq(' + each + ') td:eq(' + 4 + ') input').val(receiveData[each]['PartName']);
-                       // $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['DispatchedQuantity']);
-					    $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['PartQuantity']);
+                        // $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['DispatchedQuantity']);
+                        $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['PartQuantity']);
                         $('#recData tr:eq(' + each + ') td:eq(' + 6 + ') input').val(receiveData[each]['PartQuantity']);
+                        $('#recData tr:eq(' + each + ') td:eq(' + 7 + ') input').val(receiveData[each]['idPartsReqInfo']);
                     }
                 } else {
                     $('#recData').html("<td></td><td></td><td></td><td>No Data Found</td><td></td><td></td>");
@@ -122,4 +125,46 @@
             }
         });
     });
+
+//    $("#searchbyro").keyup(function() {
+//        var search = $("#searchbyro").val();
+//        $('#recData').html('');
+//        $('#recData tr input').val('');
+//        $.ajax({
+//            url: "<?//= base_url() ?>//index.php/partsreceived/search",
+//            type: "POST",
+//            data: {searchbyro: search},
+//            success: function(data) {
+//
+//                var receiveData = JSON.parse(data);
+//                if (receiveData.length > 0) {
+//                    for (var a = 0; a < receiveData.length; a++) {
+//                        if ($('#recData tr').length > receiveData.length) {
+//                            $('#recData tr:eq(' + a + ')').remove();
+//                        } else {
+//                            $('#recData').append("<tr>\n\
+//                                        <td class='tbl-count'>" + parseInt(a + 1) + "</td>\n\
+//                                        <td class='tbl-ro-number'><input readonly type='text' name='ronumber[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'></td>\n\
+//                                        <td class='tbl-part-number' style='display:none'><input readonly type='text' name='idpartsrec[]'></td>\n\
+//                                        <td class='tbl-part-number'><input readonly type='text' name='partsreqinfo[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'></td>\n\
+//                                        <td class='tbl-od'><input readonly type='text' name='partsreqinfo[]' style='background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Description' placeholder='Description'/></td>\n\
+//                                        <td class='tbl-req-qty'><input readonly type='text' name='requestquantity[]' style='width: 69%;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Quantity' placeholder='Quantity'/>\n\
+//                                        <td class='tbl-req-qty'><input readonly type='text' name='requestquantity[]' style='width: 69%;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='Quantity' placeholder='Quantity'/></td>");
+//                        }
+//                    }
+//                    for (var each in receiveData) {
+//                        $('#recData tr:eq(' + each + ') td:eq(' + 1 + ') input').val(receiveData[each]['RONumber']);
+//                        $('#recData tr:eq(' + each + ') td:eq(' + 2 + ') input').val(receiveData[each]['idPartsRec']);
+//                        $('#recData tr:eq(' + each + ') td:eq(' + 3 + ') input').val(receiveData[each]['PartNumber']);
+//                        $('#recData tr:eq(' + each + ') td:eq(' + 4 + ') input').val(receiveData[each]['PartName']);
+//                       // $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['DispatchedQuantity']);
+//					    $('#recData tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['PartQuantity']);
+//                        $('#recData tr:eq(' + each + ') td:eq(' + 6 + ') input').val(receiveData[each]['PartQuantity']);
+//                    }
+//                } else {
+//                    $('#recData').html("<td></td><td></td><td></td><td>No Data Found</td><td></td><td></td>");
+//                }
+//            }
+//        });
+//    });
 </script>

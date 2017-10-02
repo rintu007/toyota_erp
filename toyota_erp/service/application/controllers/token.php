@@ -67,6 +67,7 @@ class Token extends CI_Controller
         $dataArray['variants'] = $this->token->get_variants();
         $dataArray['s_category'] = $this->token->get_s_category();
         $dataArray['tokenNumber'] = $this->token->get_tokenNumber();
+        $dataArray['msi'] = $this->token->get_MSI();
 
 //        var_dump($dataArray['tokenNumber']);die;;
 
@@ -96,7 +97,8 @@ class Token extends CI_Controller
     {
         $idToken = $this->input->post('idToken');
         $Data = array(
-            'status'    => $this->input->post('status')
+            'status'    => $this->input->post('status'),
+            'remarks'    => $this->input->post('remarks')
         );
         $editAppointment =$this->token->Updatetoken($idToken, $Data);
         if ($editAppointment) {

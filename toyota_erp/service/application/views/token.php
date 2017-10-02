@@ -100,15 +100,17 @@ $data = unserialize($_COOKIE['logindata']);
 
 
                 <div class="col-sm-2 token" onclick="get_token(<?= $item['idToken']?>)">
-                    <div class="col-sm-5 token_id">
-                        <h2><?= sprintf('%03d', $item['tokenNumber']); ?></h2>
+                    <div class="col-sm-3 token_id">
+                        <h2><?= sprintf('%02d', $item['tokenNumber']); ?></h2>
                     </div>
                     <div class="col-sm-7 token_left">
-                        <p><?= $item['CustomerName'] ?></p>
-                        <p><?= $item['category'] ?></p>
-                        <p><?= $item['Model'] ?></p>
-                        <div class="token_bottom <?= $item['status'] ?>">
-                            <p><?= 'T-'.date('dmy-').sprintf('%03d', $item['tokenNumber']) ?></p>
+                        <div style="padding-left: 10px;">
+                            <p><?= $item['CustomerName'] ?></p>
+                            <p><?= $item['category'] ?></p>
+                            <p><?= $item['Model'] ?></p>
+                        </div>
+                        <div class="token_bottom <?= $item['status'] ?>" style="    width: 129%;">
+                            <p><?= 'T-'.date('dmy-').sprintf('%02d', $item['tokenNumber']) ?></p>
                         </div>
                     </div>
                 </div>

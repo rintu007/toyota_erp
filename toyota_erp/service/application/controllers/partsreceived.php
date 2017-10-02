@@ -27,6 +27,7 @@ class Partsreceived extends CI_Controller {
     }
 
     function Received() {
+//        var_dump($_POST);die;
 
         $recModel = new S_partsreceived();
         $isReceived = $recModel->updatePartsReceived();

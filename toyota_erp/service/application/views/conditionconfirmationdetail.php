@@ -49,7 +49,7 @@
                         <label>Search 5W1H Detail</label>
                         <input type="text" name="searchconditiondetail" id="searchconditiondetail"  placeholder="Search by 5W1H Detail">
                     </div><br>
-                    <div class="btn-block-wrap datagrid">
+                    <div class="btn-block-wrap datagrid dg">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead class="conditiondetailhf">
                                 <tr>

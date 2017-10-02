@@ -35,7 +35,7 @@
                         <label>Search 5W1H</label>
                         <input type="text" name="searchconditionconfirmation" id="searchconditionconfirmation"  placeholder="Search by 5W1H">
                     </div><br>
-                    <div class="btn-block-wrap datagrid">
+                    <div class="btn-block-wrap datagrid dg">
                         <table width="100%" border="0" cellpadding="1" cellspacing="1">
                             <thead class="conditionconfirmationlisthf">
                                 <tr>

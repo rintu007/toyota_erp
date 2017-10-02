@@ -68,13 +68,9 @@
                             <label>Customer Name</label>
                             <input type="text" name="CustomerName"  id="CustomerName">
                             <input type="hidden" name="idCustomer"  id="idCustomer">
+                            <button type="button" class="btn" onclick="showpopup('estimatelist')">List</button>
                         </div>
-                        <div>
-                            <label>Registration</label>
-                            <input type="text" name="regNo"  id="RegistrationNumber">
-                            <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>
 
-                        </div>
                         <div>
                             <label>Phone</label>
                             <input type="text" name="CompanyContact"  id="CompanyContact">
@@ -82,6 +78,25 @@
                         <div>
                             <label>Mobile</label>
                             <input type="text" name="Cellphone"  id="Cellphone">
+                        </div>
+                        <div>
+                            <label>Current Address</label>
+                            <input type="text" name="AddressDetails" id="AddressDetails">
+                        </div>
+
+                        <div>
+                            <label>Email</label>
+                            <input type="text" name="CustomerEmail"  id="CustomerEmail">
+                        </div>
+                        <div>
+                            <label>CNIC</label>
+                            <input class="CNIC" id="Cnic" type="text" name="CustomerNIC" placeholder="Enter NIC" data-validation="">
+                        </div>
+                        <div>
+                            <label>Registration</label>
+                            <input type="text" name="regNo"  id="RegistrationNumber">
+                            <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>
+
                         </div>
                         <div>
                             <label>Chasis No</label>
@@ -100,18 +115,18 @@
                             </select>
                         </div>
                         <br>
-                        <div>
-                            <label>Current Address</label>
-                            <input type="text" name="AddressDetails" id="AddressDetails">
-                        </div>
 
                         <div>
-                            <label>Email</label>
-                            <input type="text" name="CustomerEmail"  id="CustomerEmail">
-                        </div>
-                        <div>
                             <label>MSI Type</label>
-                            <input type="text" name="msitype"  id="msitype">
+<!--                            <input type="text" name="msitype"  id="msitype">-->
+                            <select name="msitype" id="msitype" class="chosen-select" style="width: 273px">
+                                <?php
+                                foreach ($msi as $row)
+                                {?>
+                                    <option value="<?=$row['idmsi']?>"><?=$row['msi']?></option>
+
+                                <?php }?>
+                            </select>
                         </div>
                         <br>
                         <div>
@@ -136,13 +151,13 @@
         <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
         <div style="margin-left: 25px;width: 0px;">
             <fieldset style="">
-                <legend>Select Chassis</legend>
+                <legend>Estimate List</legend>
                 <div class="feildwrap">
                     <table id="myTable" class="myTable">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>estimateNumber</th>
+                            <th>EstimateNumber</th>
                             <th>RegistrationNumber</th>
                             <th>EngineNumber</th>
                             <th>ChassisNumber</th>
@@ -216,7 +231,6 @@
 
 <script>
     $(".chosen-select").chosen()
-
     var cust_list = <?= json_encode($customer_list,false); ?>;
     var est_list = <?= json_encode($estimate_list,false); ?>;
     function showpopup(div_id)

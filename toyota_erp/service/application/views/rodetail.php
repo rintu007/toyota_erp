@@ -879,30 +879,35 @@
                         var totalPartsAmount = 0;
                         var roModes = "";
 						if (partsdata && partsdata.length > 0) {
-							for(ip=0;ip<partsdata.length;ip++){
-								
-						var valueee = 	partsdata[ip]['CreatedDate'].split(" ")
-							  
-        var items = "";
-        if(partsdata[ip]['manual']!=""){var mm=partsdata[ip]['manual'];}else{var mm=partsdata[ip]['PartAmount']}
-        items +=
-                "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ip+1) + "</td>\n\
-                <td class='tbl-price'><input type='date' value='"+valueee[0]+"' name='PartsDate[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsDate' placeholder='Date' data-validation = 'required'></td><td class='tbl-price'><input type='text' name='PartsInvoiceNo[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'  value='"+partsdata[ip]['invoice']+"' id='PartsInvoiceNo' placeholder='Invoice'></td><td class='tbl-part'><select class='chosen-select slctboxes' name='PartNumber["+ip+"]' onchange=getPart(this) style=' width: 200px; background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartNumber'><option>Select Part Name</option><?php
-                                        foreach ($partsList as $AllPart) {
-                                            ?><option value='<?= $AllPart['idPart'] ?>'><?= $AllPart['PartName'] ?></option><?php } ?></select><span name='' class='error-qi cb-error help-block' style='margin-left:50px;margin-top:-35px;display:none;'>Option must be Selected</span></td>" +
-                "<td class='tbl-price'><input type='text' name='PartsQuantity[]' value='"+partsdata[ip]['PartQuantity']+"' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsQuantity' placeholder='Qty' data-validation = 'required'></td>" +
-                "<td class='tbl-price'><input type='text' name='PartsDescription[]'  style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsDescription' placeholder='Description'></td>" +             
+                            for (ip = 0; ip < partsdata.length; ip++) {
 
-                "<td class='tbl-price'><input type='text' name='PartsAmount[]' value='"+mm+"' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsAmount' placeholder='Amount' data-validation = 'required'></td>" +
-             "<td class='tbl-price'><input type='text' value='"+partsdata[ip]['signature']+"' name='PartsSign[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsSign' placeholder='Signature'></td>" +
-                "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deletePartRow(this)'></td></tr>";
-        "</tr>";
-        $('#tblParts').append(items);
-        $("select[name='PartNumber["+ip+"]']").chosen({no_results_text: "Oops, nothing found!"});
-		$("select[name='PartNumber["+ip+"]']").val(partsdata[ip]['idPart']);
-		$("select[name='PartNumber["+ip+"]']").trigger('chosen:updated');
-		
-					}		
+                                var valueee = partsdata[ip]['CreatedDate'].split(" ")
+
+                                var items = "";
+                                var mm=0;
+                                if (partsdata[ip]['manual'] != "") {
+                                     mm = partsdata[ip]['manual'];
+                                } else {
+                                     mm = partsdata[ip]['PartAmount']
+                                }
+                                items +=
+                                    "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ip + 1) + "</td>\n\
+                <td class='tbl-price'><input type='date' value='" + valueee[0] + "' name='PartsDate[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsDate' placeholder='Date' data-validation = 'required'></td><td class='tbl-price'><input type='text' name='PartsInvoiceNo[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);'  value='" + partsdata[ip]['invoice'] + "' id='PartsInvoiceNo' placeholder='Invoice'></td><td class='tbl-part'><select class='chosen-select slctboxes' name='PartNumber[" + ip + "]' onchange=getPart(this) style=' width: 200px; background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartNumber'><option>Select Part Name</option><?php
+                                        foreach ($partsList as $AllPart) {
+                                        ?><option value='<?= $AllPart['idPart'] ?>'><?= $AllPart['PartName'] ?></option><?php } ?></select><span name='' class='error-qi cb-error help-block' style='margin-left:50px;margin-top:-35px;display:none;'>Option must be Selected</span></td>" +
+                                    "<td class='tbl-price'><input type='text' name='PartsQuantity[]' value='" + partsdata[ip]['PartQuantity'] + "' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsQuantity' placeholder='Qty' data-validation = 'required'></td>" +
+                                    "<td class='tbl-price'><input type='text' name='PartsDescription[]'  style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsDescription' placeholder='Description'></td>" +
+
+                                    "<td class='tbl-price'><input type='text' name='PartsAmount[]' value='" + mm + "' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsAmount' placeholder='Amount' data-validation = 'required'></td>" +
+                                    "<td class='tbl-price'><input type='text' value='" + partsdata[ip]['signature'] + "' name='PartsSign[]' style='width: 150px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='PartsSign' placeholder='Signature'></td>" +
+                                    "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deletePartRow(this)'></td></tr>";
+                                "</tr>";
+                                $('#tblParts').append(items);
+                                $("select[name='PartNumber[" + ip + "]']").chosen({no_results_text: "Oops, nothing found!"});
+                                $("select[name='PartNumber[" + ip + "]']").val(partsdata[ip]['idPart']);
+                                $("select[name='PartNumber[" + ip + "]']").trigger('chosen:updated');
+
+                            }
 						}
 						
                         if (parsedData.length > 0) {
@@ -918,39 +923,40 @@
 								 var res3 = str3.split(",");
 								 var ccounter = 1; 
 								 var iitems = "";
-								 for(i=0;i<res.length;i++){
-									    ccounter = ccounter + 1;
-     
-        iitems +=
-                "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ccounter - 1) + "</td>" +
-                "<td class = 'tbl-description'><input type = 'text' name = 'WorkPerformed[]'  value ='"+res[i]+"' style = 'width: 500px;background: #fff; border: 1px solid #dfdfdf; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id = 'WorkPerformed' placeholder = 'Work to be Performed' data-validation = 'required'></td>" +
-                "<td class='tbl-price'><input type='text' value ='"+res3[i]+"' name='WorkPerformedHrs[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedHrs' placeholder='Hrs' data-validation = 'required'></td>" +
-                "<td class='tbl-price'><input type='text'  value ='"+res2[i]+"' name='WorkPerformedAmount[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedAmount' placeholder='Amount' data-validation = 'required'></td>" +
-                "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deleteWorkRow(this)'></td></tr>";
-        
-								 }
+                                for (i = 0; i < res.length; i++) {
+                                    ccounter = ccounter + 1;
+
+                                    iitems +=
+                                        "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ccounter - 1) + "</td>" +
+                                        "<td class = 'tbl-description'><input type = 'text' name = 'WorkPerformed[]'  value ='" + res[i] + "' style = 'width: 500px;background: #fff; border: 1px solid #dfdfdf; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id = 'WorkPerformed' placeholder = 'Work to be Performed' data-validation = 'required'></td>" +
+                                        "<td class='tbl-price'><input type='text' value ='" + res3[i] + "' name='WorkPerformedHrs[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedHrs' placeholder='Hrs' data-validation = 'required'></td>" +
+                                        "<td class='tbl-price'><input type='text'  value ='" + res2[i] + "' name='WorkPerformedAmount[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedAmount' placeholder='Amount' data-validation = 'required'></td>" +
+                                        "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deleteWorkRow(this)'></td></tr>";
+
+                                }
 								 $('#tblworkperformed').append(iitems);
 								
 							}else{
 								if(parsedData[0]['is_PM'] == 1){
-										 var ccounter = 1; 
-								//var resultx = parsedData[0]['Jobs']
-								 var iitems = "";
-								// for(i=0;i<resultx.length;i++){
-									    ccounter = ccounter + 1;
-     
-        iitems +=
-                "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ccounter - 1) + "</td>" +
-                "<td class = 'tbl-description'><input type = 'text' name = 'WorkPerformed[]'  value ='"+parsedData[0]['PMPackage']+"' style = 'width: 500px;background: #fff; border: 1px solid #dfdfdf; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id = 'WorkPerformed' placeholder = 'Work to be Performed' data-validation = 'required'></td>" +
-                "<td class='tbl-price'><input type='text' value ='' name='WorkPerformedHrs[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedHrs' placeholder='Hrs' data-validation = 'required'></td>" +
-                "<td class='tbl-price'><input type='text'  value ='"+parsedData[0]['PM_amount']+"' name='WorkPerformedAmount[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedAmount' placeholder='Amount' data-validation = 'required'></td>" +
-                "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deleteWorkRow(this)'></td></tr>";
-        
-								// }
-								 $('#tblworkperformed').append(iitems);
+										 var ccounter = 1;
+                                    //var resultx = parsedData[0]['Jobs']
+                                    var iitems = "";
+                                    // for(i=0;i<resultx.length;i++){
+                                    ccounter = ccounter + 1;
+                                    iitems +=
+                                        "<tr class='tblPurchaseForce'><td class='tbl-count'>" + (ccounter - 1) + "</td>" +
+                                        "<td class = 'tbl-description'><input type = 'text' name = 'WorkPerformed[]'  value ='" + parsedData[0]['PMPackage'] + "' style = 'width: 500px;background: #fff; border: 1px solid #dfdfdf; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id = 'WorkPerformed' placeholder = 'Work to be Performed' data-validation = 'required'></td>" +
+                                        "<td class='tbl-price'><input type='text' value ='' name='WorkPerformedHrs[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedHrs' placeholder='Hrs' data-validation = 'required'></td>" +
+                                        "<td class='tbl-price'><input type='text'  value ='" + parsedData[0]['PM_amount'] + "' name='WorkPerformedAmount[]' style='width: 175px;background: #fff; padding: 7px 4px 7px 7px; border: 1px solid #dfdfdf; padding: 7px 10px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);' id='WorkPerformedAmount' placeholder='Amount' data-validation = 'required'></td>" +
+                                        "<td><input style='width:35px;height:30px;text-align:center;background: rgb(250,85,55); background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); background: -moz-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(250,85,55)), color-stop(50%, rgb(242,111,92)), color-stop(51%, rgb(245,41,12)), color-stop(100%, rgb(227,53,37))); background: -webkit-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -o-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: -ms-linear-gradient(top, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); background: linear-gradient(to bottom, rgb(250,85,55) 0%, rgb(242,111,92) 50%, rgb(245,41,12) 51%, rgb(227,53,37) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5537', endColorstr='#e33525', GradientType=0 ); border: 1px solid #a41100 !important; color: #fff !important; padding: 0px 5px; font-size: 22px; -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09); text-shadow: 0 1px 1px #333333; float: right; cursor: pointer '  type='button' value='X' onclick='deleteWorkRow(this)'></td></tr>";
+
+                                    // }
+                                    $('#tblworkperformed').append(iitems);
 									
 									
-								}else if (parsedData[0]['Jobs'].length > 0){
+								}
+								else
+								    if (parsedData[0]['Jobs'].length > 0){
 								
 								 var ccounter = 1; 
 								var resultx = parsedData[0]['Jobs']
@@ -967,7 +973,9 @@
         
 								 }
 								 $('#tblworkperformed').append(iitems);
-							}else if(parsedData[0]['PMPackage']){
+							}
+							else
+							    if(parsedData[0]['PMPackage']){
 											 var ccounter = 1; 
 								//var resultx = parsedData[0]['Jobs']
 								 var iitems = "";
@@ -1012,7 +1020,9 @@
                                     $('#Parts').val(totalPartsAmount);
                                 }, 5000);
 								
-                            } else {
+                            }
+                            else
+                                {
                                 $('#RoDetailFormBodyPaint').hide();
                                 $('#RoDetailForm').show();
                                 $('#IdInsertRO').val(parsedData[0]['idRO']);
@@ -1283,8 +1293,8 @@
                     for (var each in receiveData) {
                         var totalAmount = 0;
                         totalAmount = receiveData[each]['RetailPrice'] * receiveData[each]['DispatchedQuantity'];
-//                        $('#tblParts tr:eq(' + each + ') td:eq(' + 1 + ') input').val(receiveData[each]['RONumber']);
-//                        $('#tblParts tr:eq(' + each + ') td:eq(' + 2 + ') input').val(receiveData[each]['idPartsRec']);
+                        $('#tblParts tr:eq(' + each + ') td:eq(' + 1 + ') input').val(receiveData[each]['RONumber']);
+                        $('#tblParts tr:eq(' + each + ') td:eq(' + 2 + ') input').val(receiveData[each]['idPartsRec']);
                         $('#tblParts tr:eq(' + each + ') td:eq(' + 3 + ') input').val(receiveData[each]['PartName']);
                         $('#tblParts tr:eq(' + each + ') td:eq(' + 4 + ') input').val(receiveData[each]['DispatchedQuantity']);
                         $('#tblParts tr:eq(' + each + ') td:eq(' + 5 + ') input').val(receiveData[each]['PartDescription']);

@@ -45,6 +45,8 @@ class Estimatemechanical extends CI_Controller {
         $dataArray['partsList'] = $partReqMechanicalModel->fillPartCombo();
         $dataArray['insertMessage'] = $this->session->flashdata('insertmessage');
         $dataArray['pmdList'] = $pmdModel->getAllPmd();
+        $dataArray['customer_list'] = $this->s_customer->customer_list();
+
         $this->load->view('header');
         $this->load->view('estimatemechanical', $dataArray);
         $this->load->view('footer');

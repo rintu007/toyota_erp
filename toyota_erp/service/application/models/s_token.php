@@ -112,6 +112,11 @@ class S_token extends CI_Model {
         return $this->db->get('car_variants')->result_array();
     }
 
+    function get_MSI()
+    {
+        return $this->db->get('s_msi_type')->result_array();
+    }
+
     function get_s_category()
     {
         return $this->db->get('s_category')->result_array();
@@ -121,7 +126,7 @@ class S_token extends CI_Model {
     function customer_list()
     {
         $this->db->select('v.idVehicle,v.idVariant,v.idCustomer,v.RegistrationNumber,v.EngineNumber,v.ChassisNumber,
-        c.CustomerName,c.AddressDetails,c.Cellphone,c.CompanyContact,c.CustomerEmail,
+        c.CustomerName,c.AddressDetails,c.Cellphone,c.CompanyContact,c.CustomerEmail,c.Cnic,
         cv.Variants
         ')
             ->from('s_vehicle v')
@@ -195,6 +200,7 @@ class S_token extends CI_Model {
                 'idAppointment' => $_POST['idAppointment'],
                 'regNo'         => $_POST['regNo'],
                 'chasis'        => $_POST['ChassisNumber'],
+                'Cnic'        => $_POST['CustomerNIC'],
                 'idCategory'    => $_POST['idCategory'],
                 'make'          => $_POST['make'],
                 'msitype'       => $_POST['msitype'],

@@ -124,6 +124,7 @@ class Appointment extends CI_Controller {
     }
 
     function Add() {
+//        var_dump($_POST);die;
         $JPCB = new S_jobprogresscontrolboard();
         $scheduleAppointment = $JPCB->ScheduleAppointment();
         if ($scheduleAppointment) {

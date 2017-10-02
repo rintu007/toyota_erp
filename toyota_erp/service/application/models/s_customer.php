@@ -100,4 +100,18 @@ class S_customer extends CI_Model {
         }
     }
 
+    function customer_list()
+    {
+        $this->db->select('v.idVehicle,v.idVariant,v.idCustomer,v.RegistrationNumber,v.EngineNumber,v.ChassisNumber,v.Model,v.Mileage,v.Year,
+        c.*,
+        cv.Variants
+        ')
+            ->from('s_vehicle v')
+            ->join('s_cutomerdetail c','c.idCustomer = v.idCustomer')
+            ->join('car_variants cv','cv.IdVariants = v.idVariant');
+        // ->where('v.RegistrationNumber',$reg);
+
+        return $data = $this->db->get()->result_array();
+    }
+
 }

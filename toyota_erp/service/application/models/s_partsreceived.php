@@ -40,17 +40,29 @@ class S_partsreceived extends CI_Model {
     }
 
     function updatePartsReceived() {
-       /* $idPartReceived = $_POST['idpartsrec'];
+       $idPartReceived = $_POST['idpartsrec'];
         for ($i = 0; $i < count($_POST['idpartsrec']); $i++) {
-            $isReceived = array(
-                'isReceived' => 1,
-                'ReceivedDate' => date('Y-m-d H:i:s'),
-                'ModifiedDate' => date('Y-m-d H:i:s')
+//            $isReceived = array(
+//                'isReceived' => 1,
+//                'ReceivedDate' => date('Y-m-d H:i:s'),
+//                'ModifiedDate' => date('Y-m-d H:i:s')
+//            );
+            $data = array(
+               "idPartsReqInfo"     =>$_POST['idPartsReqInfo'][$i],
+               "DispatchedQuantity" =>$_POST['requestquantity'][$i],
+              // "DispatchedDate"     =>$_POST['DispatchedDate'],
+              // "ReceivedDate"       =>$_POST['ReceivedDate'],
+               "isReceived"         =>1,
+               "CreatedDate"        => date("Y-m-d H:i:s"),
+               "ModifiedDate"       => date("Y-m-d H:i:s"),
+               "isActive"           =>1,
+               "RemainingQuantity"  =>0,
+//               "manual" =>$_POST['manual']
             );
-            $this->db->where('idPartsReceivedInfo', $idPartReceived[$i]);
-            $update = $this->db->update('s_partsreceivedinfo', $isReceived);
+//            $this->db->where('idPartsReceivedInfo', $idPartReceived[$i]);
+            $update = $this->db->insert('s_partsreceivedinfo', $data);
         }
-        if ($update) {
+      /*  if ($update) {
             return TRUE;
         } else {
             return FALSE;

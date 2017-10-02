@@ -58,6 +58,7 @@ class S_jobprogresscontrolboard extends CI_Model {
         $AppointmentData = array(
             'AppointmentDate' => date("Y-m-d", strtotime($_POST['AppointmentDate'])),
             'color' => $_POST['color'],
+            'idCategory' => $_POST['idCategory'],
             'StartTime' => $_POST['StartTime'],
             'EndTime' => $_POST['EndTime'],
             'RegistrationNumber' => $_POST['RegNumber'],
@@ -137,6 +138,15 @@ class S_jobprogresscontrolboard extends CI_Model {
 //
 //        $this->db->insert_batch('s_appointment_condition', $ConditionData);
 
+        foreach ($_POST['ConditionDetail'] as $row)
+        {
+            $cond = array(
+                'idAppointment' => $idApointment,
+                'idConditionConfirmationDetail'   => $row
+            );
+            $this->db->insert('s_appointment_condition', $cond);
+        }
+
         if (isset($_POST['PartNumber'])) {
             $PartsData = array();
             for ($i = 0; $i < count($_POST['PartNumber']); $i++) {
@@ -175,6 +185,15 @@ class S_jobprogresscontrolboard extends CI_Model {
         }
         $finalDropDown = $dropDownList;
         return $finalDropDown;
+    }
+
+    function get_s_category()
+    {
+        $this->db->select('*');
+        $this->db->from('s_category');
+        $this->db->where('s_category.isActive != 0');
+        $category = $this->db->get();
+        return $category->result_array();
     }
 
     function InsertJpcb($JPCBData) {

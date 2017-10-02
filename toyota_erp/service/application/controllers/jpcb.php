@@ -53,11 +53,13 @@ class Jpcb extends CI_Controller {
         $allModels = new S_allmodels();
         $pmdModel = new S_periodicmaintenancedetails();
         $conditionModel = new S_conditionconfirmationdetail();
+        $Jpcb = new S_jobprogresscontrolboard();
 
         $dataArray['Response'] = $this->session->flashdata('Appointment');
         $dataArray['ROMode'] = $repairOrderModel->getROModes();
         $dataArray['RONumber'] = $repairOrderModel->generateRONumber();
         $dataArray['condConfirm'] = $conditionModel->getConditionDetail();
+//        var_dump($dataArray['condConfirm'] );die;
         $dataArray['partsList'] = $repairOrderModel->fillPartCombo();
         $dataArray['checkList'] = $checkListModel->getAllRoCheckList();
         $dataArray['financeInfoList'] = $financeModel->getFinanceInfo();
@@ -73,6 +75,7 @@ class Jpcb extends CI_Controller {
         $dataArray['pmdList'] = $pmdModel->getAllPmd();
         $dataArray['bay'] = $BayModel->AllBays();
         $dataArray['staff'] = $staffManagment->AllStaff();
+        $dataArray['category'] = $Jpcb->get_s_category();
         $dataArray['insertMessage'] = $this->session->flashdata('insertmessage');
         $dataArray['updateMessage'] = $this->session->flashdata('updatemessage');
         $dataArray['deleteMessage'] = $this->session->flashdata('deletemessage');
