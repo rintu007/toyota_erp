@@ -65,6 +65,17 @@
 
         </div>
 
+        <div class="form-group">
+
+            <div class="col-sm-3">
+                <br>
+                <a href="<?= base_url().'index.php/token/updatetoken/'.$token->idToken.'/'.'estimatemechanical'?>" class="btn btn-primary">Create Estimate Mechanical</a>
+                <a href="<?= base_url().'index.php/token/updatetoken/'.$token->idToken.'/'.'estimatebodyshop'?>" class="btn btn-primary">Create Estimate Body Shop</a>
+
+            </div>
+
+        </div>
+
         <!--                        <button type="button" id="update" class="btn btn-success">Update</button>-->
 
     </div>

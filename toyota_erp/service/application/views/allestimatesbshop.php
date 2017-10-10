@@ -19,7 +19,7 @@
                         <input type="text" name="searchbyest" id="searchbyest"  placeholder="Search by Estimate Number">
                     </div><br><br>
                     <div id="JobDescDiv" class="feildwrap">
-                        <div class="btn-block-wrap datagrid">
+                        <div class="btn-block-wrap dg">
                             <table width="100%" border="0" cellpadding="1" cellspacing="0">
                                 <thead>
                                     <tr>

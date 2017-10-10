@@ -20,6 +20,7 @@ class Estimatebodyshop extends CI_Controller {
         $this->load->model('s_jobreferencemanual');
         $this->load->model('s_partsrequistionmechanical');
         $this->load->model('s_customer');
+        $this->load->model('s_token');
         $this->load->model('s_vehicle');
         $this->load->model('s_allbrands');
         $this->load->model('s_allmodels');
@@ -30,12 +31,14 @@ class Estimatebodyshop extends CI_Controller {
         date_default_timezone_set("Asia/Karachi");
     }
 
-    function index() {
+    function index($token=null) {
         $dataArray = array();
         $partReqMechanicalModel = new s_partsrequistionmechanical();
         $jobRefManual = new S_jobreferencemanual();
         $allBrands = new S_allbrands();
         $staffManagment = new S_staff();
+        $dataArray['token'] = $this->s_token->selectOnetoken($token);
+        $dataArray['customer_list'] = $this->s_customer->customer_list( ($token==null)?null:$dataArray['token']->idCustomer);
         $dataArray['allJobs'] = $jobRefManual->getBodyPaintJobs();
         $dataArray['serviceAdvList'] = $staffManagment->getServiceAdvisor();
         $dataArray['brandsList'] = $allBrands->getAllBrands();
@@ -310,6 +313,8 @@ class Estimatebodyshop extends CI_Controller {
     }
 
   function getCustomer() {
+      if($_POST['idCustomer']!='')
+          return $_POST['idCustomer'];
 
         $customerModel = new S_customer();
         $isExistCustomer = $customerModel->isExistCustomer($this->input->post('CustomerName'), $this->input->post('CustomerContact'));

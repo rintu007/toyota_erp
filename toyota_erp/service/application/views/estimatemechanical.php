@@ -32,14 +32,20 @@
                                 <input id="Date" type="text" readonly name="Date" class="date" placeholder="Date" value="<?=date('d-M-Y')?>"
                                        data-validation="required" style="width:150px;">
                             </div>
-                            <br><br><br><br>
+                            <?php if(count($token)){ ?>
+                            <div style="float: right;">
+                                <label>Token Number</label>
+                                <input id="Date" type="text" readonly name="" value="<?= 'T-'.date('dmy-').sprintf('%02d',$token->tokenNumber) ?>"
+                                       data-validation="required" style="width:100px;">
+                                <input type="hidden" name="idToken" value="<?=$token->idToken?>">
+                            </div>
+                            <?php }?>
 
-                            <br><br>
                             <div>
                                 <label>Customer Name</label>
                                 <input type="text" name="CustomerName"  id="CustomerName">
                                 <input type="hidden" name="idCustomer"  id="idCustomer">
-                                <button type="button" class="btn" onclick="showpopup('customerlist')">List</button>
+                                <button type="button" class="btn" id="listbtn" onclick="showpopup('customerlist')">List</button>
                             </div>
 
                             <div>
@@ -377,6 +383,8 @@
 
     $(".chosen-select").chosen()
     var cust_list = <?= json_encode($customer_list,false); ?>;
+
+
     function showpopup(div_id)
     {
         $('.popup-' + div_id).bPopup({
@@ -698,6 +706,9 @@
             return true;
         }
     }
-
+    <?php if(count($token)){ ?>
+    filldata(0);
+    $("#listbtn").hide()
+    <?php }?>
     $('.myTable').DataTable();
 </script>

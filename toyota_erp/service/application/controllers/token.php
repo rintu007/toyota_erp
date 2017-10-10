@@ -106,6 +106,13 @@ class Token extends CI_Controller
         }
     }
 
+    public function updateToken($idToken,$action)
+    {
+        $this->token->Updatetoken($idToken, array('status'=>'CLOSED','remarks'=>$action.' '.'created'));
+        redirect(base_url('index.php/'.$action.'/index/'.$idToken));
+
+    }
+
 
 
 

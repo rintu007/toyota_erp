@@ -96,7 +96,7 @@
                                     <th width="">AppointmentDate</th>
                                     <th width="">RegistrationNumber</th>
                                     <th width="">ExtendTime</th>
-                                    <th>Action</th>
+<!--                                    <th>Action</th>-->
                                 </tr>
                             </thead>
 
@@ -115,7 +115,7 @@
                                         <td class="tbl-date"><?= $row['AppointmentDate'] ?></td>
                                         <td class="tbl-color"><?= $row['RegistrationNumber'] ?></td>
                                         <td class="tbl-phone"><?= ($row['ExtendTime']) ?></td>
-                                        <td class="tbl-phone"><a href="<?=site_url(('index.php/Appointment/indec').'/'.$row['idAppointment'])?>">Ro</a></td>
+<!--                                        <td class="tbl-phone"><a href="--><?//=site_url(('index.php/Appointment/indec').'/'.$row['idAppointment'])?><!--">Ro</a></td>-->
                                     </tr>
                                     <?php
                                 }

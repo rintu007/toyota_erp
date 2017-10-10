@@ -69,7 +69,7 @@ class Appointment extends CI_Controller {
         $config["base_url"] = base_url() . "index.php/Appointment/index/";
         $count = $appointment->get_appointments_count();
         $config["total_rows"] = $count;
-        $config["per_page"] = 5;
+        $config["per_page"] = 20;
         $config["uri_segment"] = 3;
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;

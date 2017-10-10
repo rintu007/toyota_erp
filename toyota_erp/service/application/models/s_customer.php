@@ -100,7 +100,7 @@ class S_customer extends CI_Model {
         }
     }
 
-    function customer_list()
+    function customer_list($idcustomer =null)
     {
         $this->db->select('v.idVehicle,v.idVariant,v.idCustomer,v.RegistrationNumber,v.EngineNumber,v.ChassisNumber,v.Model,v.Mileage,v.Year,
         c.*,
@@ -109,6 +109,10 @@ class S_customer extends CI_Model {
             ->from('s_vehicle v')
             ->join('s_cutomerdetail c','c.idCustomer = v.idCustomer')
             ->join('car_variants cv','cv.IdVariants = v.idVariant');
+        if(isset($idcustomer))
+        {
+            $this->db->where('c.idCustomer',$idcustomer);
+        }
         // ->where('v.RegistrationNumber',$reg);
 
         return $data = $this->db->get()->result_array();

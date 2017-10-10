@@ -1,4 +1,10 @@
+<style>
+    input:read-only {
+        background-color: #aaa !important;
+    }
+</style>
 <div id="wrapper">
+
     <div id="content">
         <?php
         $data = unserialize($_COOKIE['logindata']);
@@ -20,6 +26,15 @@
                     <fieldset id="insurance_detail">
                         <legend onclick="DoToggle('#InitialInfoDiv')">Initial Information</legend>
                         <div id="InitialInfoDiv" class="feildwrap">
+
+                            <?php if(count($token)){ ?>
+                                <div style="float: right;">
+                                    <label>Token Number</label>
+                                    <input id="Date" type="text" readonly name="" value="<?= 'T-'.date('dmy-').sprintf('%02d',$token->tokenNumber) ?>"
+                                           data-validation="required" style="width:100px;">
+                                    <input type="hidden" name="idToken" value="<?=$token->idToken?>">
+                                </div>
+                            <?php }?>
                             <!--                            <div>
                                                             <label>S.No</label>
                                                             <input id="SNO" type="text" name="SNO" placeholder="Serial Number" data-validation="" style="width: 150px;" 
@@ -87,26 +102,30 @@
                         <legend onclick="DoToggle('#CustomerInfoDiv')">Customer Information</legend>
                         <div id="CustomerInfoDiv" class="feildwrap">
 						    
-                            <div style="margin-left: 0px;">
-                                <label>Existing Customer</label>
-                                <input type="text" name="searchbyreg" id="searchbyreg" placeholder="Search by Reg.Num / Frame-Num / Engine-Num / Est.Num / Model" style="width: 400px;">
-                                <span id="regresult" name="RegResult" style="margin-left:05px;font-weight: bolder;font-size: 14px;">New Customer</span>
-                            </div><br><br>
+<!--                            <div style="margin-left: 0px;">-->
+<!--                                <label>Existing Customer</label>-->
+<!--                                <input type="text" name="searchbyreg" id="searchbyreg" placeholder="Search by Reg.Num / Frame-Num / Engine-Num / Est.Num / Model" style="width: 400px;">-->
+<!--                                <span id="regresult" name="RegResult" style="margin-left:05px;font-weight: bolder;font-size: 14px;">New Customer</span>-->
+<!--                            </div><br><br>-->
 							<div>
                                 <label>Estimate Date</label>
-                                <input id="Date" type="text" name="Date" class="date" placeholder="Date" data-validation="required" style="width: 150px;">
+                                <input id="Date" type="text" name="Date" value="<?=date('d-M-Y')?>" readonly class="date" placeholder="Date" data-validation="required" style="width: 150px;">
                             </div>
                             <div>
                                 <label>Company Name</label>
                                 <input id="CompanyName" type="text" name="CompanyName" placeholder="Enter Company Name"  data-validation = "" style="width: 150px;">
+                                <button type="button" class="btn" id="listbtn" onclick="showpopup('customerlist')">List</button>
+
                             </div>
                             <div>
                                 <label>Company Contact No.</label>
                                 <input id="CompanyContact" type="text" name="CompanyContact" placeholder="Enter Company Contact"  data-validation = "" style="width: 150px;">
                             </div><br>
+
                             <div>
                                 <label>Customer Name</label>
                                 <input id="CustomerName" type="text" name="CustomerName"  placeholder="Enter Customer Name" data-validation="required" style="width: 150px;">
+                                <input type="hidden" name="idCustomer"  id="idCustomer">
                             </div>
                             <div>
                                 <label>ATTN Mr.</label>
@@ -114,7 +133,7 @@
                             </div><br>                                                     
                             <div>
                                 <label>Tel</label>
-                                <input class="MobileNo" id="CustomerContact" type="text" name="CustomerContact" placeholder="Enter Contact Number"  data-validation="required"style="width: 150px;">
+                                <input class="MobileNo" id="Cellphone" type="text" name="CustomerContact" placeholder="Enter Contact Number"  data-validation="required"style="width: 150px;">
                             </div>
                             <div>
                                 <label>Tel-2</label>
@@ -128,21 +147,21 @@
                                 <label>Email</label>
                                 <input class="" id="CustomerEmail" type="email" name="CustomerEmail" placeholder="Enter Customer Email" data-validation = "" style="width: 150px;">
                             </div>
-                            <div>
+                            <div style="display: none">
                                 <label>Fax No.</label>
                                 <input class="FaxNo" id="CustomerFax" type="text" name="CustomerFax" placeholder="Enter Fax Number"  data-validation=" " style="width: 150px;">
                             </div><br>
 							<div>
                                 <label>NTN.</label>
-                                <input class="NTN" id="NTN" type="text" name="NTN" placeholder="Enter NTN Number"  data-validation=" " style="width: 150px;">
+                                <input class="NTN" id="Ntn" type="text" name="NTN" placeholder="Enter NTN Number"  data-validation=" " style="width: 150px;">
                             </div><br>
 							<div>
                                 <label>GST NUMBER.</label>
-                                <input class="GST_NUMBER" id="GST_NUMBER" type="text" name="GST_NUMBER" placeholder="Enter GST NUMBER"  data-validation=" " style="width: 150px;">
+                                <input class="GST_NUMBER" id="Gst" type="text" name="GST_NUMBER" placeholder="Enter GST NUMBER"  data-validation=" " style="width: 150px;">
                             </div><br>
                             <div>
                                 <label>Address</label>
-                                <textarea id="CustomerAddress" name="CustomerAddress" placeholder="Enter Address" style="margin: 0px; width: 600px; height: 100px;"></textarea>
+                                <textarea id="AddressDetails" name="CustomerAddress" placeholder="Enter Address" style="margin: 0px; width: 600px; height: 100px;"></textarea>
                             </div>                       
                         </div>
                     </fieldset>
@@ -202,7 +221,7 @@
                             </div>
                             <div>
                                 <label>KM</label>
-                                <input id="KM" type="text" name="KM" placeholder="Enter KM" style="width: 150px;">
+                                <input id="Mileage" type="text" name="KM" placeholder="Enter KM" style="width: 150px;">
                             </div>
                         </div>
                     </fieldset>
@@ -325,8 +344,77 @@
         </div>
     </div>
 </div>
+
+<div style="width: 750px;" class="feildwrap  popup popup-customerlist">
+    <form action="" method="POST" class="form animated fadeIn" onSubmit="" style="width: 250px;">
+        <img src="<?php echo base_url() ?>assets/images/icons/close.png" width="32" height="32" alt="close" class="close-pop">
+        <div style="margin-left: 25px;width: 0px;">
+            <fieldset style="">
+                <legend>Select Chassis</legend>
+                <div class="feildwrap">
+                    <table id="myTable" class="myTable">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>RegistrationNumber</th>
+                            <th>EngineNumber</th>
+                            <th>ChassisNumber</th>
+                            <th>CustomerName</th>
+                            <th>Cellphone</th>
+
+                        </tr>
+                        </thead>
+                        <?php
+                        $count = 0;
+                        foreach ($customer_list as $row) {
+                            ?>
+                            <tr onclick="filldata(<?= $count++ ?>)">
+                                <td><?= $count + 1 ?></td>
+
+                                <td><?= $row['RegistrationNumber'] ?></td>
+                                <td><?= $row['EngineNumber'] ?></td>
+                                <td><?= $row['ChassisNumber'] ?></td>
+                                <td><?= $row['CustomerName'] ?></td>
+                                <td><?= $row['Cellphone'] ?></td>
+                            </tr>
+
+                        <?php } ?>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <br>
+    </form>
+</div>
 <script>
- function deleteSubletRow(r) {
+
+    $(".chosen-select").chosen()
+    var cust_list = <?= json_encode($customer_list,false); ?>;
+
+    function showpopup(div_id)
+    {
+        $('.popup-' + div_id).bPopup({
+            fadeSpeed: 'slow', //can be a string ('slow'/'fast') or int
+            followSpeed: 1500, //can be a string ('slow'/'fast') or int
+            modalColor: '#333',
+            closeClass: 'close-pop'
+        }, function() {
+        });
+    }
+    function filldata(i){
+
+        console.log(cust_list[i]);
+
+        $.each((cust_list[i]),function(j,v){
+            $('#'+j).val(v)
+            $('#'+j).attr('readonly',true)
+        })
+        $(".chosen-select").trigger("chosen:updated");
+
+        $('.popup' ).bPopup().close()
+    }
+
+    function deleteSubletRow(r) {
         var i = r.parentNode.parentNode.rowIndex;
         document.getElementById('SubletTable').deleteRow(i);
     }
@@ -723,5 +811,11 @@
             $("#insurance_detail").show();
         }) ;
     });
+    <?php if(count($token)){ ?>
+    filldata(0);
+    $("#listbtn").hide()
+    <?php }?>
+
+    $('.myTable').DataTable();
 </script>
 

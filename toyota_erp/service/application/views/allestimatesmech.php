@@ -19,7 +19,7 @@
                         <input type="text" name="searchbyest" id="searchbyest"  placeholder="Search by Estimate Number">
                     </div><br><br>
                     <div id="JobDescDiv" class="feildwrap">
-                        <div class="btn-block-wrap datagrid">
+                        <div class="btn-block-wrap dg">
                             <table width="100%" border="0" cellpadding="1" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -68,7 +68,7 @@
 												}if($key['PartsP']){
 													$totalAmount += $key['PartsP'];
 												}
-                                                echo $totalAmount . " /=";
+                                                echo $totalAmount . "";
                                                 ?>
                                             </td>
 											<?php }else{ $CI =& get_instance();
@@ -87,7 +87,7 @@
 												}if($key['PartsP']){
 													$totalAmount2 += $key['PartsP'];
 												}
-                                                echo $totalAmount2 . " /=";
+                                                echo $totalAmount2 . "";
                                                 ?>
                                             </td>
 												
@@ -109,7 +109,7 @@
                                             foreach ($sumArray as $val) {
                                                 $totalAmount += $val;
                                             }
-                                            echo $totalAmount . " /=";
+                                            echo $totalAmount . "";
                                             ?>
                                             </td>-->
                                             <td name="complaints" class="tbl-name">

@@ -14,7 +14,7 @@ class Estimatemechanical extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
+        $this->load->model('s_token');
         $this->load->model('s_estimatesmechanical');
         $this->load->model('s_jobreferencemanual');
         $this->load->model('s_partsrequistionmechanical');
@@ -30,9 +30,10 @@ class Estimatemechanical extends CI_Controller {
         date_default_timezone_set("Asia/Karachi");
     }
 
-    function index() {
+    function index($token = null) {
 
         $dataArray = array();
+        $dataArray['token'] = $this->s_token->selectOnetoken($token);
         $jobRefManual = new S_jobreferencemanual();
         $partReqMechanicalModel = new s_partsrequistionmechanical();
         $staffManagment = new S_staff();
@@ -45,7 +46,7 @@ class Estimatemechanical extends CI_Controller {
         $dataArray['partsList'] = $partReqMechanicalModel->fillPartCombo();
         $dataArray['insertMessage'] = $this->session->flashdata('insertmessage');
         $dataArray['pmdList'] = $pmdModel->getAllPmd();
-        $dataArray['customer_list'] = $this->s_customer->customer_list();
+        $dataArray['customer_list'] = $this->s_customer->customer_list( ($token==null)?null:$dataArray['token']->idCustomer);
 
         $this->load->view('header');
         $this->load->view('estimatemechanical', $dataArray);
@@ -97,6 +98,7 @@ class Estimatemechanical extends CI_Controller {
                 'Creator' => $this->input->post('ServiceAdvisor'),
                 'Range' => $this->input->post('Range'),
                 'isMechanical' => 1,
+                'idToken' => isset($_POST['idToken'])?($_POST['idToken']):null,
                 'CreatedDate' => $this->getFieldsValue()['CreatedDate'],
                 'ModifiedDate' => $this->getFieldsValue()['ModifiedDate'],
                 'isActive' => $this->getFieldsValue()['isActive']
@@ -311,8 +313,11 @@ class Estimatemechanical extends CI_Controller {
     }
 
     function getCustomer() {
-
+        if($_POST['idCustomer']!='')
+            return $_POST['idCustomer'];
         $customerModel = new S_customer();
+
+
         $isExistCustomer = $customerModel->isExistCustomer($this->input->post('CustomerName'), $this->input->post('CustomerContact'));
         if ($isExistCustomer != NULL) {
             return $isExistCustomer;
